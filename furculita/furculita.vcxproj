@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Round.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="Word.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="furculita.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Round.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="Word.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,13 +139,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="furculita.cpp" />
-    <ClCompile Include="Round.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Round.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

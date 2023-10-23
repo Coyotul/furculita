@@ -2,6 +2,9 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include "User.h"
+#include "Round.h"
+
 class Game
 {
 public:
@@ -14,10 +17,10 @@ public:
 
 private:
 	 std::string currentWord;
-	 //std::vector<Player> players;
+	 std::vector<User> players;
 	 std::uint8_t currentPlayerIndex;
 	 bool gameInProgress;
-
+	 Round currentRound;
 
 
 
