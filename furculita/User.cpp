@@ -15,7 +15,7 @@ User::User(const User& user) :
 {
 }
 
-std::string User::GetName()
+std::string User::GetName() const
 {
 	return this->m_name;
 }
@@ -25,7 +25,7 @@ void User::SetName(const std::string& name)
 	m_name = name;
 }
 
-uint16_t User::GetScore()
+uint16_t User::GetScore() const
 {
 	return this->m_score;
 }
