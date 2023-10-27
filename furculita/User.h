@@ -7,9 +7,9 @@ public:
 	User();
 	User(const std::string &name, uint16_t score);
 	User(const User &user);
-	std::string GetName() const;
+	std::string GetName();
 	void SetName(const std::string& name);
-	uint16_t GetScore() const;
+	uint16_t GetScore();
 	void SetScore(uint16_t score);
 
 private:
