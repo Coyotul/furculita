@@ -21,3 +21,16 @@ std::string Round::GetWordToDraw()
 {
 	return wordToDraw;
 }
+
+bool Round::WordGuessed(std::string guess)
+{
+	if (guess == wordToDraw)
+	{
+		return true;
+	}
+	return false;
+}
+
+void Round::StartRound()
+{
+}

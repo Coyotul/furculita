@@ -7,6 +7,8 @@ public:
 	uint8_t GetTimeLeft();
 	uint8_t GetDuration();
 	std::string GetWordToDraw();
+	bool WordGuessed(std::string guess);
+	void StartRound();
 private:
 	std::string wordToDraw;
 	uint8_t duration;
