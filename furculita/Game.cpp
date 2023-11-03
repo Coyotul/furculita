@@ -33,6 +33,7 @@ void Game::startGame() {
         currentWord = randomWords[userChoice - 1].GetWord();
         currentRound = Round(currentWord.GetWord(), 60);
         gameInProgress = true;
+        std::cout << currentWord.GetWord();
     }
     else {
         std::cout << "Invalid option" << std::endl;
