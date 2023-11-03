@@ -1,9 +1,10 @@
-
 #include "User.h"
 #include "Round.h"
-#include "Word.h"
+
 #include <iostream>
 
+import word;
+using gartic::Word;
 import game;
 using gartic::Game;
 

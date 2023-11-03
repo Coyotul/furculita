@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
-#include "word.h"
+import word;
+using gartic::Word;
 class Round
 {
 public:
