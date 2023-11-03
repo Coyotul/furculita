@@ -15,9 +15,30 @@ void Game::addPlayer(const std::string& playerName) {
     players.push_back(User(playerName, 0));
 }
 
-void Game::startGame(const std::string& wordToGuess) {
+void Game::startGame() {
     
-    
+    std::vector<Word> randomWords = Word::GenerateRandomWords("words.txt", 3);
+
+
+    for (int i = 0; i < 3; ++i) {
+        std::cout << i + 1 << ". " << randomWords[i].GetWord() << std::endl;
+    }
+
+
+    int userChoice;
+    std::cout << "Choose a number (1-3): ";
+    std::cin >> userChoice;
+
+    if (userChoice >= 1 && userChoice <= 3) {
+        currentWord = randomWords[userChoice - 1].GetWord();
+        currentRound = Round(currentWord.GetWord(), 60);
+        gameInProgress = true;
+    }
+    else {
+        std::cout << "Invalid option" << std::endl;
+        gameInProgress = false;
+    }
+
     
 }
 void Game::endGame() {

@@ -10,7 +10,7 @@ namespace garlic {
 	public:
 		Game();
 		void addPlayer(const std::string& playerName);
-		void startGame(const std::string& wordToGuess);
+		void startGame();
 		void endGame();
 		void guessWord(const std::string& guessedWord);
 		void displayScores() const;
