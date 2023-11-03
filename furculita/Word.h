@@ -15,6 +15,6 @@ public:
 
 private:
 	std::string word;
-	std::string category;
+	std::string language;
 };
 

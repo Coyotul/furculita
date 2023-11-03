@@ -5,7 +5,7 @@ export module game;
 import <string>;
 import <vector>;
 
-namespace garlic {
+namespace gartic {
 	export class Game {
 	public:
 		Game();

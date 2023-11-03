@@ -5,7 +5,7 @@
 #include <iostream>
 
 import game;
-using garlic::Game;
+using gartic::Game;
 
 Game::Game() : currentPlayerIndex(0), gameInProgress(false), currentRound("default word", 0), currentWord() {
 
@@ -55,6 +55,7 @@ void Game::guessWord(const std::string& guessedWord) {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 }
-void Game::displayScores()const {
+void Game::displayScores()const 
+{
 
 }
