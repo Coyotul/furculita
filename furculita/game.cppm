@@ -1,5 +1,6 @@
 #include "User.h"
 #include "Round.h"
+#include "Word.h"
 export module game;
 import <string>;
 import <vector>;
@@ -15,11 +16,12 @@ namespace garlic {
 		void displayScores() const;
 
 	private:
-		std::string currentWord;
+		//std::string currentWord;
 		std::vector<User> players;
 		std::uint8_t currentPlayerIndex;
 		bool gameInProgress;
 		Round currentRound;
+		Word currentWord;
 
 	};
 }

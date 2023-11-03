@@ -1,4 +1,5 @@
 #include "Round.h"
+#include "word.h"
 
 Round::Round(const std::string& wordToDraw, uint8_t duration)
 	:wordToDraw(wordToDraw),
