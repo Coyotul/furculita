@@ -4,13 +4,13 @@
 Word::Word()
 {
 	word.assign("");
-	category.assign("");
+	language.assign("");
 }
 
 Word::Word(const std::string chosen_word, const std::string chosen_category)
 {
 	word.assign(chosen_word);
-	category.assign(chosen_category);
+	language.assign(chosen_category);
 }
 Word::Word(const std::string word_to_be_chosen_from)
 {
@@ -21,7 +21,7 @@ Word::Word(const std::string word_to_be_chosen_from)
 Word::Word(const Word& word)
 {
 	this->word.assign(word.word);
-	this->category.assign(word.category);
+	this->language.assign(word.language);
 }
 
 std::string Word::GetWord() const

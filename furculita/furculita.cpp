@@ -3,6 +3,6 @@ import game;
 
 int main()
 {
-    garlic::Game myGame;
+    gartic::Game myGame;
     myGame.startGame();
 }
