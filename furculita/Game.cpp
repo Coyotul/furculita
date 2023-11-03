@@ -1,6 +1,8 @@
-#include "Game.h"
+
 #include "User.h"
 #include "Round.h"
+import game;
+using garlic::Game;
 
 Game::Game() : currentPlayerIndex(0), gameInProgress(false), currentRound("default word", 0) {
 
