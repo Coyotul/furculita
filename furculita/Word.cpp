@@ -51,16 +51,18 @@ std::vector<Word> Word::GenerateRandomWords(const std::string& filePath, int num
 		srand(time(0));
 
 		inputFile.open(filePath);
-		int selectedWords = 0;
+		std::vector<int> selectedIndices;
 
-		while (selectedWords < numWords) {
+		while (words.size() < numWords) {
 			int randomIndex = rand() % totalWords;
-			for (int i = 0; i < randomIndex; i++) {
-				inputFile >> currentWord;
-			}
-			words.push_back(Word(currentWord));
-			selectedWords++;
+			if (std::find(selectedIndices.begin(), selectedIndices.end(), randomIndex) == selectedIndices.end()) {
+				selectedIndices.push_back(randomIndex);
+				for (int i = 0; i < randomIndex; i++) {
+					inputFile >> currentWord;
+				}
+				words.push_back(Word(currentWord));
 
+			}
 		}
 		inputFile.close();
 
