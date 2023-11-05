@@ -35,3 +35,8 @@ void User::SetScore(uint16_t score)
 {
 	m_score = score;
 }
+
+void gartic::User::AddPoints(uint16_t points)
+{
+	m_score = m_score + points;
+}

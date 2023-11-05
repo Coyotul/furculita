@@ -1,4 +1,3 @@
-#include "User.h"
 #include "Round.h"
 
 #include <iostream>
@@ -7,6 +6,8 @@ import word;
 using gartic::Word;
 import game;
 using gartic::Game;
+import user;
+using gartic::User;
 
 Game::Game() : currentPlayerIndex(0), gameInProgress(false), currentRound("default word", 0), currentWord() {
 
