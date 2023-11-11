@@ -8,5 +8,7 @@ public:
 
 private:
 	crow::SimpleApp app;
+
+	void configureRoutes();
 };
 
