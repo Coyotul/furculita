@@ -1,10 +1,9 @@
 #include "User.h"
 #include "Round.h"
+#include "Word.h"
 export module game;
 import <string>;
 import <vector>;
-import word;
-using gartic::Word;
 
 namespace gartic {
 	export class Game {

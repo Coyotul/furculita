@@ -1,7 +1,5 @@
+#include "Word.h"
 #include <cstdlib>
-
-import word;
-using gartic::Word;
 
 Word::Word()
 {
