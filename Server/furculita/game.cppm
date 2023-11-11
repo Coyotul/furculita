@@ -14,6 +14,8 @@ namespace gartic {
 		void endGame();
 		void guessWord(const std::string& guessedWord);
 		void displayScores() const;
+		void resetScores();
+		bool checkGameState() const;
 
 	private:
 		//std::string currentWord;

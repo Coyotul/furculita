@@ -4,7 +4,8 @@
 Round::Round(const std::string& wordToDraw, uint8_t duration)
 	:wordToDraw(wordToDraw),
 	duration(duration),
-	timeLeft(duration)
+	timeLeft(duration),
+	roundNumber(1)
 {
 }
 
@@ -34,4 +35,9 @@ bool Round::WordGuessed(std::string guess)
 
 void Round::StartRound()
 {
+}
+
+uint8_t Round::GetRoundNumber() const
+{
+	return roundNumber;
 }

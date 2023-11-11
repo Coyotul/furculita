@@ -10,9 +10,11 @@ public:
 	std::string GetWordToDraw();
 	bool WordGuessed(std::string guess);
 	void StartRound();
+	uint8_t GetRoundNumber() const;
 private:
 	std::string wordToDraw;
 	uint8_t duration;
 	uint8_t timeLeft;
+	uint8_t roundNumber;
 };
 

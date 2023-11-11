@@ -60,3 +60,22 @@ void Game::displayScores()const
 {
 
 }
+
+void Game::resetScores() {
+    for (auto& player : players) {
+        player.SetScore(0);
+    }
+    currentPlayerIndex = 0;
+    gameInProgress = false;
+}
+
+bool Game::checkGameState()const {
+    const uint8_t maxRounds = 4;
+    if (currentRound.GetRoundNumber() > maxRounds) {
+        std::cout << "Game over! All rounds have been completed." << std::endl;
+        displayScores();
+        return false;
+    }
+
+    return true;
+}
