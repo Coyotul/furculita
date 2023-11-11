@@ -1,5 +1,5 @@
 #include "Server.h";
-import game;
+
 
 Server::Server() {
 	configureRoutes();
@@ -11,6 +11,7 @@ void Server::run() {
 
 void Server::configureRoutes() {
 	CROW_ROUTE(app, "/")([]() {
+		
 		return "Hello Gartic";
 		});
 }

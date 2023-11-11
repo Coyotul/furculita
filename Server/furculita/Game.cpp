@@ -3,6 +3,7 @@
 #include "Round.h"
 #include "Word.h"
 #include <iostream>
+#include <cstdint>
 
 import game;
 using gartic::Game;
@@ -16,29 +17,29 @@ void Game::addPlayer(const std::string& playerName) {
 }
 
 void Game::startGame() {
-    
+    const uint16_t numChoices = 3;
     std::vector<Word> randomWords = Word::GenerateRandomWords("words.txt", 3);
 
 
-    for (int i = 0; i < 3; ++i) {
-        std::cout << i + 1 << ". " << randomWords[i].GetWord() << std::endl;
+    for (const auto&word:randomWords) {
+        std::cout<<word.GetWord() << std::endl;
     }
 
 
-    int userChoice;
-    std::cout << "Choose a number (1-3): ";
-    std::cin >> userChoice;
+    uint16_t userChoice;
+    std::cout << "Choose a number (1-" << numChoices << "): ";
+    
 
-    if (userChoice >= 1 && userChoice <= 3) {
-        currentWord = randomWords[userChoice - 1].GetWord();
-        currentRound = Round(currentWord.GetWord(), 60);
-        gameInProgress = true;
-        std::cout << currentWord.GetWord();
-    }
-    else {
+    if (!(std::cin >> userChoice) || userChoice < 1 || userChoice > numChoices) {
         std::cout << "Invalid option" << std::endl;
         gameInProgress = false;
+        return;
+
     }
+    currentWord = randomWords[userChoice - 1].GetWord();
+    currentRound = Round(currentWord.GetWord(), 60);
+    gameInProgress = true;
+    std::cout << currentWord.GetWord();
 
     
 }

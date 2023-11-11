@@ -4,9 +4,9 @@ import game;
 
 int main()
 {
-    /*gartic::Game myGame;
+    gartic::Game myGame;
     myGame.startGame();
-    */
+    
     Server server;
     server.run();
 
