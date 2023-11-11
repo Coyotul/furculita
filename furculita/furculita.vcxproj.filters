@@ -18,6 +18,9 @@
     <ClInclude Include="Round.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="furculita.cpp">
@@ -39,9 +42,6 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="word.cppm">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="user.cppm">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>

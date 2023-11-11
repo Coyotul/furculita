@@ -1,5 +1,4 @@
-module;
-export import <string>;
+#include <string>
 export module user;
 
 namespace gartic {

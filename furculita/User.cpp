@@ -1,5 +1,4 @@
-import user;
-using gartic::User;
+#include "User.h"
 
 User::User() :
 	m_name(" "), m_score(0)

@@ -11,7 +11,7 @@ namespace gartic {
 		English
 	};
 
-	export class Word
+	class Word
 	{
 	public:
 		Word();

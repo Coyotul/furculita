@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Round.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="furculita.cpp" />
@@ -27,7 +28,6 @@
     <ClCompile Include="game.cppm" />
     <ClCompile Include="Round.cpp" />
     <ClCompile Include="User.cpp" />
-    <ClCompile Include="user.cppm" />
     <ClCompile Include="Word.cpp" />
     <ClCompile Include="word.cppm" />
   </ItemGroup>
