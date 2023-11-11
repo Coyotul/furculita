@@ -3,7 +3,7 @@ export import <string>;
 export module user;
 
 namespace gartic {
-	export class User
+	class User
 	{
 	public:
 		User();
@@ -13,7 +13,6 @@ namespace gartic {
 		void SetName(const std::string& name);
 		uint16_t GetScore();
 		void SetScore(uint16_t score);
-		void AddPoints(uint16_t points);
 
 	private:
 		std::string m_name;
