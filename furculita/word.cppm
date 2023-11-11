@@ -3,19 +3,12 @@ import <fstream>;
 import <vector>;
 export module word;
 
-
 namespace gartic {
-
-	enum class Language : uint8_t {
-		Romanian,
-		English
-	};
-
 	class Word
 	{
 	public:
 		Word();
-		Word(const std::string chosen_word, const Language chosen_language);
+		Word(const std::string chosen_word, const std::string chosen_category);
 		Word(const std::string word_to_be_chosen_from);
 		Word(const Word& word);
 		std::string GetWord() const;
@@ -24,6 +17,6 @@ namespace gartic {
 
 	private:
 		std::string word;
-		Language language;
+		std::string language;
 	};
 }

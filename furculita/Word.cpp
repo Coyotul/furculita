@@ -6,32 +6,30 @@ using gartic::Word;
 Word::Word()
 {
 	word.assign("");
-	language = Language::Romanian;
+	language.assign("");
 }
 
-Word::Word(const std::string chosen_word, const Language chosen_language)
+Word::Word(const std::string chosen_word, const std::string chosen_category)
 {
 	word.assign(chosen_word);
-	language = chosen_language;
+	language.assign(chosen_category);
 }
-
-Word::Word(const std::string word_to_be_chosen_from, const Language chosen_language)
+Word::Word(const std::string word_to_be_chosen_from)
 {
 	word.assign(word_to_be_chosen_from);
-	language = chosen_language;
+	
 }
 
 Word::Word(const Word& word)
 {
 	this->word.assign(word.word);
-	this->language = word.language;
+	this->language.assign(word.language);
 }
 
 std::string Word::GetWord() const
 {
 	return word;
 }
-
 
 std::vector<Word> Word::GenerateRandomWords(const std::string& filePath, int numWords)
 {
