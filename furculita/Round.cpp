@@ -1,34 +1,31 @@
 #include "Round.h"
-#include <iostream>
-#include <thread>
-#include <chrono>
 
-Round::Round(const std::string& wordToDraw, uint16_t duration)
-	:m_wordToDraw(wordToDraw),
-	m_duration(duration),
-	m_timeLeft(duration),
-	m_timerRunning(false)
+
+Round::Round(const std::string& wordToDraw, uint8_t duration)
+	:wordToDraw(wordToDraw),
+	duration(duration),
+	timeLeft(duration)
 {
 }
 
-uint16_t Round::GetTimeLeft()
+uint8_t Round::GetTimeLeft()
 {
-	return m_timeLeft;
+	return timeLeft;
 }
 
-uint16_t Round::GetDuration()
+uint8_t Round::GetDuration()
 {
-	return m_duration;
+	return duration;
 }
 
 std::string Round::GetWordToDraw()
 {
-	return m_wordToDraw;
+	return wordToDraw;
 }
 
 bool Round::WordGuessed(std::string guess)
 {
-	if (guess == m_wordToDraw)
+	if (guess == wordToDraw)
 	{
 		return true;
 	}
@@ -37,13 +34,4 @@ bool Round::WordGuessed(std::string guess)
 
 void Round::StartRound()
 {
-	std::cout << "Round start\n";
-
-	while (m_timeLeft > 0)
-	{
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		m_timeLeft--;
-
-		std::cout << "Time left: " << m_timeLeft << " seconds\n";
-	}
 }
