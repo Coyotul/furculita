@@ -44,5 +44,6 @@ void Round::StartRound()
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		m_timeLeft--;
 
+		std::cout << "Time left: " << m_timeLeft << " seconds\n";
 	}
 }
