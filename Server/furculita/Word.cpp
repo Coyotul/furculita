@@ -3,33 +3,33 @@
 
 Word::Word()
 {
-	word.assign("");
-	language.assign("");
+	m_word.assign("");
+	m_language.assign("");
 }
 
 Word::Word(const std::string chosen_word, const std::string chosen_category)
 {
-	word.assign(chosen_word);
-	language.assign(chosen_category);
+	m_word.assign(chosen_word);
+	m_language.assign(chosen_category);
 }
 Word::Word(const std::string word_to_be_chosen_from)
 {
-	word.assign(word_to_be_chosen_from);
+	m_word.assign(word_to_be_chosen_from);
 	
 }
 
 Word::Word(const Word& word)
 {
-	this->word.assign(word.word);
-	this->language.assign(word.language);
+	this->m_word.assign(word.m_word);
+	this->m_language.assign(word.m_language);
 }
 
-std::string Word::GetWord() const
+std::string Word::getWord() const
 {
-	return word;
+	return m_word;
 }
 
-std::vector<Word> Word::GenerateRandomWords(const std::string& filePath, int numWords)
+std::vector<Word> Word::generateRandomWords(const std::string& filePath, int numWords)
 {
 	std::vector<Word>words;
 	std::ifstream inputFile("words.txt");
