@@ -19,7 +19,7 @@ namespace gartic {
 
 	private:
 		//std::string currentWord;
-		std::vector<User> players;
+		std::vector<User> m_players;
 		std::uint8_t currentPlayerIndex;
 		bool gameInProgress;
 		Round currentRound;

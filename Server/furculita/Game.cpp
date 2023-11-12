@@ -13,7 +13,7 @@ Game::Game() : currentPlayerIndex(0), gameInProgress(false), currentRound("defau
 }
 
 void Game::addPlayer(const std::string& playerName) {
-    players.push_back(User(playerName, 0));
+    m_players.push_back(User(playerName, 0));
 }
 
 void Game::startGame() {
@@ -51,9 +51,9 @@ void Game::endGame() {
 void Game::guessWord(const std::string& guessedWord) {
     if (gameInProgress) {
         if (guessedWord == currentRound.GetWordToDraw()) {
-            players[currentPlayerIndex].SetScore(players[currentPlayerIndex].GetScore() + 1);
+            m_players[currentPlayerIndex].SetScore(m_players[currentPlayerIndex].GetScore() + 1);
         }
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        currentPlayerIndex = (currentPlayerIndex + 1) % m_players.size();
     }
 }
 void Game::displayScores()const 
@@ -62,7 +62,7 @@ void Game::displayScores()const
 }
 
 void Game::resetScores() {
-    for (auto& player : players) {
+    for (auto& player : m_players) {
         player.SetScore(0);
     }
     currentPlayerIndex = 0;
