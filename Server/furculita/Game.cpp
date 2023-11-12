@@ -18,11 +18,11 @@ void Game::addPlayer(const std::string& playerName) {
 
 void Game::startGame() {
     const uint16_t numChoices = 3;
-    std::vector<Word> randomWords = Word::GenerateRandomWords("words.txt", 3);
+    std::vector<Word> randomWords = Word::generateRandomWords("words.txt", 3);
 
 
     for (const auto&word:randomWords) {
-        std::cout<<word.GetWord() << std::endl;
+        std::cout<<word.getWord() << std::endl;
     }
 
 
@@ -36,10 +36,10 @@ void Game::startGame() {
         return;
 
     }
-    m_currentWord = randomWords[userChoice - 1].GetWord();
-    m_currentRound = Round(m_currentWord.GetWord(), 60);
+    m_currentWord = randomWords[userChoice - 1].getWord();
+    m_currentRound = Round(m_currentWord.getWord(), 60);
     m_gameInProgress = true;
-    std::cout << m_currentWord.GetWord();
+    std::cout << m_currentWord.getWord();
 
     
 }
@@ -50,7 +50,7 @@ void Game::endGame() {
 }
 void Game::guessWord(const std::string& guessedWord) {
     if (m_gameInProgress) {
-        if (guessedWord == m_currentRound.GetWordToDraw()) {
+        if (guessedWord == m_currentRound.getWordToDraw()) {
             m_players[m_currentPlayerIndex].SetScore(m_players[m_currentPlayerIndex].GetScore() + 1);
         }
         m_currentPlayerIndex = (m_currentPlayerIndex + 1) % m_players.size();
@@ -71,7 +71,7 @@ void Game::resetScores() {
 
 bool Game::checkGameState()const {
     const uint8_t maxRounds = 4;
-    if (m_currentRound.GetRoundNumber() > maxRounds) {
+    if (m_currentRound.getRoundNumber() > maxRounds) {
         std::cout << "Game over! All rounds have been completed." << std::endl;
         displayScores();
         return false;

@@ -2,42 +2,42 @@
 #include "word.h"
 
 Round::Round(const std::string& wordToDraw, uint8_t duration)
-	:wordToDraw(wordToDraw),
-	duration(duration),
-	timeLeft(duration),
-	roundNumber(1)
+	:m_wordToDraw(wordToDraw),
+	m_duration(duration),
+	m_timeLeft(duration),
+	m_roundNumber(1)
 {
 }
 
-uint8_t Round::GetTimeLeft()
+uint8_t Round::getTimeLeft()
 {
-	return timeLeft;
+	return m_timeLeft;
 }
 
-uint8_t Round::GetDuration()
+uint8_t Round::getDuration()
 {
-	return duration;
+	return m_duration;
 }
 
-std::string Round::GetWordToDraw()
+std::string Round::getWordToDraw()
 {
-	return wordToDraw;
+	return m_wordToDraw;
 }
 
-bool Round::WordGuessed(std::string guess)
+bool Round::wordGuessed(std::string guess)
 {
-	if (guess == wordToDraw)
+	if (guess == m_wordToDraw)
 	{
 		return true;
 	}
 	return false;
 }
 
-void Round::StartRound()
+void Round::startRound()
 {
 }
 
-uint8_t Round::GetRoundNumber() const
+uint8_t Round::getRoundNumber() const
 {
-	return roundNumber;
+	return m_roundNumber;
 }
