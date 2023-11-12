@@ -1,7 +1,7 @@
 #include "Round.h"
 #include "word.h"
 
-Round::Round(const std::string& wordToDraw, uint8_t duration)
+Round::Round(const std::string& wordToDraw, uint16_t duration)
 	:m_wordToDraw(wordToDraw),
 	m_duration(duration),
 	m_timeLeft(duration),
@@ -9,12 +9,12 @@ Round::Round(const std::string& wordToDraw, uint8_t duration)
 {
 }
 
-uint8_t Round::getTimeLeft()
+uint16_t Round::getTimeLeft()
 {
 	return m_timeLeft;
 }
 
-uint8_t Round::getDuration()
+uint16_t Round::getDuration()
 {
 	return m_duration;
 }
@@ -37,7 +37,7 @@ void Round::startRound()
 {
 }
 
-uint8_t Round::getRoundNumber() const
+uint16_t Round::getRoundNumber() const
 {
 	return m_roundNumber;
 }
