@@ -29,3 +29,9 @@ void populateStorage(Storage& storage)
 
 	storage.insert_range(words.begin(), words.end());	
 }
+
+WordsDb::WordsDb(Storage& storage):
+	m_db { storage }
+{
+
+}

@@ -29,5 +29,10 @@ void populateStorage(Storage& storage);
 
 class WordsDb
 {
+public:
+	WordsDb(Storage& storage);
+
+private:
+	Storage& m_db;
 };
 
