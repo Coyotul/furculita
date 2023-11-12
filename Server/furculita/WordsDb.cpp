@@ -18,8 +18,8 @@ void populateStorage(Storage& storage)
 		{
 			Word element;
 			element.id = -1;
-			element.word.first = word1;
-			element.word.second = word2;
+			element.wordInEnglish = word1;
+			element.wordInRomanian = word2;
 
 			words.push_back(element);
 		}
