@@ -18,12 +18,11 @@ namespace gartic {
 		bool checkGameState() const;
 
 	private:
-		//std::string currentWord;
 		std::vector<User> m_players;
-		std::uint8_t currentPlayerIndex;
-		bool gameInProgress;
-		Round currentRound;
-		Word currentWord;
+		std::uint8_t m_currentPlayerIndex;
+		bool m_gameInProgress;
+		Round m_currentRound;
+		Word m_currentWord;
 
 	};
 }

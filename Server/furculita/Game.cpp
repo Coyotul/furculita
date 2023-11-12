@@ -8,7 +8,7 @@
 import game;
 using gartic::Game;
 
-Game::Game() : currentPlayerIndex(0), gameInProgress(false), currentRound("default word", 0), currentWord() {
+Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 0), m_currentWord() {
 
 }
 
@@ -32,28 +32,28 @@ void Game::startGame() {
 
     if (!(std::cin >> userChoice) || userChoice < 1 || userChoice > numChoices) {
         std::cout << "Invalid option" << std::endl;
-        gameInProgress = false;
+        m_gameInProgress = false;
         return;
 
     }
-    currentWord = randomWords[userChoice - 1].GetWord();
-    currentRound = Round(currentWord.GetWord(), 60);
-    gameInProgress = true;
-    std::cout << currentWord.GetWord();
+    m_currentWord = randomWords[userChoice - 1].GetWord();
+    m_currentRound = Round(m_currentWord.GetWord(), 60);
+    m_gameInProgress = true;
+    std::cout << m_currentWord.GetWord();
 
     
 }
 void Game::endGame() {
-    gameInProgress = false;
+    m_gameInProgress = false;
     displayScores();
 
 }
 void Game::guessWord(const std::string& guessedWord) {
-    if (gameInProgress) {
-        if (guessedWord == currentRound.GetWordToDraw()) {
-            m_players[currentPlayerIndex].SetScore(m_players[currentPlayerIndex].GetScore() + 1);
+    if (m_gameInProgress) {
+        if (guessedWord == m_currentRound.GetWordToDraw()) {
+            m_players[m_currentPlayerIndex].SetScore(m_players[m_currentPlayerIndex].GetScore() + 1);
         }
-        currentPlayerIndex = (currentPlayerIndex + 1) % m_players.size();
+        m_currentPlayerIndex = (m_currentPlayerIndex + 1) % m_players.size();
     }
 }
 void Game::displayScores()const 
@@ -65,13 +65,13 @@ void Game::resetScores() {
     for (auto& player : m_players) {
         player.SetScore(0);
     }
-    currentPlayerIndex = 0;
-    gameInProgress = false;
+    m_currentPlayerIndex = 0;
+    m_gameInProgress = false;
 }
 
 bool Game::checkGameState()const {
     const uint8_t maxRounds = 4;
-    if (currentRound.GetRoundNumber() > maxRounds) {
+    if (m_currentRound.GetRoundNumber() > maxRounds) {
         std::cout << "Game over! All rounds have been completed." << std::endl;
         displayScores();
         return false;
