@@ -11,14 +11,14 @@ void Server::run() {
 }
 
 void Server::configureRoutes() {
-    
+    gartic::Game game;
 	CROW_ROUTE(app, "/")([]() {
 		
 		return "Hello Gartic";
 		});
     CROW_ROUTE(app, "/game")
-        ([](const crow::request& req) {
-        gartic::Game game;
+        ([&game](const crow::request& req) -> crow::response {
+        
         if (req.url_params.get("action") == "start") {
             game.startGame();
         }
@@ -29,15 +29,25 @@ void Server::configureRoutes() {
         else if (req.url_params.get("action") == "end") {
             game.endGame();
         }
+        else if (req.url_params.get("action") == "addPlayer") {
+            std::string playerName = req.url_params.get("playerName");
+            game.addPlayer(playerName);
+            return crow::response{ "Player added: " + playerName };
+        }
+        else if (req.url_params.get("action") == "reset") {
+            game.resetScores();
+            return crow::response{ "Game reset." };
+        }
+        
 
         
         if (!game.checkGameState()) {
             
-            return "Game over!";
+            return crow::response{ "Game over!" };
         }
 
         
-        return "Hello Gartic 2";
+        return crow::response{ "Hello Gartic 2" };
             });
 }
 
