@@ -69,6 +69,14 @@ void Game::resetScores() {
     m_gameInProgress = false;
 }
 
+void Game::resetGame() {
+    resetScores();
+    m_players.clear();
+
+
+}
+
+
 bool Game::checkGameState()const {
     const uint8_t maxRounds = 4;
     if (m_currentRound.getRoundNumber() > maxRounds) {
@@ -79,3 +87,5 @@ bool Game::checkGameState()const {
 
     return true;
 }
+
+

@@ -35,7 +35,7 @@ void Server::configureRoutes() {
             return crow::response{ "Player added: " + playerName };
         }
         else if (req.url_params.get("action") == "reset") {
-            game.resetScores();
+            game.resetGame();
             return crow::response{ "Game reset." };
         }
         
