@@ -9,7 +9,7 @@ int main()
 {
     Storage db = createStorage("words.sqlite");
     db.sync_schema();
-    auto initialProductsCount = db.count<Word2>();
+    auto initialProductsCount = db.count<WordStruct>();
     if (initialProductsCount == 0)
     {
         populateStorage(db);
