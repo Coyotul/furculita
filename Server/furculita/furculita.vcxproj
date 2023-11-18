@@ -23,6 +23,7 @@
     <ClInclude Include="Server.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Word.h" />
+    <ClInclude Include="WordsDb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="furculita.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Word.cpp" />
+    <ClCompile Include="WordsDb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="words.txt" />
@@ -96,6 +98,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
+      <AdditionalOptions>/D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,6 +115,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
+      <AdditionalOptions>/D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +132,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
+      <AdditionalOptions>/D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,6 +149,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
+      <AdditionalOptions>/D_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
