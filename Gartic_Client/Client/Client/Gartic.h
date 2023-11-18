@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QtWidgets/QMainWindow>
 #include "ui_Gartic.h"
@@ -16,4 +16,6 @@ private:
     void on_wordButton_1_clicked();
     void on_wordButton_2_clicked();
     void on_wordButton_3_clicked();
+    void keyPressEvent(QKeyEvent* event); // Adaugăm o funcție pentru gestionarea evenimentelor de tastatură
+
 };
