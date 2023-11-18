@@ -13,4 +13,7 @@ public:
 
 private:
     Ui::GarticClass ui;
+    void on_wordButton_1_clicked();
+    void on_wordButton_2_clicked();
+    void on_wordButton_3_clicked();
 };
