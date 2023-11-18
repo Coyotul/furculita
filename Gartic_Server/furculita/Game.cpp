@@ -16,7 +16,11 @@ void Game::addPlayer(const std::string& playerName) {
     m_players.push_back(User(playerName, 0));
 }
 
+
+
 void Game::startGame() {
+
+    
     const uint16_t numChoices = 3;
     std::vector<Word> randomWords = Word::generateRandomWords("words.txt", 3);
 

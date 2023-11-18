@@ -29,8 +29,13 @@ std::string Word::getWord() const
 	return m_word;
 }
 
+std::string Word::getLanguage() const {
+	return m_language;
+}
+
 std::vector<Word> Word::generateRandomWords(const std::string& filePath, int numWords)
 {
+
 	std::vector<Word>words;
 	std::ifstream inputFile("words.txt");
 
