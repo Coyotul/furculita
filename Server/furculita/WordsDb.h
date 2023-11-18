@@ -6,7 +6,7 @@
 #include <sqlite_orm/sqlite_orm.h>
 namespace sql = sqlite_orm;
 
-struct Word
+struct Word2
 {
 	int id;
 	std::string wordInEnglish;
@@ -20,9 +20,9 @@ inline auto createStorage(const std::string& filename)
 		filename,
 		sql::make_table(
 			"Words",
-			sql::make_column("id", &Word::id, sql::primary_key().autoincrement()),
-			sql::make_column("word_in_english", &Word::wordInEnglish),
-			sql::make_column("word_in_romanian", &Word::wordInRomanian)
+			sql::make_column("id", &Word2::id, sql::primary_key().autoincrement()),
+			sql::make_column("word_in_english", &Word2::wordInEnglish),
+			sql::make_column("word_in_romanian", &Word2::wordInRomanian)
 
 		)
 	);

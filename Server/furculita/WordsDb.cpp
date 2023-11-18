@@ -6,7 +6,7 @@
 void populateStorage(Storage& storage)
 {
 	std::ifstream inputFile("words.txt");
-	std::vector<Word> words;
+	std::vector<Word2> words;
 
 	std::string line;
 	while (std::getline(inputFile, line))
@@ -16,7 +16,7 @@ void populateStorage(Storage& storage)
 
 		if (iss >> word1 >> word2)
 		{
-			Word element;
+			Word2 element;
 			element.id = -1;
 			element.wordInEnglish = word1;
 			element.wordInRomanian = word2;
