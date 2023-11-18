@@ -5,3 +5,6 @@ Gartic_Client/Client/.vs/Client/v17/ipch/AutoPCH/7513d097fdb70c6d/MAIN.ipch
 *.db
 Gartic_Client/.vs/Gartic_Client/v17/ipch/AutoPCH/58d7f2d068029392/SOURCE.ipch
 Gartic_Client/.vs/Gartic_Client/v17/ipch/AutoPCH/58d7f2d068029392/SOURCE.ipch
+Gartic_Client/Client/.vs/Client/v17/ipch/AutoPCH/7513d097fdb70c6d/MAIN.ipch
+*.ipch
+*.db
