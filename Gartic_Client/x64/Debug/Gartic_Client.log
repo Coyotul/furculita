@@ -1,2 +1,40 @@
 ﻿  Source.cpp
-  Gartic_Client.vcxproj -> C:\Facultate\Garlic\furculita\Gartic_Client\x64\Debug\Gartic_Client.exe
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\query_string.h(117,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\query_string.h(370,92): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\query_string.h(406,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\query_string.h(445,112): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\utility.h(672,39): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\http_parser_merged.h(589,32): warning C4244: '=': conversion from '__int64' to 'unsigned long', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\http_parser_merged.h(609,32): warning C4244: '=': conversion from '__int64' to 'unsigned long', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\json.h(1211,35): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\json.h(1671,32): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(97,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(116,48): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(118,53): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(221,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(367,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(378,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(390,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(401,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(463,60): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\mustache.h(563,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(800,70): warning C4244: 'argument': conversion from '__int64' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(821,70): warning C4244: 'argument': conversion from '__int64' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(842,70): warning C4244: 'argument': conversion from '__int64' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(864,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(880,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(895,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(945,53): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(956,45): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(1002,36): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(1005,33): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(1204,101): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(1204,87): warning C4267: 'argument': conversion from 'size_t' to 'uint16_t', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(1210,118): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(1259,100): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\George\vcpkg\installed\x64-windows\include\crow\routing.h(1420,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Gartic_Client.vcxproj -> C:\Users\George\source\repos\furculita\Gartic_Client\x64\Debug\Gartic_Client.exe
