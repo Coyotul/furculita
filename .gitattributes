@@ -1,3 +1,5 @@
 artic_Client/.vs/Gartic_Client/v17/ipch/AutoPCH/58d7f2d068029392/SOURCE.ipch filter=lfs diff=lfs merge=lfs -text
 Gartic_Client/.vs/Gartic_Client/v17/ipch/AutoPCH/58d7f2d068029392/SOURCE.ipch filter=lfs diff=lfs merge=lfs -text
 Gartic_Client/.vs/Gartic_Client/v17/Browse.VC.db filter=lfs diff=lfs merge=lfs -text
+*.db filter=lfs diff=lfs merge=lfs -text
+Gartic_Client/Client/.vs/Client/v17/ipch/AutoPCH/7513d097fdb70c6d/MAIN.ipch filter=lfs diff=lfs merge=lfs -text
