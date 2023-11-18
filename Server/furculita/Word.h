@@ -10,6 +10,7 @@ public:
 	Word(const std::string word_to_be_chosen_from);
 	Word(const Word& word);
 	std::string getWord() const;
+	std::string getLanguage() const;
 	static std::vector<Word> generateRandomWords(const std::string& filePath, int numWords);
 
 
