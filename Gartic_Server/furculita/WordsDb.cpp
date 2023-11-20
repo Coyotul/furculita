@@ -60,41 +60,44 @@ WordsDb::WordsDb(Storage& storage):
 
 std::vector<WordStruct> WordsDb::getRandomWords(size_t count, const std::string& language) const
 {   
-    try {
+    
         auto allWords = m_db.get_all<WordStruct>();
-
-        auto languageFilter = [&language](const WordStruct& word) {
-            return (language == "english") ? !word.wordInEnglish.empty() : !word.wordInRomanian.empty();
-        };
-        std::cout << "Words before language filtering: ";
-        for (const auto& word : allWords) {
-            std::cout << word.wordInEnglish << " | " << word.wordInRomanian << ", ";
+        std::vector<WordStruct> filteredWords(1);
+        if (language == "english") {
+            int i = 0;
+            for (const auto& word : allWords) {
+              filteredWords.resize(i+1);
+              filteredWords[i].wordInEnglish = word.wordInEnglish;
+              i++;
+            }
+            
         }
-        std::cout << std::endl;
-        std::cout << "Number of words before language filtering: " << allWords.size() << std::endl;
-        allWords.erase(std::remove_if(allWords.begin(), allWords.end(), languageFilter), allWords.end());
-        std::cout << "Number of words after language filtering: " << allWords.size() << std::endl;
+        else {
+            int i = 0;
+            for (const auto& word : allWords) {
+                filteredWords.resize(i + 1);
+                filteredWords[i].wordInRomanian = word.wordInRomanian;
+                i++;
+            }
+        }
+        
         // Shuffle the vector randomly
         std::random_device rd;
         std::mt19937 g(rd());
 
-        std::shuffle(allWords.begin(), allWords.end(), g);
-
+        std::shuffle(filteredWords.begin(), filteredWords.end(), g);
+        
         // Take the first 'count' elements
-        if (allWords.size() > count) {
-            allWords.resize(count);
+        if (filteredWords.size() > count) {
+            filteredWords.resize(count);
         }
 
-        
+        return filteredWords;
 
-        return allWords;
+    
+    
 
-    }
-    catch (const std::exception& e) {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
-    }
-
-    // Filter by language
+   
     
 }
 

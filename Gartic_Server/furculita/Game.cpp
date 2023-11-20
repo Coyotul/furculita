@@ -50,7 +50,7 @@ void Game::startGame() {
     }
     WordsDb wordsDb(db);
     std::vector<WordStruct> randomWords = wordsDb.getRandomWords(numChoices, language);
-    std::cout << randomWords.size();
+
     for (size_t i = 0; i < randomWords.size(); ++i) {
         std::cout << i + 1 << ". " << ((language == "english") ? randomWords[i].wordInEnglish : randomWords[i].wordInRomanian) << std::endl;
     }
