@@ -38,7 +38,7 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(520, 400);
+        GarticClass->resize(526, 400);
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
         textBox = new QLineEdit(centralWidget);
@@ -59,7 +59,7 @@ public:
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 520, 22));
+        menuBar->setGeometry(QRect(0, 0, 526, 22));
         GarticClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(GarticClass);
         mainToolBar->setObjectName("mainToolBar");

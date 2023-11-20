@@ -1,5 +1,7 @@
 ﻿#include "Gartic.h"
 #include <QKeyEvent>
+#include <QString>
+
 
 Gartic::Gartic(QWidget *parent)
     : QMainWindow(parent)
@@ -29,8 +31,10 @@ void Gartic::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
-        ui.chat->setText(ui.textBox->text());
+        chatText = chatText + '\n' + ui.textBox->text();
+        ui.chat->setText(chatText);
+        ui.textBox->clear();
     }
 
-    QMainWindow::keyPressEvent(event); // Transmiti evenimentul mai departe pentru a gestiona comportamentul implicit al tastelor
+    QMainWindow::keyPressEvent(event);
 }
