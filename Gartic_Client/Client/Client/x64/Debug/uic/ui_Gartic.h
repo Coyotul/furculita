@@ -12,6 +12,7 @@
 #include <QtCore/QLocale>
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -32,6 +33,7 @@ public:
     QPushButton *wordButton_2;
     QPushButton *wordButton_3;
     QTextEdit *textEdit;
+    QGraphicsView *drawView;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -40,13 +42,13 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(473, 400);
+        GarticClass->resize(654, 592);
         GarticClass->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
         textBox = new QLineEdit(centralWidget);
         textBox->setObjectName("textBox");
-        textBox->setGeometry(QRect(10, 320, 201, 21));
+        textBox->setGeometry(QRect(10, 510, 201, 21));
         wordButton1 = new QPushButton(centralWidget);
         wordButton1->setObjectName("wordButton1");
         wordButton1->setGeometry(QRect(30, 10, 75, 24));
@@ -58,11 +60,14 @@ public:
         wordButton_3->setGeometry(QRect(170, 10, 75, 24));
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(10, 200, 201, 111));
+        textEdit->setGeometry(QRect(10, 390, 201, 111));
+        drawView = new QGraphicsView(centralWidget);
+        drawView->setObjectName("drawView");
+        drawView->setGeometry(QRect(10, 50, 641, 331));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 473, 22));
+        menuBar->setGeometry(QRect(0, 0, 654, 22));
         GarticClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(GarticClass);
         mainToolBar->setObjectName("mainToolBar");

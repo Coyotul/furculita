@@ -4,6 +4,9 @@
 #include "ui_Gartic.h"
 #include <QtWidgets/QMainWindow>
 #include <QTextEdit>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsRectItem>
 
 class Gartic : public QMainWindow
 {
@@ -12,6 +15,7 @@ class Gartic : public QMainWindow
 public:
     Gartic(QWidget *parent = nullptr);
     ~Gartic();
+    QGraphicsPathItem* currentDrawing;
 
     //For methods
 private:
@@ -20,6 +24,18 @@ private:
     void on_wordButton_2_clicked();
     void on_wordButton_3_clicked();
     void keyPressEvent(QKeyEvent* event); // Adaugăm o funcție pentru gestionarea evenimentelor de tastatură
+    void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent* event);
+
+
+
+
+    QGraphicsScene* scene;
+    QGraphicsRectItem* drawRectItem;
+
+
+
 
 
     //For var
