@@ -36,6 +36,7 @@ class WordsDb
 {
 public:
 	WordsDb(Storage& storage);
+	std::vector<WordStruct> getRandomWords(size_t count, const std::string& language) const;
 
 private:
 	Storage& m_db;

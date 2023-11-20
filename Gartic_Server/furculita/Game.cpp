@@ -2,8 +2,10 @@
 #include "User.h"
 #include "Round.h"
 #include "Word.h"
+#include "WordsDb.h"
 #include <iostream>
 #include <cstdint>
+
 
 import game;
 using gartic::Game;
@@ -19,33 +21,59 @@ void Game::addPlayer(const std::string& playerName) {
 
 
 void Game::startGame() {
-
-    
     const uint16_t numChoices = 3;
-    std::vector<Word> randomWords = Word::generateRandomWords("words.txt", 3);
 
+    // Ask the user to choose the language
+    std::cout << "Choose the language (1. English, 2. Romanian): ";
+    int languageChoice;
+    std::cin >> languageChoice;
 
-    for (const auto&word:randomWords) {
-        std::cout<<word.getWord() << std::endl;
+    std::string language;
+    switch (languageChoice) {
+    case 1:
+        language = "english";
+        break;
+    case 2:
+        language = "romanian";
+        break;
+    default:
+        std::cout << "Invalid language choice" << std::endl;
+        m_gameInProgress = false;
+        return;
     }
 
+    Storage db = createStorage("words.sqlite");
+    db.sync_schema();
+    auto initialProductsCount = db.count<WordStruct>();
+    if (initialProductsCount == 0) {
+        populateStorage(db);
+    }
+    WordsDb wordsDb(db);
+    std::vector<WordStruct> randomWords = wordsDb.getRandomWords(numChoices, language);
+
+    for (size_t i = 0; i < randomWords.size(); ++i) {
+        std::cout << i + 1 << ". " << ((language == "english") ? randomWords[i].wordInEnglish : randomWords[i].wordInRomanian) << std::endl;
+    }
 
     uint16_t userChoice;
     std::cout << "Choose a number (1-" << numChoices << "): ";
-    
 
     if (!(std::cin >> userChoice) || userChoice < 1 || userChoice > numChoices) {
         std::cout << "Invalid option" << std::endl;
         m_gameInProgress = false;
         return;
-
     }
-    m_currentWord = randomWords[userChoice - 1].getWord();
-    m_currentRound = Round(m_currentWord.getWord(), 60);
-    m_gameInProgress = true;
-    std::cout << m_currentWord.getWord();
-
     
+    if (userChoice <= randomWords.size()) {
+        m_currentWord = (language == "english") ? randomWords[userChoice - 1].wordInEnglish : randomWords[userChoice - 1].wordInRomanian;
+        m_currentRound = Round(m_currentWord.getWord(), 60);
+        m_gameInProgress = true;
+        std::cout << m_currentWord.getWord();
+    }
+    else {
+        std::cout << "Invalid option" << std::endl;
+        m_gameInProgress = false;
+    }
 }
 void Game::endGame() {
     m_gameInProgress = false;
