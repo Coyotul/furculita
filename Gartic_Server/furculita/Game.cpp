@@ -2,6 +2,7 @@
 #include "User.h"
 #include "Round.h"
 #include "Word.h"
+#include "WordsDb.h"
 #include <iostream>
 #include <cstdint>
 

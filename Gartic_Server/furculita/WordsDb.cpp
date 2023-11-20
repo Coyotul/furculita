@@ -3,6 +3,9 @@
 #include <vector>
 #include <utility>
 #include <string>
+#include <algorithm>
+#include <random>
+
 void populateStorage(Storage& storage)
 {
 	std::ifstream inputFile("words.txt");
@@ -35,3 +38,33 @@ WordsDb::WordsDb(Storage& storage):
 {
 
 }
+
+std::vector<WordStruct> WordsDb::getRandomWords(size_t count, const std::string& language) const
+{
+	auto allWords = m_db.get_all<WordStruct>();
+
+	// Filter by language
+	auto languageFilter = [&language](const WordStruct& word) {
+		return (language == "english") ? !word.wordInEnglish.empty() : !word.wordInRomanian.empty();
+	};
+
+	allWords.erase(std::remove_if(allWords.begin(), allWords.end(), languageFilter), allWords.end());
+
+	// Shuffle the vector randomly
+	std::random_device rd;
+	std::mt19937 g(rd());
+
+	std::shuffle(allWords.begin(), allWords.end(), g);
+
+	// Take the first 'count' elements
+	if (allWords.size() > count) {
+		allWords.resize(count);
+	}
+
+	return allWords;
+}
+
+
+
+
+
