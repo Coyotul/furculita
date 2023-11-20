@@ -31,8 +31,8 @@ void Gartic::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
-        chatText = chatText + '\n' + ui.textBox->text();
-        ui.chat->setText(chatText);
+        chatText = chatText + '\n' +"George" + ": " + ui.textBox->text();
+        ui.textEdit->setText(chatText);
         ui.textBox->clear();
     }
 

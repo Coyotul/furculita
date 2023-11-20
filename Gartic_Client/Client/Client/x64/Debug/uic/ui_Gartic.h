@@ -9,6 +9,7 @@
 #ifndef UI_GARTIC_H
 #define UI_GARTIC_H
 
+#include <QtCore/QLocale>
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLineEdit>
@@ -16,6 +17,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -29,7 +31,7 @@ public:
     QPushButton *wordButton1;
     QPushButton *wordButton_2;
     QPushButton *wordButton_3;
-    QLineEdit *chat;
+    QTextEdit *textEdit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -38,28 +40,29 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(526, 400);
+        GarticClass->resize(473, 400);
+        GarticClass->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
         textBox = new QLineEdit(centralWidget);
         textBox->setObjectName("textBox");
-        textBox->setGeometry(QRect(10, 320, 161, 21));
+        textBox->setGeometry(QRect(10, 320, 201, 21));
         wordButton1 = new QPushButton(centralWidget);
         wordButton1->setObjectName("wordButton1");
         wordButton1->setGeometry(QRect(30, 10, 75, 24));
         wordButton_2 = new QPushButton(centralWidget);
         wordButton_2->setObjectName("wordButton_2");
-        wordButton_2->setGeometry(QRect(190, 10, 75, 24));
+        wordButton_2->setGeometry(QRect(100, 10, 75, 24));
         wordButton_3 = new QPushButton(centralWidget);
         wordButton_3->setObjectName("wordButton_3");
-        wordButton_3->setGeometry(QRect(390, 10, 75, 24));
-        chat = new QLineEdit(centralWidget);
-        chat->setObjectName("chat");
-        chat->setGeometry(QRect(10, 200, 161, 111));
+        wordButton_3->setGeometry(QRect(170, 10, 75, 24));
+        textEdit = new QTextEdit(centralWidget);
+        textEdit->setObjectName("textEdit");
+        textEdit->setGeometry(QRect(10, 200, 201, 111));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 526, 22));
+        menuBar->setGeometry(QRect(0, 0, 473, 22));
         GarticClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(GarticClass);
         mainToolBar->setObjectName("mainToolBar");
