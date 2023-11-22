@@ -5,7 +5,7 @@ User::User() :
 {
 }
 
-User::User(const std::string& name, uint16_t score) :
+User::User(std::string_view name, uint16_t score) :
 	m_name(name), m_score(score)
 {
 }
@@ -20,7 +20,7 @@ std::string User::GetName()
 	return this->m_name;
 }
 
-void User::SetName(const std::string& name)
+void User::SetName(std::string_view name)
 {
 	m_name = name;
 }

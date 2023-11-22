@@ -14,7 +14,7 @@ Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound(
 
 }
 
-void Game::addPlayer(const std::string& playerName) {
+void Game::addPlayer(std::string_view playerName) {
     m_players.push_back(User(playerName, 0));
 }
 
@@ -80,7 +80,7 @@ void Game::endGame() {
     displayScores();
 
 }
-void Game::guessWord(const std::string& guessedWord) {
+void Game::guessWord(std::string_view guessedWord) {
     if (m_gameInProgress) {
         if (guessedWord == m_currentRound.getWordToDraw()) {
             m_players[m_currentPlayerIndex].SetScore(m_players[m_currentPlayerIndex].GetScore() + 1);

@@ -9,10 +9,10 @@ namespace gartic {
 	export class Game {
 	public:
 		Game();
-		void addPlayer(const std::string& playerName);
+		void addPlayer(std::string_view playerName);
 		void startGame();
 		void endGame();
-		void guessWord(const std::string& guessedWord);
+		void guessWord(std::string_view guessedWord);
 		void displayScores() const;
 		void resetScores();
 		bool checkGameState() const;
