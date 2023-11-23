@@ -39,5 +39,8 @@ private:
 
     //For var
 private:
+    QString username;
     QString chatText;
+
+    bool playerLogged = false;
 };

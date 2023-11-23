@@ -17,6 +17,7 @@ Gartic::Gartic(QWidget *parent)
     ui.drawView->setScene(scene); 
     currentDrawing = nullptr;
     hideInterface();
+    username = "Guest";
 }
 
 Gartic::~Gartic()
@@ -41,9 +42,18 @@ void Gartic::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
-        chatText = chatText + '\n' +"George" + ": " + ui.textBox->text();
-        ui.textEdit->setText(chatText);
-        ui.textBox->clear();
+        if (playerLogged)
+        {
+            chatText = chatText + '\n' + username + ": " + ui.textBox->text();
+            ui.textEdit->setText(chatText);
+            ui.textBox->clear();
+        }
+        else
+        {
+            username = ui.username->text();
+            showInterface();
+            playerLogged = true;
+        }
     }
 
     QMainWindow::keyPressEvent(event);
@@ -78,7 +88,6 @@ void Gartic::mouseReleaseEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton)
     {
         currentDrawing = nullptr;
-        showInterface();
     }
 }
 
@@ -91,11 +100,8 @@ void Gartic::hideInterface()
     ui.wordButton1->hide();
     ui.wordButton_2->hide();
     ui.wordButton_3->hide();
-    ui.label->show();
-    ui.label_2->show();
-    ui.username->show();
-    ui.password->show();
-    
+    ui.username_text->show();
+    ui.username->show();    
 }
 
 void Gartic::showInterface()
@@ -107,9 +113,7 @@ void Gartic::showInterface()
     ui.wordButton1->show();
     ui.wordButton_2->show();
     ui.wordButton_3->show();
-    ui.label->hide();
-    ui.label_2->hide();
+    ui.username_text->hide();
     ui.username->hide();
-    ui.password->hide();
 }
 

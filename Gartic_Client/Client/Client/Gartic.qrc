@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="Gartic">
-    </qresource>
+  <qresource prefix="Gartic">
+    <file>gartic_logo_125px.png</file>
+    <file>gartic_logo.png</file>
+  </qresource>
 </RCC>
