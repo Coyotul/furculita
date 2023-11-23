@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
+#include <iostream>
 
 
 Gartic::Gartic(QWidget *parent)
@@ -18,6 +19,63 @@ Gartic::Gartic(QWidget *parent)
     currentDrawing = nullptr;
     hideInterface();
     username = "Guest";
+    ui.drawView->viewport()->installEventFilter(this);
+
+}
+bool Gartic::eventFilter(QObject* obj, QEvent* event)
+{
+    if (obj == ui.drawView->viewport())
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+            if (mouseEvent->button() == Qt::LeftButton)
+            {
+                ui.drawView->setFocus();  // Setează focusul pe widget-ul de desen
+
+                QPainterPath path;
+                path.moveTo(ui.drawView->mapToScene(mouseEvent->pos()));
+
+                QGraphicsPathItem* drawnPath = new QGraphicsPathItem(path);
+                scene->addItem(drawnPath);
+
+                currentDrawing = drawnPath;
+
+                return true;  // Consumă evenimentul
+            }
+        }
+        else if (event->type() == QEvent::MouseButtonRelease)
+        {
+            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+            if (mouseEvent->button() == Qt::LeftButton)
+            {
+                currentDrawing = nullptr;
+
+                return true;  // Consumă evenimentul
+            }
+        }
+        else if (event->type() == QEvent::MouseMove)
+        {
+            if (currentDrawing)
+            {
+                QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+                if (ui.drawView->rect().contains(mouseEvent->pos()))
+                {
+                    QPainterPath path = currentDrawing->path();
+                    path.lineTo(ui.drawView->mapToScene(mouseEvent->pos()));
+                    currentDrawing->setPath(path);
+                }
+                else
+                {
+                    currentDrawing = nullptr;
+                }
+
+                return true;  // Consumă evenimentul
+            }
+        }
+    }
+
+    return QMainWindow::eventFilter(obj, event);
 }
 
 
@@ -65,39 +123,6 @@ void Gartic::keyPressEvent(QKeyEvent* event)
     QMainWindow::keyPressEvent(event);
 }
 
-void Gartic::mousePressEvent(QMouseEvent* event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        QPainterPath path;
-        path.moveTo(event->pos());
-
-        QGraphicsPathItem* drawnPath = new QGraphicsPathItem(path);
-        scene->addItem(drawnPath);
-
-        currentDrawing = drawnPath;
-    }
-}
-
-void Gartic::mouseMoveEvent(QMouseEvent* event)
-{
-    if (event->buttons() & Qt::LeftButton && currentDrawing)
-    {
-        // Verifică dacă evenimentul de mișcare a mouse-ului are loc în interiorul dreptunghiului de desen
-        if (drawRectItem->contains(event->pos()))
-        {
-            QPainterPath path = currentDrawing->path();
-            path.lineTo(event->pos());
-            currentDrawing->setPath(path);
-        }
-        else
-        {
-            // Dacă cursorul este în afara dreptunghiului de desen, setează "currentDrawing" la nullptr
-            currentDrawing = nullptr;
-        }
-    }
-}
-
 
 void Gartic::mouseReleaseEvent(QMouseEvent* event)
 {
@@ -106,6 +131,42 @@ void Gartic::mouseReleaseEvent(QMouseEvent* event)
         currentDrawing = nullptr;
     }
 }
+
+
+void Gartic::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton && ui.drawView->rect().contains(event->pos()))
+    {
+        ui.drawView->setFocus();
+
+        lastMousePos = ui.drawView->mapToScene(event->pos());
+        isDrawing = true;
+    }
+}
+
+void Gartic::mouseMoveEvent(QMouseEvent* event)
+{
+    if (isDrawing)
+    {
+        if (ui.drawView->rect().contains(event->pos()))
+        {
+            QPainter painter(ui.drawView->viewport());
+            painter.setRenderHint(QPainter::Antialiasing);
+            QPointF currentPos = ui.drawView->mapToScene(event->pos());
+
+            painter.drawLine(lastMousePos, currentPos);
+
+            lastMousePos = currentPos;
+        }
+        else
+        {
+            isDrawing = false;
+        }
+    }
+}
+
+
+
 
 void Gartic::hideInterface()
 {
