@@ -50,13 +50,13 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(736, 627);
+        GarticClass->resize(690, 725);
         GarticClass->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
         textBox = new QLineEdit(centralWidget);
         textBox->setObjectName("textBox");
-        textBox->setGeometry(QRect(10, 550, 201, 21));
+        textBox->setGeometry(QRect(30, 630, 201, 21));
         wordButton_1 = new QPushButton(centralWidget);
         wordButton_1->setObjectName("wordButton_1");
         wordButton_1->setGeometry(QRect(30, 10, 75, 24));
@@ -68,10 +68,10 @@ public:
         wordButton_3->setGeometry(QRect(170, 10, 75, 24));
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(10, 440, 201, 111));
+        textEdit->setGeometry(QRect(30, 510, 201, 111));
         drawView = new QGraphicsView(centralWidget);
         drawView->setObjectName("drawView");
-        drawView->setGeometry(QRect(10, 50, 641, 391));
+        drawView->setGeometry(QRect(10, 50, 641, 451));
         username = new QLineEdit(centralWidget);
         username->setObjectName("username");
         username->setGeometry(QRect(260, 220, 113, 21));
@@ -98,7 +98,7 @@ public:
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 736, 22));
+        menuBar->setGeometry(QRect(0, 0, 690, 22));
         menuGartic = new QMenu(menuBar);
         menuGartic->setObjectName("menuGartic");
         GarticClass->setMenuBar(menuBar);

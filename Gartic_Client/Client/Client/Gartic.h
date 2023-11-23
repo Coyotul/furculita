@@ -32,6 +32,7 @@ private:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
+
     void hideInterface();
     void showInterface();
 
@@ -45,4 +46,7 @@ private:
     QString chatText;
     QString word;
     bool playerLogged = false;
+    bool isMouseInsideRect = false;
+    QPoint lastMousePos;
+
 };

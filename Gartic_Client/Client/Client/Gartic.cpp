@@ -20,6 +20,7 @@ Gartic::Gartic(QWidget *parent)
     username = "Guest";
 }
 
+
 Gartic::~Gartic()
 {}
 
@@ -82,11 +83,21 @@ void Gartic::mouseMoveEvent(QMouseEvent* event)
 {
     if (event->buttons() & Qt::LeftButton && currentDrawing)
     {
-        QPainterPath path = currentDrawing->path();
-        path.lineTo(event->pos());
-        currentDrawing->setPath(path);
+        // Verifică dacă evenimentul de mișcare a mouse-ului are loc în interiorul dreptunghiului de desen
+        if (drawRectItem->contains(event->pos()))
+        {
+            QPainterPath path = currentDrawing->path();
+            path.lineTo(event->pos());
+            currentDrawing->setPath(path);
+        }
+        else
+        {
+            // Dacă cursorul este în afara dreptunghiului de desen, setează "currentDrawing" la nullptr
+            currentDrawing = nullptr;
+        }
     }
 }
+
 
 void Gartic::mouseReleaseEvent(QMouseEvent* event)
 {
