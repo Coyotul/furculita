@@ -27,14 +27,13 @@ private:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
-
+    void hideInterface();
+    void showInterface();
 
 
 
     QGraphicsScene* scene;
     QGraphicsRectItem* drawRectItem;
-
-
 
 
 

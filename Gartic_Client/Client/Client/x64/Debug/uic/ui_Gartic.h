@@ -13,6 +13,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -34,6 +35,10 @@ public:
     QPushButton *wordButton_3;
     QTextEdit *textEdit;
     QGraphicsView *drawView;
+    QLineEdit *username;
+    QLineEdit *password;
+    QLabel *label;
+    QLabel *label_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -64,6 +69,18 @@ public:
         drawView = new QGraphicsView(centralWidget);
         drawView->setObjectName("drawView");
         drawView->setGeometry(QRect(10, 50, 641, 331));
+        username = new QLineEdit(centralWidget);
+        username->setObjectName("username");
+        username->setGeometry(QRect(220, 250, 113, 21));
+        password = new QLineEdit(centralWidget);
+        password->setObjectName("password");
+        password->setGeometry(QRect(220, 220, 113, 21));
+        label = new QLabel(centralWidget);
+        label->setObjectName("label");
+        label->setGeometry(QRect(160, 220, 61, 20));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName("label_2");
+        label_2->setGeometry(QRect(160, 250, 49, 16));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
@@ -87,6 +104,8 @@ public:
         wordButton1->setText(QCoreApplication::translate("GarticClass", "Word1", nullptr));
         wordButton_2->setText(QCoreApplication::translate("GarticClass", "Word2", nullptr));
         wordButton_3->setText(QCoreApplication::translate("GarticClass", "Word3", nullptr));
+        label->setText(QCoreApplication::translate("GarticClass", "Username", nullptr));
+        label_2->setText(QCoreApplication::translate("GarticClass", "Password", nullptr));
     } // retranslateUi
 
 };

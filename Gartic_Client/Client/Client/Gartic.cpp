@@ -12,11 +12,11 @@ Gartic::Gartic(QWidget *parent)
     ui.setupUi(this);
 
     scene = new QGraphicsScene(this);
-    drawRectItem = new QGraphicsRectItem(0, 0, 600, 600);  // Poți schimba dimensiunile
+    drawRectItem = new QGraphicsRectItem(0, 0, 600, 600); 
     scene->addItem(drawRectItem);
-    ui.drawView->setScene(scene);  // Asigură-te că este numele corect al QGraphicsView-
+    ui.drawView->setScene(scene); 
     currentDrawing = nullptr;
-
+    hideInterface();
 }
 
 Gartic::~Gartic()
@@ -53,15 +53,12 @@ void Gartic::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        // Creează un nou obiect de desenare pe scenă
         QPainterPath path;
         path.moveTo(event->pos());
 
-        // Adaugă un nou obiect de desenare în scenă
         QGraphicsPathItem* drawnPath = new QGraphicsPathItem(path);
         scene->addItem(drawnPath);
 
-        // Salvează obiectul de desenare pentru a continua linia
         currentDrawing = drawnPath;
     }
 }
@@ -70,7 +67,6 @@ void Gartic::mouseMoveEvent(QMouseEvent* event)
 {
     if (event->buttons() & Qt::LeftButton && currentDrawing)
     {
-        // Adaugă segmente la calea obiectului de desenare pe măsură ce mouse-ul se mișcă
         QPainterPath path = currentDrawing->path();
         path.lineTo(event->pos());
         currentDrawing->setPath(path);
@@ -81,8 +77,39 @@ void Gartic::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        // Resetarea obiectului de desenare după ce butonul mouse-ului este eliberat
         currentDrawing = nullptr;
+        showInterface();
     }
+}
+
+void Gartic::hideInterface()
+{
+    //We are gonna hide all buttons until the player logs in
+    ui.drawView->hide();
+    ui.textBox->hide();
+    ui.textEdit->hide();
+    ui.wordButton1->hide();
+    ui.wordButton_2->hide();
+    ui.wordButton_3->hide();
+    ui.label->show();
+    ui.label_2->show();
+    ui.username->show();
+    ui.password->show();
+    
+}
+
+void Gartic::showInterface()
+{
+    ui.drawView->show();
+    ui.textBox->show();
+    ui.textEdit->show();
+    ui.centralWidget->show();
+    ui.wordButton1->show();
+    ui.wordButton_2->show();
+    ui.wordButton_3->show();
+    ui.label->hide();
+    ui.label_2->hide();
+    ui.username->hide();
+    ui.password->hide();
 }
 
