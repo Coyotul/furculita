@@ -32,7 +32,7 @@ class Ui_GarticClass
 public:
     QWidget *centralWidget;
     QLineEdit *textBox;
-    QPushButton *wordButton1;
+    QPushButton *wordButton_1;
     QPushButton *wordButton_2;
     QPushButton *wordButton_3;
     QTextEdit *textEdit;
@@ -40,6 +40,7 @@ public:
     QLineEdit *username;
     QLabel *username_text;
     QLabel *logo;
+    QLabel *wordText;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -56,9 +57,9 @@ public:
         textBox = new QLineEdit(centralWidget);
         textBox->setObjectName("textBox");
         textBox->setGeometry(QRect(10, 550, 201, 21));
-        wordButton1 = new QPushButton(centralWidget);
-        wordButton1->setObjectName("wordButton1");
-        wordButton1->setGeometry(QRect(30, 10, 75, 24));
+        wordButton_1 = new QPushButton(centralWidget);
+        wordButton_1->setObjectName("wordButton_1");
+        wordButton_1->setGeometry(QRect(30, 10, 75, 24));
         wordButton_2 = new QPushButton(centralWidget);
         wordButton_2->setObjectName("wordButton_2");
         wordButton_2->setGeometry(QRect(100, 10, 75, 24));
@@ -86,6 +87,14 @@ public:
         logo->setObjectName("logo");
         logo->setGeometry(QRect(260, -10, 111, 61));
         logo->setPixmap(QPixmap(QString::fromUtf8(":/Gartic/gartic_logo_125px.png")));
+        wordText = new QLabel(centralWidget);
+        wordText->setObjectName("wordText");
+        wordText->setGeometry(QRect(440, 20, 221, 21));
+        QFont font1;
+        font1.setFamilies({QString::fromUtf8("Garamond")});
+        font1.setPointSize(16);
+        font1.setBold(true);
+        wordText->setFont(font1);
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
@@ -110,11 +119,12 @@ public:
     void retranslateUi(QMainWindow *GarticClass)
     {
         GarticClass->setWindowTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
-        wordButton1->setText(QCoreApplication::translate("GarticClass", "Word1", nullptr));
+        wordButton_1->setText(QCoreApplication::translate("GarticClass", "Word1", nullptr));
         wordButton_2->setText(QCoreApplication::translate("GarticClass", "Word2", nullptr));
         wordButton_3->setText(QCoreApplication::translate("GarticClass", "Word3", nullptr));
         username_text->setText(QCoreApplication::translate("GarticClass", "Username", nullptr));
         logo->setText(QString());
+        wordText->setText(QCoreApplication::translate("GarticClass", "Draw: ", nullptr));
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 

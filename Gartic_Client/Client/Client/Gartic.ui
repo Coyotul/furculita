@@ -27,7 +27,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="wordButton1">
+   <widget class="QPushButton" name="wordButton_1">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -130,6 +130,26 @@
     </property>
     <property name="pixmap">
      <pixmap resource="Gartic.qrc">:/Gartic/gartic_logo_125px.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="wordText">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>20</y>
+      <width>221</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Garamond</family>
+      <pointsize>16</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Draw: </string>
     </property>
    </widget>
   </widget>

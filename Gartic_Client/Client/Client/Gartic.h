@@ -17,30 +17,32 @@ public:
     ~Gartic();
     QGraphicsPathItem* currentDrawing;
 
-    //For methods
-private:
-    Ui::GarticClass ui;
+    void SetWords(std::string word1, std::string word2, std::string word3);
+
+private slots:
     void on_wordButton_1_clicked();
     void on_wordButton_2_clicked();
     void on_wordButton_3_clicked();
-    void keyPressEvent(QKeyEvent* event); // Adaugăm o funcție pentru gestionarea evenimentelor de tastatură
+
+    //For methods
+private:
+    Ui::GarticClass ui;
+   
+    void keyPressEvent(QKeyEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
     void hideInterface();
     void showInterface();
 
-
-
     QGraphicsScene* scene;
     QGraphicsRectItem* drawRectItem;
-
 
 
     //For var
 private:
     QString username;
     QString chatText;
-
+    QString word;
     bool playerLogged = false;
 };

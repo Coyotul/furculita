@@ -25,17 +25,21 @@ Gartic::~Gartic()
 
 void Gartic::on_wordButton_1_clicked()
 {
-
+    word = ui.wordButton_1->text();
+    qDebug() << "Word selected: " << word;
+    ui.wordText->setText(QString::fromStdString("Draw: ") + word);
 }
 
 void Gartic::on_wordButton_2_clicked()
 {
-
+    word = ui.wordButton_2->text();
+    ui.wordText->setText(QString::fromStdString("Draw: ") + word);
 }
 
 void Gartic::on_wordButton_3_clicked()
 {
-
+    word = ui.wordButton_3->text();
+    ui.wordText->setText(QString::fromStdString("Draw: ") + word);
 }
 
 void Gartic::keyPressEvent(QKeyEvent* event)
@@ -50,7 +54,8 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         }
         else
         {
-            username = ui.username->text();
+            if(ui.username->text().size()>0)
+                username = ui.username->text();
             showInterface();
             playerLogged = true;
         }
@@ -97,9 +102,11 @@ void Gartic::hideInterface()
     ui.drawView->hide();
     ui.textBox->hide();
     ui.textEdit->hide();
-    ui.wordButton1->hide();
+    ui.wordButton_1->hide();
     ui.wordButton_2->hide();
     ui.wordButton_3->hide();
+    ui.wordText->hide();
+
     ui.username_text->show();
     ui.username->show();    
 }
@@ -110,10 +117,19 @@ void Gartic::showInterface()
     ui.textBox->show();
     ui.textEdit->show();
     ui.centralWidget->show();
-    ui.wordButton1->show();
+    ui.wordButton_1->show();
     ui.wordButton_2->show();
     ui.wordButton_3->show();
+    ui.wordText->show();
+
     ui.username_text->hide();
     ui.username->hide();
+}
+
+void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
+{
+    ui.wordButton_1->setText(QString::fromStdString(word1));
+    ui.wordButton_2->setText(QString::fromStdString(word2));
+    ui.wordButton_3->setText(QString::fromStdString(word3));
 }
 
