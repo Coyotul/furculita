@@ -200,15 +200,15 @@ void Gartic::showInterface()
     ui.username->hide();
 }
 
-void Gartic::addPlayerToServer(const QString& playerName)
-{
-    std::string playerNameStd = playerName.toStdString();
-    std::string url = "http://localhost:8080/addPlayer";
-    cpr::Response response = cpr::Post(
-    cpr::Url{url},
-    cpr::Parameters{{"playerName", playerNameStd}}
-    );
-}
+//void Gartic::addPlayerToServer(const QString& playerName)
+//{
+//    std::string playerNameStd = playerName.toStdString();
+//    std::string url = "http://localhost:8080/addPlayer";
+//    cpr::Response response = cpr::Post(
+//    cpr::Url{url},
+//    cpr::Parameters{{"playerName", playerNameStd}}
+//    );
+//}
 
 void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
 {
