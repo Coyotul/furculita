@@ -22,7 +22,12 @@ void Server::configureRoutes() {
 		if (req.method == crow::HTTPMethod::Post) {
 
 			std::string playerName = req.url_params.get("playerName");
+			game.addPlayer(playerName);
 
+			return crow::response{ "Player added: " + playerName };
+		}
+		else {
+			return crow::response(400, "BadRequest");
 		}
 
 
