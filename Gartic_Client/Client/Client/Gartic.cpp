@@ -5,7 +5,7 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <iostream>
-
+#include <cpr/cpr.h>
 
 Gartic::Gartic(QWidget *parent)
     : QMainWindow(parent)
@@ -113,8 +113,10 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         }
         else
         {
-            if(ui.username->text().size()>0)
+            if (ui.username->text().size() > 0) {
                 username = ui.username->text();
+                addPlayerToServer(username);
+            }
             showInterface();
             playerLogged = true;
         }
@@ -196,6 +198,16 @@ void Gartic::showInterface()
 
     ui.username_text->hide();
     ui.username->hide();
+}
+
+void Gartic::addPlayerToServer(const QString& playerName)
+{
+    std::string playerNameStd = playerName.toStdString();
+    std::string url = "http://localhost:8080/addPlayer";
+    cpr::Response response = cpr::Post(
+    cpr::Url{url},
+    cpr::Parameters{{"playerName", playerNameStd}}
+    );
 }
 
 void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
