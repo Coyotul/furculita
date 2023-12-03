@@ -1,5 +1,6 @@
 #include "Round.h"
 #include "word.h"
+#include "Timer.h"
 
 Round::Round(const std::string& wordToDraw, uint16_t duration)
 	:m_wordToDraw(wordToDraw),
@@ -35,6 +36,20 @@ bool Round::wordGuessed(std::string guess)
 
 void Round::startRound()
 {
+	Timer* timer = Timer::Instance();
+	bool isRunning = true;
+
+	while (isRunning)
+	{
+		timer->Tick();
+
+		if (timer->GetDeltaTime() >= 1) {
+			
+			timer->Reset();
+			m_timeLeft--;
+			if (m_timeLeft == 0) isRunning = false;
+		}
+	}
 }
 
 uint16_t Round::getRoundNumber() const
