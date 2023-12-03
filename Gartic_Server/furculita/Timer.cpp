@@ -15,6 +15,17 @@ void Timer::Release()
     sInstance = nullptr;
 }
 
+Timer::Timer()
+{
+    Reset();
+    m_TimeScale = 1.0f;
+    m_DeltaTime = std::chrono::duration<float>{ 0.0f };
+}
+
+Timer::~Timer()
+{
+
+}
 void Timer::Reset()
 {
 }
