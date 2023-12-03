@@ -10,6 +10,7 @@ public:
 	std::string getWordToDraw();
 	bool wordGuessed(std::string guess);
 	void startRound();
+	void finishRound();
 	uint16_t getRoundNumber() const;
 private:
 	std::string m_wordToDraw;

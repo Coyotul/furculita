@@ -1,6 +1,7 @@
 #include "Round.h"
 #include "word.h"
 #include "Timer.h"
+#include <iostream>
 
 Round::Round(const std::string& wordToDraw, uint16_t duration)
 	:m_wordToDraw(wordToDraw),
@@ -51,6 +52,17 @@ void Round::startRound()
 		}
 	}
 }
+
+void Round::finishRound()
+{
+	if (m_timeLeft == 0)
+	{
+		std::cout << "Round " << m_roundNumber << " has finished!\n";
+		m_timeLeft = m_duration;
+		m_roundNumber++;
+	}
+}
+
 
 uint16_t Round::getRoundNumber() const
 {
