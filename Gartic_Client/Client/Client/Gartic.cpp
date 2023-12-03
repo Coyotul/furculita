@@ -130,7 +130,7 @@ void Gartic::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton)
     {
-        currentDrawing = nullptr;
+        isDrawing = false;
     }
 }
 
@@ -143,31 +143,24 @@ void Gartic::mousePressEvent(QMouseEvent* event)
 
         lastMousePos = ui.drawView->mapToScene(event->pos());
         isDrawing = true;
+
+        // Adaugă un nou PainterPath la vectorul de linii
+        QPainterPath newPath;
+        newPath.moveTo(lastMousePos);
+        lines.push_back(newPath);
     }
 }
 
-void Gartic::mouseMoveEvent(QMouseEvent* event)
+void Gartic::paintEvent(QPaintEvent* event)
 {
-    if (isDrawing)
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    for (const auto& path : lines)
     {
-        if (ui.drawView->rect().contains(event->pos()))
-        {
-            QPainter painter(ui.drawView->viewport());
-            painter.setRenderHint(QPainter::Antialiasing);
-            QPointF currentPos = ui.drawView->mapToScene(event->pos());
-
-            painter.drawLine(lastMousePos, currentPos);
-
-            lastMousePos = currentPos;
-        }
-        else
-        {
-            isDrawing = false;
-        }
+        painter.drawPath(path);
     }
 }
-
-
 
 
 void Gartic::hideInterface()

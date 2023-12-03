@@ -30,7 +30,7 @@ private:
    
     void keyPressEvent(QKeyEvent* event);
     void mousePressEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
+    void paintEvent(QPaintEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
     bool eventFilter(QObject* obj, QEvent* event);
     void hideInterface();
@@ -49,5 +49,6 @@ private:
     bool playerLogged = false;
     bool isDrawing = false;
     QPointF lastMousePos;
+    std::vector<QPainterPath> lines;
 
 };
