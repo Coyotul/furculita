@@ -115,7 +115,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         {
             if (ui.username->text().size() > 0) {
                 username = ui.username->text();
-                addPlayerToServer(username);
+                //addPlayerToServer(username);
             }
             showInterface();
             playerLogged = true;
@@ -203,7 +203,7 @@ void Gartic::showInterface()
 //void Gartic::addPlayerToServer(const QString& playerName)
 //{
 //    std::string playerNameStd = playerName.toStdString();
-//    std::string url = "http://localhost:8080/addPlayer";
+//    std::string url = "";
 //    cpr::Response response = cpr::Post(
 //    cpr::Url{url},
 //    cpr::Parameters{{"playerName", playerNameStd}}

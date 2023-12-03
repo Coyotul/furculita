@@ -35,7 +35,7 @@ private:
     bool eventFilter(QObject* obj, QEvent* event);
     void hideInterface();
     void showInterface();
-    void addPlayerToServer(const QString& playerName);
+    //void addPlayerToServer(const QString& playerName);
 
     QGraphicsScene* scene;
     QGraphicsRectItem* drawRectItem;
