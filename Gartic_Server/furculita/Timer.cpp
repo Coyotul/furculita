@@ -1,12 +1,18 @@
 #include "Timer.h"
 
+Timer* Timer::sInstance = nullptr;
+
 Timer* Timer::Instance()
 {
-    return nullptr;
+    if (sInstance == nullptr)
+        sInstance = new Timer();
+    return sInstance;
 }
 
 void Timer::Release()
 {
+    delete sInstance;
+    sInstance = nullptr;
 }
 
 void Timer::Reset()
