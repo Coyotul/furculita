@@ -1,1 +1,4 @@
-﻿  Client.vcxproj -> C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe
+﻿  moc_Gartic.cpp
+  qrc_Gartic.cpp
+  LINK : C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe not found or not built by the last incremental link; performing full link
+  Client.vcxproj -> C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe
