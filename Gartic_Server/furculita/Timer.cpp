@@ -17,3 +17,20 @@ float Timer::GetDeltaTime()
 {
     return 0.0f;
 }
+
+void Timer::SetTimeScale(float t)
+{
+}
+
+float Timer::GetTimeScale()
+{
+    return 0.0f;
+}
+
+void Timer::Tick()
+{
+}
+
+Timer::~Timer()
+{
+}
