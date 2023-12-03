@@ -18,5 +18,10 @@ public:
 	void SetTimeScale(float t = 1.0f);
 	float GetTimeScale();
 	void Tick();
+
+private:
+
+	Timer();
+	~Timer();
 };
 
