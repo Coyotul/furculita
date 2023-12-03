@@ -22,30 +22,30 @@ Timer::Timer()
     m_DeltaTime = std::chrono::duration<float>{ 0.0f };
 }
 
-Timer::~Timer()
-{
 
-}
 void Timer::Reset()
 {
+    m_StartTime = std::chrono::system_clock::now();
 }
 
 float Timer::GetDeltaTime()
 {
-    return 0.0f;
+    return m_DeltaTime.count();
 }
 
 void Timer::SetTimeScale(float t)
 {
+    m_TimeScale = t;
 }
 
 float Timer::GetTimeScale()
 {
-    return 0.0f;
+    return m_TimeScale;
 }
 
 void Timer::Tick()
 {
+    m_DeltaTime = std::chrono::system_clock::now() - m_StartTime;
 }
 
 Timer::~Timer()
