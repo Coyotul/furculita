@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Round.h" />
     <ClInclude Include="Server.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Word.h" />
     <ClInclude Include="WordsDb.h" />
@@ -31,6 +32,7 @@
     <ClCompile Include="game.cppm" />
     <ClCompile Include="Round.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Word.cpp" />
     <ClCompile Include="WordsDb.cpp" />
