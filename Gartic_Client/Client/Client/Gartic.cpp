@@ -6,6 +6,8 @@
 #include <QGraphicsRectItem>
 #include <iostream>
 #include <cpr/cpr.h>
+#include <crow.h>
+
 
 // At Start
 Gartic::Gartic(QWidget *parent)
@@ -118,7 +120,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         {
             if (ui.username->text().size() > 0) {
                 username = ui.username->text();
-                //addPlayerToServer(username);
+                addPlayerToServer(username);
             }
             showInterface();
             playerLogged = true;
@@ -231,20 +233,24 @@ void Gartic::updatePlayersScore()
     }
 }
 
-//void Gartic::addPlayerToServer(const QString& playerName)
-//{
-//    std::string playerNameStd = playerName.toStdString();
-//    std::string url = "";
-//    cpr::Response response = cpr::Post(
-//    cpr::Url{url},
-//    cpr::Parameters{{"playerName", playerNameStd}}
-//    );
-//}
+void Gartic::addPlayerToServer(const QString& playerName)
+{
+    QByteArray playerNameUtf8 = playerName.toUtf8();
+    std::string playerNameStd = playerNameUtf8.constData();
+    std::string url = "http://localhost:8080";
+    
+    cpr::Response response = cpr::Post(
+    cpr::Url{url},
+    cpr::Parameters{{"playerName", playerNameStd}}
+    );
+
+    
+}
 
 void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
 {
-    ui.wordButton_1->setText(QString::fromStdString(word1));
+    /*ui.wordButton_1->setText(QString::fromStdString(word1));
     ui.wordButton_2->setText(QString::fromStdString(word2));
-    ui.wordButton_3->setText(QString::fromStdString(word3));
+    ui.wordButton_3->setText(QString::fromStdString(word3));*/
 }
 

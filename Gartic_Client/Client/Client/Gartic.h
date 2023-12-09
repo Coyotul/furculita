@@ -7,6 +7,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
+#include <cpr/cpr.h>
 
 class Gartic : public QMainWindow
 {
@@ -38,7 +39,7 @@ private:
     void updateLeaderboard();
     void updatePlayersUsername();
     void updatePlayersScore();
-    //void addPlayerToServer(const QString& playerName);
+    void addPlayerToServer(const QString& playerName);
 
     QGraphicsScene* scene;
     QGraphicsRectItem* drawRectItem;
