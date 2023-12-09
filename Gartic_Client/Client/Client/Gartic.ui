@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
+    <width>651</width>
     <height>725</height>
    </rect>
   </property>
@@ -152,13 +152,29 @@
      <string>Draw: </string>
     </property>
    </widget>
+   <widget class="QLabel" name="leaderboard">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>510</y>
+      <width>151</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Leaderboard:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>653</width>
+     <width>651</width>
      <height>22</height>
     </rect>
    </property>

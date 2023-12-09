@@ -134,20 +134,19 @@ void Gartic::mouseReleaseEvent(QMouseEvent* event)
     }
 }
 
-
 void Gartic::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton && ui.drawView->rect().contains(event->pos()))
     {
         ui.drawView->setFocus();
 
-        lastMousePos = ui.drawView->mapToScene(event->pos());
-        isDrawing = true;
-
         // Adaugă un nou PainterPath la vectorul de linii
         QPainterPath newPath;
+        lastMousePos = ui.drawView->mapToScene(event->pos());
         newPath.moveTo(lastMousePos);
         lines.push_back(newPath);
+
+        isDrawing = true;
     }
 }
 
@@ -159,6 +158,15 @@ void Gartic::paintEvent(QPaintEvent* event)
     for (const auto& path : lines)
     {
         painter.drawPath(path);
+    }
+
+    // Desenează linia curentă dacă se află în proces de desenare
+    if (isDrawing)
+    {
+        QPainterPath currentPath;
+        currentPath.moveTo(lastMousePos);
+        currentPath.lineTo(ui.drawView->mapToScene(ui.drawView->mapFromGlobal(QCursor::pos())));
+        painter.drawPath(currentPath);
     }
 }
 
