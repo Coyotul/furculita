@@ -36,6 +36,8 @@ private:
     void hideInterface();
     void showInterface();
     void updateLeaderboard();
+    void updatePlayersUsername();
+    void updatePlayersScore();
     //void addPlayerToServer(const QString& playerName);
 
     QGraphicsScene* scene;
@@ -48,6 +50,8 @@ private:
     QString chatText;
     QString leaderboard;
     QString word;
+    std::vector<QString> playersUsername;
+    std::vector<QString> playersScore;
     bool playerLogged = false;
     bool isDrawing = false;
     QPointF lastMousePos;

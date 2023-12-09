@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cpr/cpr.h>
 
+// At Start
 Gartic::Gartic(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -21,6 +22,8 @@ Gartic::Gartic(QWidget *parent)
     username = "Guest";
     ui.drawView->viewport()->installEventFilter(this);
     updateLeaderboard();
+    updatePlayersScore();
+    updatePlayersUsername();
 }
 bool Gartic::eventFilter(QObject* obj, QEvent* event)
 {
@@ -207,8 +210,25 @@ void Gartic::updateLeaderboard()
 {
     //TODO: implement all logic
     //for(auto it& player)
-    leaderboard = username + " "+ "100";
+    leaderboard = username + " " + "100";
     ui.leaderboard->setText(leaderboard);
+}
+
+void Gartic::updatePlayersUsername()
+{
+    for (auto& it : playersUsername)
+    {
+        //TODO: extract playersUsername from server
+
+    }
+}
+
+void Gartic::updatePlayersScore()
+{
+    for (auto& it : playersScore)
+    {
+        //TODO: extract playersScore from server
+    }
 }
 
 //void Gartic::addPlayerToServer(const QString& playerName)
