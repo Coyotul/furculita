@@ -20,7 +20,7 @@ Gartic::Gartic(QWidget *parent)
     hideInterface();
     username = "Guest";
     ui.drawView->viewport()->installEventFilter(this);
-
+    updateLeaderboard();
 }
 bool Gartic::eventFilter(QObject* obj, QEvent* event)
 {
@@ -181,9 +181,10 @@ void Gartic::hideInterface()
     ui.wordButton_2->hide();
     ui.wordButton_3->hide();
     ui.wordText->hide();
+    ui.leaderboard->hide();
 
     ui.username_text->show();
-    ui.username->show();    
+    ui.username->show();  
 }
 
 void Gartic::showInterface()
@@ -196,9 +197,18 @@ void Gartic::showInterface()
     ui.wordButton_2->show();
     ui.wordButton_3->show();
     ui.wordText->show();
+    ui.leaderboard->show();
 
     ui.username_text->hide();
     ui.username->hide();
+}
+
+void Gartic::updateLeaderboard()
+{
+    //TODO: implement all logic
+    //for(auto it& player)
+    leaderboard = username + " "+ "100";
+    ui.leaderboard->setText(leaderboard);
 }
 
 //void Gartic::addPlayerToServer(const QString& playerName)

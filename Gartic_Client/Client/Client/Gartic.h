@@ -35,6 +35,7 @@ private:
     bool eventFilter(QObject* obj, QEvent* event);
     void hideInterface();
     void showInterface();
+    void updateLeaderboard();
     //void addPlayerToServer(const QString& playerName);
 
     QGraphicsScene* scene;
@@ -45,6 +46,7 @@ private:
 private:
     QString username;
     QString chatText;
+    QString leaderboard;
     QString word;
     bool playerLogged = false;
     bool isDrawing = false;
