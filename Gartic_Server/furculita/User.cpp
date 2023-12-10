@@ -25,7 +25,7 @@ void User::SetName(std::string_view name)
 	m_name = name;
 }
 
-uint16_t User::GetScore()
+uint16_t User::GetScore() const
 {
 	return this->m_score;
 }

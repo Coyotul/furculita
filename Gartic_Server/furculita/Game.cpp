@@ -108,12 +108,12 @@ void Game::resetGame() {
 
 }
 
-const std::vector<std::string>& gartic::Game::getPlayers() const {
-    static std::vector<std::string> playerNames;
+const std::vector<std::pair<std::string, uint16_t>>& gartic::Game::getPlayers() const {
+    static std::vector<std::pair<std::string, uint16_t>> playerNames;
     playerNames.clear();  
 
     for ( auto& user : m_players) {
-        playerNames.push_back(user.GetName());
+        playerNames.push_back(std::make_pair(user.GetName(),user.GetScore()));
     }
 
     // Return the vector of strings
