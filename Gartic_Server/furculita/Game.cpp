@@ -15,6 +15,11 @@ Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound(
 }
 
 void Game::addPlayer(std::string playerName) {
+    if (playerName.empty()) {
+        std::cout << "Invalid player name" << std::endl;
+        // Handle the error appropriately
+        return;
+    }
     m_players.push_back(User(playerName, 0));
 }
 
@@ -23,7 +28,7 @@ void Game::addPlayer(std::string playerName) {
 
 void Game::startGame() {
     const uint16_t numChoices = 3;
-    
+    std::cout << "Game started." << std::endl;
     // Ask the user to choose the language
     std::cout << "Choose the language (1. English, 2. Romanian): ";
     int languageChoice;
@@ -75,6 +80,8 @@ void Game::startGame() {
         std::cout << "Invalid option" << std::endl;
         m_gameInProgress = false;
     }
+
+   // std::cout << "Round " << m_currentRound.getRoundNumber() << ": " << m_players[m_currentPlayerIndex].GetName() << " is drawing." << std::endl;
 }
 void Game::endGame() {
     m_gameInProgress = false;
