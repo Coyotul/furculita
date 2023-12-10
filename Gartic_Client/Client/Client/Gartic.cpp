@@ -249,8 +249,8 @@ void Gartic::addPlayerToServer(const QString& playerName)
 
 void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
 {
-    /*ui.wordButton_1->setText(QString::fromStdString(word1));
-    ui.wordButton_2->setText(QString::fromStdString(word2));
-    ui.wordButton_3->setText(QString::fromStdString(word3));*/
+    ui.wordButton_1->setText(QString::fromUtf8(word1.c_str()));
+    ui.wordButton_2->setText(QString::fromUtf8(word2.c_str()));
+    ui.wordButton_3->setText(QString::fromUtf8(word3.c_str()));
 }
 
