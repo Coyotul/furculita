@@ -27,3 +27,13 @@ Robot Robot
 Rainbow Curcubeu
 Turtle Testoasa
 Rocket Racheta
+Apple  Mar
+Banana  Banana
+Orange  Portocal
+Grape  Strugure
+Strawberry  Capsuna
+Pineapple  Ananas
+Watermelon  Pepene 
+Mango  Mango
+Cherry  Cireasa
+Peach  Piersica
