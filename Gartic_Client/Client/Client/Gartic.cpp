@@ -217,12 +217,19 @@ void Gartic::updateLeaderboard()
 }
 
 void Gartic::updatePlayersUsername()
-{
-    for (auto& it : playersUsername)
-    {
-        //TODO: extract playersUsername from server
+{ //vezi ca e un singur extract pentru amandoua, ti l schimbi tu dupa sau il folosesti unde iti trebuie
+    //crapa mereu, e greu rau programu sa mor eu
+    /*std::vector<std::pair<std::string, uint16_t>> nameAndScore;
+    cpr::Response response = cpr::Get(cpr::Url{ "http://localhost:8080/getPlayersName" });
+    auto players = crow::json::load(response.text);
 
-    }
+    for (const auto& player : players) {
+        
+        std::string playerName = player["name"].s();  
+        uint16_t playerScore = player["score"].u();  
+
+        nameAndScore.push_back(std::make_pair(playerName, playerScore));
+    }*/
 }
 
 void Gartic::updatePlayersScore()
