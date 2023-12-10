@@ -32,7 +32,15 @@ void Server::configureRoutes() {
 
 
 		});
-	
+	CROW_ROUTE(app, "/getPlayers")([&game]() {
+		std::vector<crow::json::wvalue> playersJSON;
+		for (const auto& player : game.getPlayers()) {
+			crow::json::wvalue playerJSON{ player };
+			playersJSON.push_back(playerJSON);
+		}
+		return crow::json::wvalue(playersJSON);
+
+		});
 
 	CROW_ROUTE(app, "/game")
 		([&game](const crow::request& req) -> crow::response {
