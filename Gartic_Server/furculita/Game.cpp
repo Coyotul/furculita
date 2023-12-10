@@ -11,10 +11,10 @@ import game;
 using gartic::Game;
 
 Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 0), m_currentWord() {
-
+    
 }
 
-void Game::addPlayer(std::string_view playerName) {
+void Game::addPlayer(std::string playerName) {
     m_players.push_back(User(playerName, 0));
 }
 
@@ -23,7 +23,7 @@ void Game::addPlayer(std::string_view playerName) {
 
 void Game::startGame() {
     const uint16_t numChoices = 3;
-
+    
     // Ask the user to choose the language
     std::cout << "Choose the language (1. English, 2. Romanian): ";
     int languageChoice;
@@ -111,9 +111,10 @@ void Game::resetGame() {
 const std::vector<std::pair<std::string, uint16_t>>& gartic::Game::getPlayers() const {
     static std::vector<std::pair<std::string, uint16_t>> playerNames;
     playerNames.clear();  
-
-    for ( auto& user : m_players) {
-        playerNames.push_back(std::make_pair(user.GetName(),user.GetScore()));
+    if (m_players.size() != 0) {
+        for (auto& user : m_players) {
+            playerNames.push_back(std::make_pair(user.GetName(), 0/*user.GetScore()*/));
+        }
     }
 
     // Return the vector of strings

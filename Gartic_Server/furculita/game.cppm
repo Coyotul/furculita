@@ -9,7 +9,7 @@ namespace gartic {
 	export class Game {
 	public:
 		Game();
-		void addPlayer(std::string_view playerName);
+		void addPlayer(std::string playerName);
 		void startGame();
 		void endGame();
 		void guessWord(std::string_view guessedWord);
