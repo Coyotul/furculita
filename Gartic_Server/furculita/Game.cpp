@@ -14,14 +14,15 @@ Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound(
     
 }
 
-void Game::addPlayer(std::string playerName) {
+void Game::addPlayer(std::string_view playerName) {
     if (playerName.empty()) {
         std::cout << "Invalid player name" << std::endl;
-        // Handle the error appropriately
+        
         return;
     }
     m_players.push_back(User(playerName, 0));
 }
+
 
 
 
@@ -91,8 +92,8 @@ void Game::endGame() {
 void Game::guessWord(std::string_view guessedWord) {
     if (m_gameInProgress) {
         if (guessedWord == m_currentRound.getWordToDraw()) {
-            int scoreToAdd = calculateScoreBasedOnTime(); // Implement this function
-            m_players[m_currentPlayerIndex].SetScore(m_players[m_currentPlayerIndex].GetScore() + scoreToAdd);
+            //int scoreToAdd = calculateScoreBasedOnTime(); // Implement this function
+           // m_players[m_currentPlayerIndex].SetScore(m_players[m_currentPlayerIndex].GetScore() + scoreToAdd);
         }
         m_currentPlayerIndex = (m_currentPlayerIndex + 1) % m_players.size();
     }
@@ -129,10 +130,12 @@ const std::vector<std::pair<std::string, uint16_t>>& gartic::Game::getPlayers() 
     return playerNames;
 }
 
-void Game::calculateScoreBasedOnTime()
+void gartic::Game::calculateScoresBasedOnTime()
 {
-
+    int scoreToBeAdded=0;
 }
+
+
 
 
 bool Game::checkGameState()const {
