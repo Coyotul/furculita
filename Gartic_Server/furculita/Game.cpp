@@ -91,7 +91,8 @@ void Game::endGame() {
 void Game::guessWord(std::string_view guessedWord) {
     if (m_gameInProgress) {
         if (guessedWord == m_currentRound.getWordToDraw()) {
-            m_players[m_currentPlayerIndex].SetScore(m_players[m_currentPlayerIndex].GetScore() + 1);
+            int scoreToAdd = calculateScoreBasedOnTime(); // Implement this function
+            m_players[m_currentPlayerIndex].SetScore(m_players[m_currentPlayerIndex].GetScore() + scoreToAdd);
         }
         m_currentPlayerIndex = (m_currentPlayerIndex + 1) % m_players.size();
     }
@@ -126,6 +127,11 @@ const std::vector<std::pair<std::string, uint16_t>>& gartic::Game::getPlayers() 
 
     // Return the vector of strings
     return playerNames;
+}
+
+void Game::calculateScoreBasedOnTime()
+{
+
 }
 
 

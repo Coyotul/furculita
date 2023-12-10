@@ -18,6 +18,7 @@ namespace gartic {
 		bool checkGameState() const;
 		void resetGame();
 		const std::vector<std::pair<std::string, uint16_t>>& getPlayers() const;
+		void calculateScoreBasedOnTime();
 
 	private:
 		std::vector<User> m_players;
