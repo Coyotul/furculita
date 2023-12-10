@@ -17,6 +17,7 @@ namespace gartic {
 		void resetScores();
 		bool checkGameState() const;
 		void resetGame();
+		const std::vector<std::string>& getPlayers() const;
 
 	private:
 		std::vector<User> m_players;

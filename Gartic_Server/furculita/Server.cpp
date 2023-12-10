@@ -32,6 +32,7 @@ void Server::configureRoutes() {
 
 
 		});
+	
 
 	CROW_ROUTE(app, "/game")
 		([&game](const crow::request& req) -> crow::response {

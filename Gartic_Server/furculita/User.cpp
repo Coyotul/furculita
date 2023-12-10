@@ -15,7 +15,7 @@ User::User(const User& user) :
 {
 }
 
-std::string User::GetName()
+ std::string User::GetName() const
 {
 	return this->m_name;
 }

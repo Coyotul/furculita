@@ -20,6 +20,7 @@ void Game::addPlayer(std::string_view playerName) {
 
 
 
+
 void Game::startGame() {
     const uint16_t numChoices = 3;
 
@@ -105,7 +106,18 @@ void Game::resetGame() {
     resetScores();
     m_players.clear();
 
+}
 
+const std::vector<std::string>& gartic::Game::getPlayers() const {
+    static std::vector<std::string> playerNames;
+    playerNames.clear();  
+
+    for ( auto& user : m_players) {
+        playerNames.push_back(user.GetName());
+    }
+
+    // Return the vector of strings
+    return playerNames;
 }
 
 

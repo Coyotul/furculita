@@ -7,7 +7,7 @@ public:
 	User();
 	User(std::string_view name, uint16_t score);
 	User(const User &user);
-	std::string GetName();
+	 std::string GetName() const;
 	void SetName(std::string_view name);
 	uint16_t GetScore();
 	void SetScore(uint16_t score);
