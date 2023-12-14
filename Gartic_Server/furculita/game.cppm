@@ -9,7 +9,8 @@ namespace gartic {
 	export class Game {
 	public:
 		Game();
-		void addPlayer(std::string_view playerName);
+		
+		void addPlayer(std::string playerName);
 		void startGame();
 		void endGame();
 		void guessWord(std::string_view guessedWord);
@@ -17,11 +18,14 @@ namespace gartic {
 		void resetScores();
 		bool checkGameState() const;
 		void resetGame();
-		const std::vector<std::pair<std::string, uint16_t>>& getPlayers() const;
+		//const std::vector<std::pair<std::string, uint16_t>>& getPlayers() const;
 		void calculateScoresBasedOnTime();
+		~Game();
+		
 
 	private:
-		std::vector<User> m_players;
+		
+		std::vector<std::pair<std::string, int>> m_players;
 		std::uint8_t m_currentPlayerIndex;
 		bool m_gameInProgress;
 		Round m_currentRound;
