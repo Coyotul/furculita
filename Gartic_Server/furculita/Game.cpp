@@ -11,23 +11,34 @@ import game;
 using gartic::Game;
 
 Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 0), m_currentWord() {
-    
+   
 }
 
-void Game::addPlayer(std::string_view playerName) {
+void Game::addPlayer(std::string playerName) {
+    //std::cout << "a intrat";
     if (playerName.empty()) {
         std::cout << "Invalid player name" << std::endl;
         
         return;
     }
-    m_players.push_back(User(playerName, 0));
+    User user;
+    user.SetName(playerName);
+    user.SetScore(0);
+    std::string name = user.GetName();
+    int score = user.GetScore();
+    
+    //m_players.push_back(std::make_pair(name,score));//std::make_pair(user.GetName(),user.GetScore()));
+    //std::cout << m_players[0].first;
 }
 
 
-
+Game::~Game() {
+   
+}
 
 
 void Game::startGame() {
+   
     const uint16_t numChoices = 3;
     std::cout << "Game started." << std::endl;
     // Ask the user to choose the language
@@ -104,31 +115,31 @@ void Game::displayScores()const
 }
 
 void Game::resetScores() {
-    for (auto& player : m_players) {
+    /*for (auto& player : m_players) {
         player.SetScore(0);
-    }
+    }*/
     m_currentPlayerIndex = 0;
     m_gameInProgress = false;
 }
 
 void Game::resetGame() {
     resetScores();
-    m_players.clear();
+    //m_players.clear();
 
 }
 
-const std::vector<std::pair<std::string, uint16_t>>& gartic::Game::getPlayers() const {
-    static std::vector<std::pair<std::string, uint16_t>> playerNames;
-    playerNames.clear();  
-    if (m_players.size() != 0) {
-        for (auto& user : m_players) {
-            playerNames.push_back(std::make_pair(user.GetName(), 0/*user.GetScore()*/));
-        }
-    }
-
-    // Return the vector of strings
-    return playerNames;
-}
+//const std::vector<std::pair<std::string, uint16_t>>& gartic::Game::getPlayers() const {
+//    static std::vector<std::pair<std::string, uint16_t>> playerNames;
+//    playerNames.clear();  
+//    if (m_players.size() != 0) {
+//        //for (auto& user : m_players) {
+//        //    playerNames.push_back(std::make_pair(user.GetName(), 0/*user.GetScore()*/));
+//        //}
+//    }
+//
+//    // Return the vector of strings
+//    return playerNames;
+//}
 
 void gartic::Game::calculateScoresBasedOnTime()
 {
