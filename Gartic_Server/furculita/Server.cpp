@@ -18,21 +18,14 @@ void Server::configureRoutes() {
 
 		});
 
-	CROW_ROUTE(app, "/addPlayer")([&game](const crow::request& req)->crow::response {
-		if (req.method == crow::HTTPMethod::Post) {
-
-			std::string playerName = req.url_params.get("playerName");
+	CROW_ROUTE(app, "/addPlayer/<string>")([&game](const crow::request& req, std::string playerName=" ") {
+		if (playerName != " ") {
 			game.addPlayer(playerName);
-
-			return crow::response{ "Player added: " + playerName };
+			return crow::response(200);
 		}
-		else {
-			return crow::response(400, "BadRequest");
-		}
-
 
 		});
-	CROW_ROUTE(app, "/getPlayersName")([&game]() {
+	/*CROW_ROUTE(app, "/getPlayersName")([&game]() {
 		std::vector<crow::json::wvalue> playersJSON;
 		for (const auto& player : game.getPlayers()) {
 			crow::json::wvalue playerJSON{
@@ -43,9 +36,9 @@ void Server::configureRoutes() {
 		}
 		return crow::json::wvalue(playersJSON);
 
-		});
+		});*/
 
-	CROW_ROUTE(app, "/game")
+	/*CROW_ROUTE(app, "/game")
 		([&game](const crow::request& req) -> crow::response {
 
 		if (req.url_params.get("action") == "start") {
@@ -73,5 +66,7 @@ void Server::configureRoutes() {
 
 		return crow::response{ "Hello Gartic 2" };
 			});
+
+			*/
 }
 

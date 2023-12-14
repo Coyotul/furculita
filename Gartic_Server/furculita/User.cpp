@@ -1,20 +1,11 @@
 #include "User.h"
 
-User::User() :
-	m_name(" "), m_score(0)
+User::User()
 {
-	m_score = 0;
+	
 }
 
-User::User(std::string_view name, uint16_t score) :
-	m_name(name), m_score(score)
-{
-}
 
-User::User(const User& user) :
-	m_name(user.m_name), m_score(user.m_score)
-{
-}
 
  std::string User::GetName() const
 {
@@ -28,8 +19,8 @@ void User::SetName(std::string_view name)
 
 uint16_t User::GetScore() const
 {
-	return 0;
-	//return this->m_score;
+	
+	return this->m_score;
 }
 
 void User::SetScore(uint16_t score)
