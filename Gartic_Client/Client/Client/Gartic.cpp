@@ -244,12 +244,20 @@ void Gartic::addPlayerToServer(const QString& playerName)
 {
     QByteArray playerNameUtf8 = playerName.toUtf8();
     std::string playerNameStd = playerNameUtf8.constData();
-    std::string url = "http://localhost:8080";
     
-    cpr::Response response = cpr::Post(
-    cpr::Url{url},
-    cpr::Parameters{{"playerName", playerNameStd}}
+    std::string url = "http://localhost:8080/addPlayer/" + playerNameStd;
+    cpr::Response response = cpr::Get(
+        cpr::Url{ url }
+       
     );
+
+    
+    if (response.error) {
+        std::cerr << "Eroare la efectuarea cererii: " << response.error.message.c_str();
+    }
+    else {
+        std::cout << "Cerere efectuată cu succes. Răspunsul serverului: " << response.text.c_str();
+    }
 
     
 }
