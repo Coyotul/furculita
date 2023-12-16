@@ -36,3 +36,17 @@ void Timer::SetTimeScale(float t)
 {
     m_TimeScale = t;
 }
+
+float Timer::GetTimeScale()
+{
+    return m_TimeScale;
+}
+
+void Timer::Tick()
+{
+    m_DeltaTime = std::chrono::system_clock::now() - m_StartTime;
+}
+
+Timer::~Timer()
+{
+}
