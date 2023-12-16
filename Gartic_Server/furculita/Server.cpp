@@ -1,4 +1,6 @@
 ﻿#include "Server.h";
+#include "Word.h"
+#include "WordsDb.h"
 import game;
 
 
@@ -10,9 +12,22 @@ void Server::run() {
 	app.port(8080).multithreaded().run();
 }
 
+
+
 void Server::configureRoutes() {
 	gartic::Game game;
 	int language = 1;
+	Storage db = createStorage("words.sqlite");
+	db.sync_schema();
+	auto initialProductsCount = db.count<WordStruct>();
+	if (initialProductsCount == 0) {
+		populateStorage(db);
+	}
+	WordsDb wordsDb(db);
+	std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3, "romana");
+
+
+
 	CROW_ROUTE(app, "/")([]() {
 
 		return "Hello Gartic";
@@ -59,6 +74,19 @@ void Server::configureRoutes() {
 				return crow::response(400); // Returnează un răspuns 400 Bad Request
 			}
 		});
+	CROW_ROUTE(app, "/words")(
+		[&randomWords,wordsDb]()
+		{
+			randomWords = wordsDb.getRandomWords(3, "romana");
+			std::vector<crow::json::wvalue>wordsJSON;
+			for (const auto& word : randomWords)
+			{
+				crow::json::wvalue word{ { "word", word } };
+				wordsJSON.push_back(word);
+			}
+			return crow::json::wvalue(wordsJSON);
+		}
+	);
 
 }
 
