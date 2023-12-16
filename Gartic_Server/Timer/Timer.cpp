@@ -21,3 +21,18 @@ Timer::Timer()
     m_TimeScale = 1.0f;
     m_DeltaTime = std::chrono::duration<float>{ 0.0f };
 }
+
+void Timer::Reset()
+{
+    m_StartTime = std::chrono::system_clock::now();
+}
+
+float Timer::GetDeltaTime()
+{
+    return m_DeltaTime.count();
+}
+
+void Timer::SetTimeScale(float t)
+{
+    m_TimeScale = t;
+}
