@@ -37,63 +37,10 @@ Game::~Game() {
 }
 
 
-void Game::startGame() {
-   
-    const uint16_t numChoices = 3;
-    std::cout << "Game started." << std::endl;
-    // Ask the user to choose the language
-    std::cout << "Choose the language (1. English, 2. Romanian): ";
-    int languageChoice;
-    std::cin >> languageChoice;
-
-    std::string language;
-    switch (languageChoice) {
-    case 1:
-        language = "english";
-        break;
-    case 2:
-        language = "romanian";
-        break;
-    default:
-        std::cout << "Invalid language choice" << std::endl;
-        m_gameInProgress = false;
-        return;
-    }
-
-    Storage db = createStorage("words.sqlite");
-    db.sync_schema();
-    auto initialProductsCount = db.count<WordStruct>();
-    if (initialProductsCount == 0) {
-        populateStorage(db);
-    }
-    WordsDb wordsDb(db);
-    std::vector<WordStruct> randomWords = wordsDb.getRandomWords(numChoices, language);
-
-    for (size_t i = 0; i < randomWords.size(); ++i) {
-        std::cout << i + 1 << ". " << ((language == "english") ? randomWords[i].wordInEnglish : randomWords[i].wordInRomanian) << std::endl;
-    }
-
-    uint16_t userChoice;
-    std::cout << "Choose a number (1-" << numChoices << "): ";
-
-    if (!(std::cin >> userChoice) || userChoice < 1 || userChoice > numChoices) {
-        std::cout << "Invalid option" << std::endl;
-        m_gameInProgress = false;
-        return;
-    }
-    
-    if (userChoice <= randomWords.size()) {
-        m_currentWord = (language == "english") ? randomWords[userChoice - 1].wordInEnglish : randomWords[userChoice - 1].wordInRomanian;
-        m_currentRound = Round(m_currentWord.getWord(), 60);
-        m_gameInProgress = true;
-        std::cout << m_currentWord.getWord();
-    }
-    else {
-        std::cout << "Invalid option" << std::endl;
-        m_gameInProgress = false;
-    }
-
-   // std::cout << "Round " << m_currentRound.getRoundNumber() << ": " << m_players[m_currentPlayerIndex].GetName() << " is drawing." << std::endl;
+void Game::startGame() 
+{
+    std::cout << "Server started.\n";
+    std::cout << "Waiting for clients.\n";
 }
 void Game::endGame() {
     m_gameInProgress = false;

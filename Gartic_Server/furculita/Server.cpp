@@ -12,6 +12,7 @@ void Server::run() {
 
 void Server::configureRoutes() {
 	gartic::Game game;
+	int language = 1;
 	CROW_ROUTE(app, "/")([]() {
 
 		return "Hello Gartic";
@@ -26,56 +27,38 @@ void Server::configureRoutes() {
 		// Returnează un răspuns simplu
 		return "Cererea POST a fost primită cu succes!";
 			});
+	CROW_ROUTE(app, "/language")([&language](const crow::request& req)
+		{
+			// Accesează direct parametrul de query string "language"
+			auto languageParam = req.url_params.get("language");
 
-	/*CROW_ROUTE(app, "/addPlayer/<string>")([&game](const crow::request& req, std::string playerName=" ") {
-		if (playerName != " ") {
-			game.addPlayer(playerName);
-			return crow::response(200);
-		}
+			// Verifică dacă parametrul există
+			if (languageParam) {
+				try {
+					// Convertește la int
+					int chosenLanguage = std::stoi(languageParam);
 
-		});*/
-	/*CROW_ROUTE(app, "/getPlayersName")([&game]() {
-		std::vector<crow::json::wvalue> playersJSON;
-		for (const auto& player : game.getPlayers()) {
-			crow::json::wvalue playerJSON{
-				{"name", player.first},
-				{"score", player.second}
-			};
-			playersJSON.push_back(playerJSON);
-		}
-		return crow::json::wvalue(playersJSON);
+					// Setează valoarea limbajului
+					language = chosenLanguage;
 
-		});*/
+					// Afișează valoarea limbajului în consolă
+					std::cout << "Limba aleasă este: " << chosenLanguage << std::endl;
 
-	/*CROW_ROUTE(app, "/game")
-		([&game](const crow::request& req) -> crow::response {
+					// Returnează un răspuns 200 OK
+					return crow::response(200);
+				}
+				catch (const std::exception& e) {
+					// În caz de eroare la conversie
+					std::cerr << "Eroare la conversia limbajului: " << e.what() << std::endl;
+					return crow::response(400); // Returnează un răspuns 400 Bad Request
+				}
+			}
+			else {
+				// În cazul în care parametrul "language" lipsește
+				std::cerr << "Parametrul 'language' lipsește." << std::endl;
+				return crow::response(400); // Returnează un răspuns 400 Bad Request
+			}
+		});
 
-		if (req.url_params.get("action") == "start") {
-			game.startGame();
-		}
-		else if (req.url_params.get("action") == "guess") {
-			std::string guessedWord = req.url_params.get("word");
-			game.guessWord(guessedWord);
-		}
-		else if (req.url_params.get("action") == "end") {
-			game.endGame();
-		}
-		else if (req.url_params.get("action") == "reset") {
-			game.resetGame();
-			return crow::response{ "Game reset." };
-		}
-
-
-
-		if (!game.checkGameState()) {
-
-			return crow::response{ "Game over!" };
-		}
-
-
-		return crow::response{ "Hello Gartic 2" };
-			});
-
-			*/
 }
 
