@@ -1,2 +1,4 @@
 ﻿  Gartic.cpp
-  Client.vcxproj -> C:\Facultate\Garlic\furculita\Gartic_Client\Client\x64\Debug\Client.exe
+  main.cpp
+  moc_Gartic.cpp
+  Client.vcxproj -> C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe

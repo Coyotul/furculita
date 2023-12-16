@@ -42,6 +42,7 @@ public:
     QLabel *logo;
     QLabel *wordText;
     QLabel *leaderboard;
+    QLabel *LeaderboardText;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -51,7 +52,7 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(651, 725);
+        GarticClass->resize(600, 725);
         GarticClass->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
@@ -98,12 +99,16 @@ public:
         wordText->setFont(font1);
         leaderboard = new QLabel(centralWidget);
         leaderboard->setObjectName("leaderboard");
-        leaderboard->setGeometry(QRect(410, 510, 151, 161));
+        leaderboard->setGeometry(QRect(400, 520, 151, 161));
         leaderboard->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        LeaderboardText = new QLabel(centralWidget);
+        LeaderboardText->setObjectName("LeaderboardText");
+        LeaderboardText->setGeometry(QRect(400, 480, 141, 61));
+        LeaderboardText->setFont(font);
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 651, 22));
+        menuBar->setGeometry(QRect(0, 0, 600, 22));
         menuGartic = new QMenu(menuBar);
         menuGartic->setObjectName("menuGartic");
         GarticClass->setMenuBar(menuBar);
@@ -131,6 +136,7 @@ public:
         logo->setText(QString());
         wordText->setText(QCoreApplication::translate("GarticClass", "Draw: ", nullptr));
         leaderboard->setText(QCoreApplication::translate("GarticClass", "Leaderboard:", nullptr));
+        LeaderboardText->setText(QCoreApplication::translate("GarticClass", "Leaderboard", nullptr));
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 

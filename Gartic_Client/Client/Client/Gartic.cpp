@@ -187,6 +187,7 @@ void Gartic::hideInterface()
     ui.wordButton_3->hide();
     ui.wordText->hide();
     ui.leaderboard->hide();
+    ui.LeaderboardText->hide();
 
     ui.username_text->show();
     ui.username->show();  
@@ -202,7 +203,9 @@ void Gartic::showInterface()
     ui.wordButton_2->show();
     ui.wordButton_3->show();
     ui.wordText->show();
-    ui.leaderboard->show();
+    ui.leaderboard->show(); 
+    ui.LeaderboardText->show();
+
 
     ui.username_text->hide();
     ui.username->hide();
