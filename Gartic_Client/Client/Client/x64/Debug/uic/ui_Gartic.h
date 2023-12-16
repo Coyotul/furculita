@@ -43,6 +43,8 @@ public:
     QLabel *wordText;
     QLabel *leaderboard;
     QLabel *LeaderboardText;
+    QPushButton *language1;
+    QPushButton *wordButton_5;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -105,6 +107,12 @@ public:
         LeaderboardText->setObjectName("LeaderboardText");
         LeaderboardText->setGeometry(QRect(400, 480, 141, 61));
         LeaderboardText->setFont(font);
+        language1 = new QPushButton(centralWidget);
+        language1->setObjectName("language1");
+        language1->setGeometry(QRect(230, 513, 141, 41));
+        wordButton_5 = new QPushButton(centralWidget);
+        wordButton_5->setObjectName("wordButton_5");
+        wordButton_5->setGeometry(QRect(230, 550, 141, 41));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
@@ -137,6 +145,8 @@ public:
         wordText->setText(QCoreApplication::translate("GarticClass", "Draw: ", nullptr));
         leaderboard->setText(QCoreApplication::translate("GarticClass", "Leaderboard:", nullptr));
         LeaderboardText->setText(QCoreApplication::translate("GarticClass", "Leaderboard", nullptr));
+        language1->setText(QCoreApplication::translate("GarticClass", "Limba Romana", nullptr));
+        wordButton_5->setText(QCoreApplication::translate("GarticClass", "English Language", nullptr));
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 

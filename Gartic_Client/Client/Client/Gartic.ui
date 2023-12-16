@@ -188,6 +188,32 @@
      <string>Leaderboard</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="language1">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>513</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Limba Romana</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="wordButton_5">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>550</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>English Language</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

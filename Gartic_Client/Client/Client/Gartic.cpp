@@ -108,6 +108,27 @@ void Gartic::on_wordButton_3_clicked()
     ui.wordText->setText(QString::fromStdString("Draw: ") + word);
 }
 
+void Gartic::on_language1_clicked()
+{
+    language = 1;
+    int languageValue = 1;
+
+    std::string url = "http://localhost:8080/language?language=" + std::to_string(languageValue);
+
+    cpr::Response response = cpr::Get(cpr::Url{ url });
+
+}
+
+void Gartic::on_language2_clicked()
+{
+    language = 2;
+    int languageValue = 2;
+
+    std::string url = "http://localhost:8080/language?language=" + std::to_string(languageValue);
+
+    cpr::Response response = cpr::Get(cpr::Url{ url });
+}
+
 void Gartic::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)

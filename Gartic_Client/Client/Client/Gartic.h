@@ -24,6 +24,8 @@ private slots:
     void on_wordButton_1_clicked();
     void on_wordButton_2_clicked();
     void on_wordButton_3_clicked();
+    void on_language1_clicked();
+    void on_language2_clicked();
 
     //For methods
 private:
@@ -51,6 +53,7 @@ private:
     QString chatText;
     QString leaderboard;
     QString word;
+    int language=1;
     std::vector<QString> playersUsername;
     std::vector<QString> playersScore;
     bool playerLogged = false;

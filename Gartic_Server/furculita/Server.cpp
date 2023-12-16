@@ -42,7 +42,7 @@ void Server::configureRoutes() {
 					language = chosenLanguage;
 
 					// Afișează valoarea limbajului în consolă
-					std::cout << "Limba aleasă este: " << chosenLanguage << std::endl;
+					std::cout << "Limba aleasa este: " << chosenLanguage << std::endl;
 
 					// Returnează un răspuns 200 OK
 					return crow::response(200);
@@ -55,7 +55,7 @@ void Server::configureRoutes() {
 			}
 			else {
 				// În cazul în care parametrul "language" lipsește
-				std::cerr << "Parametrul 'language' lipsește." << std::endl;
+				std::cerr << "Parametrul 'language' lipseste." << std::endl;
 				return crow::response(400); // Returnează un răspuns 400 Bad Request
 			}
 		});

@@ -43,16 +43,20 @@ static constexpr auto qt_meta_stringdata_CLASSGarticENDCLASS = QtMocHelpers::str
     "on_wordButton_1_clicked",
     "",
     "on_wordButton_2_clicked",
-    "on_wordButton_3_clicked"
+    "on_wordButton_3_clicked",
+    "on_language1_clicked",
+    "on_language2_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSGarticENDCLASS_t {
-    uint offsetsAndSizes[10];
+    uint offsetsAndSizes[14];
     char stringdata0[7];
     char stringdata1[24];
     char stringdata2[1];
     char stringdata3[24];
     char stringdata4[24];
+    char stringdata5[21];
+    char stringdata6[21];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSGarticENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -62,13 +66,17 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSGarticENDCLASS_t qt_meta_string
         QT_MOC_LITERAL(7, 23),  // "on_wordButton_1_clicked"
         QT_MOC_LITERAL(31, 0),  // ""
         QT_MOC_LITERAL(32, 23),  // "on_wordButton_2_clicked"
-        QT_MOC_LITERAL(56, 23)   // "on_wordButton_3_clicked"
+        QT_MOC_LITERAL(56, 23),  // "on_wordButton_3_clicked"
+        QT_MOC_LITERAL(80, 20),  // "on_language1_clicked"
+        QT_MOC_LITERAL(101, 20)   // "on_language2_clicked"
     },
     "Gartic",
     "on_wordButton_1_clicked",
     "",
     "on_wordButton_2_clicked",
-    "on_wordButton_3_clicked"
+    "on_wordButton_3_clicked",
+    "on_language1_clicked",
+    "on_language2_clicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -80,7 +88,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGarticENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -88,11 +96,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGarticENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   32,    2, 0x08,    1 /* Private */,
-       3,    0,   33,    2, 0x08,    2 /* Private */,
-       4,    0,   34,    2, 0x08,    3 /* Private */,
+       1,    0,   44,    2, 0x08,    1 /* Private */,
+       3,    0,   45,    2, 0x08,    2 /* Private */,
+       4,    0,   46,    2, 0x08,    3 /* Private */,
+       5,    0,   47,    2, 0x08,    4 /* Private */,
+       6,    0,   48,    2, 0x08,    5 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -114,6 +126,10 @@ Q_CONSTINIT const QMetaObject Gartic::staticMetaObject = { {
         // method 'on_wordButton_2_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_wordButton_3_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_language1_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_language2_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -128,6 +144,8 @@ void Gartic::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->on_wordButton_1_clicked(); break;
         case 1: _t->on_wordButton_2_clicked(); break;
         case 2: _t->on_wordButton_3_clicked(); break;
+        case 3: _t->on_language1_clicked(); break;
+        case 4: _t->on_language2_clicked(); break;
         default: ;
         }
     }
@@ -153,13 +171,13 @@ int Gartic::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }
