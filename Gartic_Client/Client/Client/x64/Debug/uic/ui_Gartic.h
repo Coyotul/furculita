@@ -52,7 +52,7 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(600, 725);
+        GarticClass->resize(650, 725);
         GarticClass->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
@@ -108,7 +108,7 @@ public:
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 600, 22));
+        menuBar->setGeometry(QRect(0, 0, 650, 22));
         menuGartic = new QMenu(menuBar);
         menuGartic->setObjectName("menuGartic");
         GarticClass->setMenuBar(menuBar);

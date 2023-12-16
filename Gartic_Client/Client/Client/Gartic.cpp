@@ -7,7 +7,9 @@
 #include <iostream>
 #include <cpr/cpr.h>
 #include <crow.h>
+#include <fstream>
 
+std::ofstream f("output.out");
 
 // At Start
 Gartic::Gartic(QWidget *parent)
@@ -136,6 +138,7 @@ void Gartic::mouseReleaseEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton)
     {
         isDrawing = false;
+        lastMousePos = event->pos();
     }
 }
 
@@ -143,8 +146,7 @@ void Gartic::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton && ui.drawView->rect().contains(event->pos()))
     {
-        ui.drawView->setFocus();
-
+        std::cout << event->pos().x() << " " << event->pos().y() << '\n';
         // Adaugă un nou PainterPath la vectorul de linii
         QPainterPath newPath;
         lastMousePos = ui.drawView->mapToScene(event->pos());
