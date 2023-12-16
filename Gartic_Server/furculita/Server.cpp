@@ -1,4 +1,4 @@
-#include "Server.h";
+﻿#include "Server.h";
 import game;
 
 
@@ -17,14 +17,23 @@ void Server::configureRoutes() {
 		return "Hello Gartic";
 
 		});
+	CROW_ROUTE(app, "/endpoint")
+		.methods("POST"_method)
+		([](const crow::request& req) {
+		// Afișează datele primite prin cererea POST
+		std::cout << "Date primite: " << req.body << std::endl;
 
-	CROW_ROUTE(app, "/addPlayer/<string>")([&game](const crow::request& req, std::string playerName=" ") {
+		// Returnează un răspuns simplu
+		return "Cererea POST a fost primită cu succes!";
+			});
+
+	/*CROW_ROUTE(app, "/addPlayer/<string>")([&game](const crow::request& req, std::string playerName=" ") {
 		if (playerName != " ") {
 			game.addPlayer(playerName);
 			return crow::response(200);
 		}
 
-		});
+		});*/
 	/*CROW_ROUTE(app, "/getPlayersName")([&game]() {
 		std::vector<crow::json::wvalue> playersJSON;
 		for (const auto& player : game.getPlayers()) {
