@@ -16,4 +16,12 @@ private:
 	float m_TimeScale;
 	Timer();
 	~Timer();
+public:
+	static Timer* Instance();
+	static void Release();
+	void Reset();
+	float GetDeltaTime();
+	void SetTimeScale(float t = 1.0f);
+	float GetTimeScale();
+	void Tick();
 };
