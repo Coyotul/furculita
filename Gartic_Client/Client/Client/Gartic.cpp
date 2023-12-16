@@ -242,7 +242,7 @@ void Gartic::updatePlayersScore()
 
 void Gartic::addPlayerToServer(const QString& playerName)
 {
-    QByteArray playerNameUtf8 = playerName.toUtf8();
+  /*  QByteArray playerNameUtf8 = playerName.toUtf8();
     std::string playerNameStd = playerNameUtf8.constData();
     
     std::string url = "http://localhost:8080/addPlayer/" + playerNameStd;
@@ -257,8 +257,25 @@ void Gartic::addPlayerToServer(const QString& playerName)
     }
     else {
         std::cout << "Cerere efectuată cu succes. Răspunsul serverului: " << response.text.c_str();
-    }
+    }*/
+    // URL-ul către serverul la care trimitem cererea POST
+    std::string url = " http://localhost:8080/endpoint";
 
+    // Cuvântul pe care vrem să-l trimitem
+    std::string cuvant = "exemplu";
+
+    // Configurația cererii
+    cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Body{ cuvant });
+
+    // Verifică dacă cererea a fost reușită
+    if (r.status_code == 200) {
+        std::cout << "Cererea POST a fost trimisă cu succes!\n";
+        std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+    else {
+        std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
+        std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
     
 }
 
