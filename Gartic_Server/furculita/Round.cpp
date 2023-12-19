@@ -1,6 +1,6 @@
 #include "Round.h"
 #include "word.h"
-#include "Timer.h"
+#include "../Timer/Timer.h"
 #include <iostream>
 
 Round::Round(const std::string& wordToDraw, uint16_t duration)

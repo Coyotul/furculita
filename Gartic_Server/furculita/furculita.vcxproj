@@ -40,6 +40,11 @@
   <ItemGroup>
     <Text Include="words.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Timer\Timer.vcxproj">
+      <Project>{2e391881-a48c-4aec-9775-d96fd86eeecb}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
