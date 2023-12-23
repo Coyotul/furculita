@@ -1,0 +1,4 @@
+Converted player name: george
+Cererea POST a fost trimisă cu succes!
+Răspunsul serverului:
+Player added successfully
