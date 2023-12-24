@@ -47,3 +47,8 @@ Carousel	Carusel
 Mystery	 Mister
 Symphony	Simfonie
 Moustache  Mustata
+Cascade	Cascada
+Monsoon	Muson
+Dandelion	Papadie
+Infinity	Infinit
+Eclipse	Eclipsa
