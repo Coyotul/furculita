@@ -57,3 +57,8 @@ Serenity	Senin
 Lighthouse	Far
 Symphony	Simfonie
 Enigma	Enigma
+Boat	Barca
+Smile	Zambet
+Book	Carte
+Train	Tren
+Cake	Tort
