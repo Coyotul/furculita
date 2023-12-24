@@ -67,3 +67,8 @@ Penguin	Pinguin
 Rainbow	Curcubeu
 Beach	Plaja
 Sleep	Somn
+Ball	Minge
+Candlestick Lumanare
+Red Rosu
+Green Verde
+Grinch Grinch
