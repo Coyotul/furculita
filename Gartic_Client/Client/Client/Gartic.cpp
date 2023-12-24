@@ -9,6 +9,7 @@
 #include <crow.h>
 #include <fstream>
 
+
 std::ofstream f("output.out");
 
 // At Start
@@ -268,30 +269,20 @@ void Gartic::updatePlayersScore()
 
 void Gartic::addPlayerToServer(const QString& playerName)
 {
-  /*  QByteArray playerNameUtf8 = playerName.toUtf8();
-    std::string playerNameStd = playerNameUtf8.constData();
-    
-    std::string url = "http://localhost:8080/addPlayer/" + playerNameStd;
-    cpr::Response response = cpr::Get(
-        cpr::Url{ url }
-       
-    );
+    std::ofstream logFile("log.txt");
+    std::cout.rdbuf(logFile.rdbuf()); 
+    std::cerr.rdbuf(logFile.rdbuf()); 
 
-    
-    if (response.error) {
-        std::cerr << "Eroare la efectuarea cererii: " << response.error.message.c_str();
-    }
-    else {
-        std::cout << "Cerere efectuată cu succes. Răspunsul serverului: " << response.text.c_str();
-    }*/
     // URL-ul către serverul la care trimitem cererea POST
-    std::string url = " http://localhost:8080/endpoint";
+    std::string url = "http://localhost:8080/addPlayer";
 
     // Cuvântul pe care vrem să-l trimitem
-    std::string cuvant = "exemplu";
+    std::string cuvant = playerName.toUtf8().constData();
+    
+    std::cout << "Converted player name: " << cuvant << std::endl;
 
     // Configurația cererii
-    cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Body{ cuvant });
+    cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"username", cuvant} });
 
     // Verifică dacă cererea a fost reușită
     if (r.status_code == 200) {
