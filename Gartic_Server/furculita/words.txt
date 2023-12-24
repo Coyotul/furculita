@@ -37,3 +37,8 @@ Watermelon  Pepene
 Mango  Mango
 Cherry  Cireasa
 Peach  Piersica
+Mystery	Mister
+Symphony Simfonie
+Adventure	Aventura
+Harmony	Armonie
+Carousel	Carusel
