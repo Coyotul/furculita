@@ -42,3 +42,8 @@ Soldier Soldat
 Revenge Razbunare
 Sadness Tristete
 Fish Peste
+Harmony	Armonie
+Carousel	Carusel
+Mystery	 Mister
+Symphony	Simfonie
+Moustache  Mustata
