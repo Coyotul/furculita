@@ -62,3 +62,8 @@ Smile	Zambet
 Book	Carte
 Train	Tren
 Cake	Tort
+Moon	Luna
+Penguin	Pinguin
+Rainbow	Curcubeu
+Beach	Plaja
+Sleep	Somn
