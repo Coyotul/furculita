@@ -24,7 +24,7 @@ namespace gartic {
 		
 	private:
 		
-		std::vector<std::pair<std::string, int>> m_players;
+		std::vector<User> m_players;
 		std::vector<int> test;
 		std::uint8_t m_currentPlayerIndex;
 		bool m_gameInProgress;

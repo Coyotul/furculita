@@ -18,7 +18,7 @@ void Server::run() {
 
 void Server::configureRoutes() {
 	
-	int language = 1;
+	int language = 1; // Acest lucru nu pare a fi folosit în codul tău, îl poți elimina dacă nu este necesar.
 	std::string username = " ";
 	Storage db = createStorage("words.sqlite");
 	db.sync_schema();
@@ -27,15 +27,35 @@ void Server::configureRoutes() {
 		populateStorage(db);
 	}
 	WordsDb wordsDb(db);
-	std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3, "romana");
 
+	CROW_ROUTE(app, "/words")
+		([&db, &wordsDb](const crow::request& req)-> crow::response {
+		std::vector<crow::json::wvalue> wordsJSON;
 
-	
-	CROW_ROUTE(app, "/")([]() {
+		// Obține limba specificată de client din query string
+		auto lang = req.url_params.get("lang");
 
-		return "Hello Gartic";
+		// Verifică dacă limba este specificată și este validă (romana sau engleza)
+		if (lang == "romana" || lang == "engleza") {
+			std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3, lang);
 
-		});
+			// Filtrăm cuvintele în funcție de limba specificată
+			for (const auto& word : randomWords) {
+				crow::json::wvalue wordJSON{
+					{"name", word.wordInRomanian} // Presupunând că atributul pe care vrei să-l afișezi este "name"
+				};
+				wordsJSON.push_back(wordJSON);
+			}
+		}
+		else {
+			// Limba nu este validă, poți returna o eroare sau o listă goală
+			// în funcție de cerințele tale
+			return crow::response(400, "Limba specificată nu este validă");
+		}
+
+		return crow::json::wvalue(wordsJSON);
+			});
+
 	CROW_ROUTE(app, "/endpoint")
 		.methods("POST"_method)
 		([](const crow::request& req) {
@@ -48,6 +68,7 @@ void Server::configureRoutes() {
 	CROW_ROUTE(app, "/addPlayer")
 		.methods("POST"_method)([&](const crow::request& req) -> crow::response {
 		auto usernameParam = req.url_params.get("username");
+		language = 2;
 		if (usernameParam) {
 			std::string playerName=usernameParam;
 			std::cout << std::endl << "sefule numele tau este: " << playerName;
@@ -93,7 +114,7 @@ void Server::configureRoutes() {
 				return crow::response(400); // Returnează un răspuns 400 Bad Request
 			}
 		});
-	CROW_ROUTE(app, "/words")(
+	/*CROW_ROUTE(app, "/words")(
 		[&randomWords,wordsDb]()
 		{
 			randomWords = wordsDb.getRandomWords(3, "romana");
@@ -105,7 +126,9 @@ void Server::configureRoutes() {
 			}
 			return crow::json::wvalue(wordsJSON);
 		}
-	);
+	);*/
+
+	std::cout << "limba este" << language;
 
 }
 

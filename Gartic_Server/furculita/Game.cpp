@@ -21,17 +21,12 @@ void Game::addPlayer(std::string playerName) {
         
         return;
     }
-    /*User user;
+    User user;
     user.SetName(playerName);
     user.SetScore(0);
-    std::string name = user.GetName();
-    int score = user.GetScore();*/
-    //players.push_back("name");
-    //std::make_pair(user.GetName(),user.GetScore()));
-    //std::cout << m_players[0].first;
     std::cout << std::endl << "acum vedem daca merge ba";
-    m_players.push_back(std::make_pair("name", 0));
-    std::cout << m_players[0].first;
+    m_players.push_back(user);
+    std::cout << m_players[0].GetName();
 }
 
 
@@ -42,7 +37,7 @@ Game::~Game() {
 
 void Game::startGame() 
 {
-    m_players.push_back(std::make_pair("name", 0));
+    
     std::cout << "Server started.\n";
     std::cout << "Waiting for clients.\n";
 }
