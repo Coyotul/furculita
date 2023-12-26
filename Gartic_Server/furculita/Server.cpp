@@ -1,6 +1,7 @@
 ﻿#include "Server.h";
 #include "Word.h"
 #include "WordsDb.h"
+
 import game;
 
 
@@ -10,12 +11,13 @@ Server::Server() {
 
 void Server::run() {
 	app.port(8080).multithreaded().run();
+	
 }
 
 
 
 void Server::configureRoutes() {
-	gartic::Game game;
+	
 	int language = 1;
 	std::string username = " ";
 	Storage db = createStorage("words.sqlite");
@@ -28,7 +30,7 @@ void Server::configureRoutes() {
 	std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3, "romana");
 
 
-
+	
 	CROW_ROUTE(app, "/")([]() {
 
 		return "Hello Gartic";
@@ -49,6 +51,9 @@ void Server::configureRoutes() {
 		if (usernameParam) {
 			std::string playerName=usernameParam;
 			std::cout << std::endl << "sefule numele tau este: " << playerName;
+			
+			myGame.addPlayer(playerName);
+			
 			return crow::response{ "Player added successfully" };
 		}
 		else {

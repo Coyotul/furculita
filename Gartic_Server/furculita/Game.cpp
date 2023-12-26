@@ -10,7 +10,7 @@
 import game;
 using gartic::Game;
 
-Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 0), m_currentWord() {
+Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 0) {
    
 }
 
@@ -21,14 +21,17 @@ void Game::addPlayer(std::string playerName) {
         
         return;
     }
-    User user;
+    /*User user;
     user.SetName(playerName);
     user.SetScore(0);
     std::string name = user.GetName();
-    int score = user.GetScore();
-    
-    //m_players.push_back(std::make_pair(name,score));//std::make_pair(user.GetName(),user.GetScore()));
+    int score = user.GetScore();*/
+    //players.push_back("name");
+    //std::make_pair(user.GetName(),user.GetScore()));
     //std::cout << m_players[0].first;
+    std::cout << std::endl << "acum vedem daca merge ba";
+    m_players.push_back(std::make_pair("name", 0));
+    std::cout << m_players[0].first;
 }
 
 
@@ -39,6 +42,7 @@ Game::~Game() {
 
 void Game::startGame() 
 {
+    m_players.push_back(std::make_pair("name", 0));
     std::cout << "Server started.\n";
     std::cout << "Waiting for clients.\n";
 }

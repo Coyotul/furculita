@@ -7,10 +7,8 @@ namespace sql = sqlite_orm;
 #include "WordsDb.h"
 int main()
 {
-    gartic::Game myGame;
-    myGame.startGame();
-    
     Server server;
     server.run();
+    
 
 }
