@@ -197,9 +197,14 @@ void Gartic::paintEvent(QPaintEvent* event)
         currentPath.moveTo(lastMousePos);
         currentPath.lineTo(ui.drawView->mapToScene(ui.drawView->mapFromGlobal(QCursor::pos())));
         painter.drawPath(currentPath);
+        sendDrawingToServer();
     }
 }
 
+void Gartic::sendDrawingToServer()
+{
+    
+}
 
 void Gartic::hideInterface()
 {
@@ -315,15 +320,13 @@ void Gartic::getWords()
         // Configurația cererii
         cpr::Response r = cpr::Get(cpr::Url{ url }, cpr::Parameters{ {"lang", chosenLanugage} });
 
-        // Verifică dacă cererea a fost reușită
-        if (r.status_code == 200) {
-            std::cout << "Cererea POST a fost trimisă cu succes!\n";
-            std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+        auto words = crow::json::load(r.text);
+        std::vector<std::string> stringWords;
+        for (const auto& word : words)
+        {
+            stringWords.push_back((std::string)word["word"]);
         }
-        else {
-            std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
-            std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
-        }
+        SetWords(stringWords[0], stringWords[1], stringWords[2]);
     }
 }
 
