@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
+    <width>622</width>
     <height>725</height>
    </rect>
   </property>
@@ -152,29 +152,13 @@
      <string>Draw: </string>
     </property>
    </widget>
-   <widget class="QLabel" name="leaderboard">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>520</y>
-      <width>151</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Leaderboard:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="LeaderboardText">
     <property name="geometry">
      <rect>
       <x>400</x>
-      <y>480</y>
+      <y>490</y>
       <width>141</width>
-      <height>61</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -214,13 +198,29 @@
      <string>English Language</string>
     </property>
    </widget>
+   <widget class="QLabel" name="leaderboard">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>520</y>
+      <width>171</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>650</width>
+     <width>622</width>
      <height>22</height>
     </rect>
    </property>

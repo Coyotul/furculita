@@ -39,8 +39,7 @@ private:
     void hideInterface();
     void showInterface();
     void updateLeaderboard();
-    void updatePlayersUsername();
-    void updatePlayersScore();
+    void updatePlayers();
     void addPlayerToServer(const QString& playerName);
     void getWords();
     void sendDrawingToServer();
@@ -56,8 +55,7 @@ private:
     QString leaderboard;
     QString word;
     int language=1;
-    std::vector<QString> playersUsername;
-    std::vector<QString> playersScore;
+    std::vector<std::pair<QString,QString>> players;
     bool playerLogged = false;
     bool isDrawing = false;
     QPointF lastMousePos;

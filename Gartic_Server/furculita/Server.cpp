@@ -11,7 +11,6 @@ Server::Server() {
 
 void Server::run() {
 	app.port(8080).multithreaded().run();
-	
 }
 
 
@@ -92,7 +91,6 @@ void Server::configureRoutes() {
 		language = 2;
 		if (usernameParam) {
 			std::string playerName=usernameParam;
-			std::cout << std::endl << "sefule numele tau este: " << playerName;
 			
 			myGame.addPlayer(playerName);
 			
@@ -101,6 +99,18 @@ void Server::configureRoutes() {
 		else {
 			return crow::response(400, "Bad Request: 'username' parameter missing");
 		}
+			});
+	CROW_ROUTE(app, "/getPlayers")
+		.methods("GET"_method)([&]() -> crow::response {
+		std::vector<crow::json::wvalue> wordsJSON;
+		for (const auto& it : myGame.getPlayers()) {
+			crow::json::wvalue wordJSON{
+				{"name", it.first},
+				{"score",it.second}
+			};
+			wordsJSON.push_back(wordJSON);
+		}
+		return crow::json::wvalue{ wordsJSON };
 			});
 
 	CROW_ROUTE(app, "/language")([&language](const crow::request& req)

@@ -41,10 +41,10 @@ public:
     QLabel *username_text;
     QLabel *logo;
     QLabel *wordText;
-    QLabel *leaderboard;
     QLabel *LeaderboardText;
     QPushButton *language1;
     QPushButton *wordButton_5;
+    QLabel *leaderboard;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -54,7 +54,7 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(650, 725);
+        GarticClass->resize(622, 725);
         GarticClass->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
@@ -99,13 +99,9 @@ public:
         font1.setPointSize(16);
         font1.setBold(true);
         wordText->setFont(font1);
-        leaderboard = new QLabel(centralWidget);
-        leaderboard->setObjectName("leaderboard");
-        leaderboard->setGeometry(QRect(400, 520, 151, 161));
-        leaderboard->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         LeaderboardText = new QLabel(centralWidget);
         LeaderboardText->setObjectName("LeaderboardText");
-        LeaderboardText->setGeometry(QRect(400, 480, 141, 61));
+        LeaderboardText->setGeometry(QRect(400, 490, 141, 41));
         LeaderboardText->setFont(font);
         language1 = new QPushButton(centralWidget);
         language1->setObjectName("language1");
@@ -113,10 +109,14 @@ public:
         wordButton_5 = new QPushButton(centralWidget);
         wordButton_5->setObjectName("wordButton_5");
         wordButton_5->setGeometry(QRect(230, 550, 141, 41));
+        leaderboard = new QLabel(centralWidget);
+        leaderboard->setObjectName("leaderboard");
+        leaderboard->setGeometry(QRect(390, 530, 171, 141));
+        leaderboard->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 650, 22));
+        menuBar->setGeometry(QRect(0, 0, 622, 22));
         menuGartic = new QMenu(menuBar);
         menuGartic->setObjectName("menuGartic");
         GarticClass->setMenuBar(menuBar);
@@ -143,10 +143,10 @@ public:
         username_text->setText(QCoreApplication::translate("GarticClass", "Username", nullptr));
         logo->setText(QString());
         wordText->setText(QCoreApplication::translate("GarticClass", "Draw: ", nullptr));
-        leaderboard->setText(QCoreApplication::translate("GarticClass", "Leaderboard:", nullptr));
         LeaderboardText->setText(QCoreApplication::translate("GarticClass", "Leaderboard", nullptr));
         language1->setText(QCoreApplication::translate("GarticClass", "Limba Romana", nullptr));
         wordButton_5->setText(QCoreApplication::translate("GarticClass", "English Language", nullptr));
+        leaderboard->setText(QCoreApplication::translate("GarticClass", "TextLabel", nullptr));
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 

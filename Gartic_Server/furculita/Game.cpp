@@ -24,10 +24,21 @@ void Game::addPlayer(std::string playerName) {
     User user;
     user.SetName(playerName);
     user.SetScore(0);
-    std::cout << std::endl << "acum vedem daca merge ba";
     m_players.push_back(user);
     std::cout << m_players[0].GetName();
 }
+
+std::vector<std::pair<std::string, int>> gartic::Game::getPlayers()
+{
+    std::vector<std::pair<std::string, int>> players;
+    for (auto it : m_players)
+    {
+        players.push_back(std::make_pair(it.GetName(), it.GetScore()));
+    }
+
+    return players;
+}
+
 
 
 Game::~Game() {

@@ -26,9 +26,8 @@ Gartic::Gartic(QWidget *parent)
     hideInterface();
     username = "Guest";
     ui.drawView->viewport()->installEventFilter(this);
+    updatePlayers();
     updateLeaderboard();
-    updatePlayersScore();
-    updatePlayersUsername();
 }
 bool Gartic::eventFilter(QObject* obj, QEvent* event)
 {
@@ -151,6 +150,12 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         }
         getWords();
     }
+    if (event->key() == Qt::Key_K)
+    {
+        updatePlayers();
+        updateLeaderboard();
+
+    }
 
     QMainWindow::keyPressEvent(event);
 }
@@ -242,34 +247,47 @@ void Gartic::showInterface()
 
 void Gartic::updateLeaderboard()
 {
-    //TODO: implement all logic
-    //for(auto it& player)
-    leaderboard = username + " " + "100";
+    leaderboard.clear();
+    int index = 0;
+    for (auto& it : players)
+    {
+        leaderboard = leaderboard +'\n' + QString::number(++index) + ": " + it.first + " " + it.second;
+    }
     ui.leaderboard->setText(leaderboard);
 }
 
-void Gartic::updatePlayersUsername()
-{ 
-    //vezi ca e un singur extract pentru amandoua, ti l schimbi tu dupa sau il folosesti unde iti trebuie
-    //crapa mereu, e greu rau programu sa mor eu
-    /*std::vector<std::pair<std::string, uint16_t>> nameAndScore;
-    cpr::Response response = cpr::Get(cpr::Url{ "http://localhost:8080/getPlayersName" });
-    auto players = crow::json::load(response.text);
+void sortPlayersByScore()
+{
 
-    for (const auto& player : players) {
-        
-        std::string playerName = player["name"].s();  
-        uint16_t playerScore = player["score"].u();  
-
-        nameAndScore.push_back(std::make_pair(playerName, playerScore));
-    }*/
 }
 
-void Gartic::updatePlayersScore()
+void Gartic::updatePlayers()
 {
-    for (auto& it : playersScore)
-    {
-        //TODO: extract playersScore from server
+    // URL-ul către serverul de la care obținem informațiile despre jucători
+    std::string url = "http://localhost:8080/getPlayers";
+
+    // Configurația cererii GET
+    cpr::Response response = cpr::Get(cpr::Url{ url });
+
+    // Verifică dacă cererea a fost reușită
+    if (response.status_code == 200) {
+        // Parsarea răspunsului JSON
+        crow::json::rvalue jsonData = crow::json::load(response.text);
+
+        // Iterarea prin elementele JSON pentru a obține informațiile despre jucători
+        for (const auto& player : jsonData) {
+            std::string playerName = player["name"].s();
+            int playerScore = player["score"].u();
+            QString name = QString::fromUtf8(playerName);
+            QString score = QString::number(playerScore);
+            // Adaugă informațiile despre jucători în vectorul players
+            players.push_back(std::make_pair(name, score));
+        }
+    }
+    else {
+        // Tratează eroarea în cazul în care cererea nu a fost reușită
+        std::cerr << "Eroare la obținerea informațiilor despre jucători. Cod de stare: " << response.status_code << std::endl;
+        std::cerr << "Răspunsul serverului:\n" << response.text << std::endl;
     }
 }
 
