@@ -58,38 +58,17 @@ WordsDb::WordsDb(Storage& storage):
     
 }
 
-std::vector<WordStruct> WordsDb::getRandomWords(size_t count, const std::string& language) const
+std::vector<WordStruct> WordsDb::getRandomWords(size_t count) const
 {
     auto allWords = m_db.get_all<WordStruct>();
-    std::vector<WordStruct> filteredWords(1);
-    if (language == "english") {
-        int i = 0;
-        for (const auto& word : allWords) {
-            filteredWords.resize(i + 1);
-            filteredWords[i].wordInEnglish = word.wordInEnglish;
-            i++;
-        }
+    std::vector<WordStruct> filteredWords;
 
-    }
-    else {
-        int i = 0;
-        for (const auto& word : allWords) {
-            filteredWords.resize(i + 1);
-            filteredWords[i].wordInRomanian = word.wordInRomanian;
-            i++;
-        }
-    }
+    // Amestecarea cuvintelor
+    auto rng = std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count());
+    std::shuffle(allWords.begin(), allWords.end(), rng);
 
-    // Shuffle the vector randomly
-    std::random_device rd;
-    std::mt19937 g(rd());
-
-    std::shuffle(filteredWords.begin(), filteredWords.end(), g);
-
-    // Take the first 'count' elements
-    if (filteredWords.size() > count) {
-        filteredWords.resize(count);
-    }
+    // Alegerea primelor count cuvinte
+    filteredWords.assign(allWords.begin(), allWords.begin() + std::min(count, allWords.size()));
 
     return filteredWords;
 }

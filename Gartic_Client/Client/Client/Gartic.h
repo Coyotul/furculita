@@ -42,6 +42,7 @@ private:
     void updatePlayersUsername();
     void updatePlayersScore();
     void addPlayerToServer(const QString& playerName);
+    void getWords();
 
     QGraphicsScene* scene;
     QGraphicsRectItem* drawRectItem;
@@ -60,5 +61,5 @@ private:
     bool isDrawing = false;
     QPointF lastMousePos;
     std::vector<QPainterPath> lines;
-
+    bool isPlayerAllowedToDraw = true;
 };

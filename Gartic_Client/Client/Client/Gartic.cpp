@@ -144,11 +144,12 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         {
             if (ui.username->text().size() > 0) {
                 username = ui.username->text();
-                addPlayerToServer(username);
             }
+            addPlayerToServer(username);
             showInterface();
             playerLogged = true;
         }
+        getWords();
     }
 
     QMainWindow::keyPressEvent(event);
@@ -230,7 +231,6 @@ void Gartic::showInterface()
     ui.leaderboard->show(); 
     ui.LeaderboardText->show();
 
-
     ui.username_text->hide();
     ui.username->hide();
 }
@@ -244,7 +244,8 @@ void Gartic::updateLeaderboard()
 }
 
 void Gartic::updatePlayersUsername()
-{ //vezi ca e un singur extract pentru amandoua, ti l schimbi tu dupa sau il folosesti unde iti trebuie
+{ 
+    //vezi ca e un singur extract pentru amandoua, ti l schimbi tu dupa sau il folosesti unde iti trebuie
     //crapa mereu, e greu rau programu sa mor eu
     /*std::vector<std::pair<std::string, uint16_t>> nameAndScore;
     cpr::Response response = cpr::Get(cpr::Url{ "http://localhost:8080/getPlayersName" });
@@ -292,8 +293,38 @@ void Gartic::addPlayerToServer(const QString& playerName)
     else {
         std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
         std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
+    } 
+}
+
+void Gartic::getWords()
+{
+    if (isPlayerAllowedToDraw)
+    {
+        std::ofstream logFile("log.txt");
+        std::cout.rdbuf(logFile.rdbuf());
+        std::cerr.rdbuf(logFile.rdbuf());
+
+        // URL-ul către serverul la care trimitem cererea POST
+        std::string url = "http://localhost:8080/words";
+
+        std::string chosenLanugage;
+        if (language == 1)
+            chosenLanugage = "1";
+        else chosenLanugage = "2";
+
+        // Configurația cererii
+        cpr::Response r = cpr::Get(cpr::Url{ url }, cpr::Parameters{ {"lang", chosenLanugage} });
+
+        // Verifică dacă cererea a fost reușită
+        if (r.status_code == 200) {
+            std::cout << "Cererea POST a fost trimisă cu succes!\n";
+            std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+        }
+        else {
+            std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
+            std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
+        }
     }
-    
 }
 
 void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
