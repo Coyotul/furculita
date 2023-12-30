@@ -43,6 +43,7 @@ private:
     void updatePlayers();
     void addPlayerToServer(const QString& playerName);
     void getWords();
+    void sendWordToServer(const QString& word);
     void sendDrawingToServer();
 
     QGraphicsScene* scene;

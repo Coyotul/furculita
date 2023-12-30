@@ -95,6 +95,7 @@ void Gartic::on_wordButton_1_clicked()
     {
         wordChosen = true;
         word = ui.wordButton_1->text();
+        sendWordToServer(word);
         qDebug() << "Word selected: " << word;
         ui.wordText->setText(QString::fromStdString("Draw: ") + word);
         hideWordChoices();
@@ -107,6 +108,7 @@ void Gartic::on_wordButton_2_clicked()
     {
         wordChosen = true;
         word = ui.wordButton_2->text();
+        sendWordToServer(word);
         qDebug() << "Word selected: " << word;
         ui.wordText->setText(QString::fromStdString("Draw: ") + word);
         hideWordChoices();
@@ -119,6 +121,7 @@ void Gartic::on_wordButton_3_clicked()
     {
         wordChosen = true;
         word = ui.wordButton_3->text();
+        sendWordToServer(word);
         qDebug() << "Word selected: " << word;
         ui.wordText->setText(QString::fromStdString("Draw: ") + word);
         hideWordChoices();
@@ -347,6 +350,27 @@ void Gartic::addPlayerToServer(const QString& playerName)
     } 
 }
 
+void Gartic::sendWordToServer(const QString& word)
+{
+    std::ofstream logFile("log.txt");
+    std::cout.rdbuf(logFile.rdbuf());
+    std::cerr.rdbuf(logFile.rdbuf());
+    
+    std::string url = "http://localhost:8080/wordToDraw";
+    std::string wordToDraw = word.toUtf8().constData();
+
+    cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"chosenWord", wordToDraw} });
+
+    if (r.status_code == 200) {
+        std::cout << "Cererea POST a fost trimisă cu succes!\n";
+        std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+    else {
+        std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
+        std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+}
+
 void Gartic::getWords()
 {
     if (isPlayerAllowedToDraw)
@@ -375,6 +399,8 @@ void Gartic::getWords()
         SetWords(stringWords[0], stringWords[1], stringWords[2]);
     }
 }
+
+
 
 void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
 {
