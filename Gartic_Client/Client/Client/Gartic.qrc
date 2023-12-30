@@ -3,4 +3,7 @@
     <file>gartic_logo_125px.png</file>
     <file>gartic_logo.png</file>
   </qresource>
+  <qresource prefix="newPrefix">
+    <file>iulian.png</file>
+  </qresource>
 </RCC>

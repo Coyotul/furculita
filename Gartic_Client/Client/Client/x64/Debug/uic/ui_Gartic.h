@@ -45,6 +45,7 @@ public:
     QPushButton *language1;
     QPushButton *language2;
     QLabel *leaderboard;
+    QLabel *easterEgg;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -113,6 +114,10 @@ public:
         leaderboard->setObjectName("leaderboard");
         leaderboard->setGeometry(QRect(400, 520, 171, 141));
         leaderboard->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        easterEgg = new QLabel(centralWidget);
+        easterEgg->setObjectName("easterEgg");
+        easterEgg->setGeometry(QRect(370, 80, 271, 351));
+        easterEgg->setPixmap(QPixmap(QString::fromUtf8(":/newPrefix/iulian.png")));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
@@ -147,6 +152,7 @@ public:
         language1->setText(QCoreApplication::translate("GarticClass", "Limba Romana", nullptr));
         language2->setText(QCoreApplication::translate("GarticClass", "English Language", nullptr));
         leaderboard->setText(QCoreApplication::translate("GarticClass", "TextLabel", nullptr));
+        easterEgg->setText(QString());
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 

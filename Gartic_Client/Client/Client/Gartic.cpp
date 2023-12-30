@@ -28,6 +28,7 @@ Gartic::Gartic(QWidget *parent)
     ui.drawView->viewport()->installEventFilter(this);
     updatePlayers();
     updateLeaderboard();
+    ui.easterEgg->hide();
 }
 bool Gartic::eventFilter(QObject* obj, QEvent* event)
 {
@@ -123,7 +124,10 @@ void Gartic::on_wordButton_3_clicked()
         word = ui.wordButton_3->text();
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
+        if(language ==2)
         ui.wordText->setText(QString::fromStdString("Draw: ") + word);
+        else
+            ui.wordText->setText(QString::fromStdString("Desen: ") + word);
         hideWordChoices();
     }
 }
@@ -137,10 +141,15 @@ void Gartic::hideWordChoices()
         ui.wordButton_3->hide();
     }
 }
+
 void Gartic::on_language1_clicked()
 {
+    //romanian language
     language = 1;
     int languageValue = 1;
+    ui.LeaderboardText->setText("Clasament");
+    ui.username_text->setText("Utilizator:");
+    ui.wordText->setText("Deseneaza:");
 
     std::string url = "http://localhost:8080/language?language=" + std::to_string(languageValue);
 
@@ -150,6 +159,7 @@ void Gartic::on_language1_clicked()
 
 void Gartic::on_language2_clicked()
 {
+    //english language
     language = 2;
     int languageValue = 2;
 
@@ -166,6 +176,11 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         {
             chatText = chatText + '\n' + username + ": " + ui.textBox->text();
             ui.textEdit->setText(chatText);
+
+            if (ui.textBox->text() == "nazi")
+            {
+                ui.easterEgg->show();
+            }
             ui.textBox->clear();
         }
         else
