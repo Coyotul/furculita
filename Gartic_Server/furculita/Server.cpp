@@ -27,17 +27,19 @@ void Server::configureRoutes() {
 	}
 	WordsDb wordsDb(db);
 	std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3);
+	
+	
 
 	CROW_ROUTE(app, "/words")
 		([randomWords](const crow::request& req)-> crow::response {
 		std::vector<crow::json::wvalue> wordsJSON;
 
 		// Obține limba specificată de client din query string
-		auto lang = req.url_params.get("lang");
+		auto lang = req.url_params.get("language");
 		// Verifică dacă limba este specificată și este validă (romana sau engleza)
 		if (lang) {
 			try {
-				if (strlen(lang) == 1)
+				if (std::stoi(lang) == 1)
 				{
 					// Filtrăm cuvintele în funcție de limba specificată
 					for (const auto& word : randomWords) {
@@ -48,7 +50,7 @@ void Server::configureRoutes() {
 					}
 					return crow::json::wvalue{ wordsJSON };
 				}
-				else if (strlen(lang)==2)
+				else if (std::stoi(lang)==2)
 				{
 					// Filtrăm cuvintele în funcție de limba specificată
 					for (const auto& word : randomWords) {
@@ -112,7 +114,6 @@ void Server::configureRoutes() {
 		}
 		return crow::json::wvalue{ wordsJSON };
 			});
-
 	CROW_ROUTE(app, "/language")([&language](const crow::request& req)
 		{
 			// Accesează direct parametrul de query string "language"
@@ -145,6 +146,6 @@ void Server::configureRoutes() {
 				return crow::response(400); // Returnează un răspuns 400 Bad Request
 			}
 		});
-	std::cout << "limba este" << language;
+	
 }
 
