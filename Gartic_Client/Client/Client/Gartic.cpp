@@ -272,6 +272,8 @@ void Gartic::showInterface()
 
     ui.username_text->hide();
     ui.username->hide();
+    ui.language1->hide();
+    ui.language2->hide();
 }
 
 
