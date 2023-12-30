@@ -38,7 +38,7 @@
     <ClCompile Include="WordsDb.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="words.txt" />
+    <Text Include="wordsfile.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Timer\Timer.vcxproj">

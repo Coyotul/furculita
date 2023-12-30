@@ -8,7 +8,7 @@
 
 void populateStorage(Storage& storage)
 {
-    std::ifstream inputFile("words.txt");
+    std::ifstream inputFile("wordsfile.txt");
     if (!inputFile.is_open())
     {
         std::cerr << "Error opening file " << std::endl;
