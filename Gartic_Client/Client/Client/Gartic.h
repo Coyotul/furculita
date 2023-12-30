@@ -38,6 +38,7 @@ private:
     bool eventFilter(QObject* obj, QEvent* event);
     void hideInterface();
     void showInterface();
+    void hideWordChoices();
     void updateLeaderboard();
     void updatePlayers();
     void addPlayerToServer(const QString& playerName);
@@ -54,6 +55,7 @@ private:
     QString chatText;
     QString leaderboard;
     QString word;
+    bool wordChosen = false;
     int language=1;
     std::vector<std::pair<QString,QString>> players;
     bool playerLogged = false;

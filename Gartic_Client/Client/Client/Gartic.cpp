@@ -91,23 +91,49 @@ Gartic::~Gartic()
 
 void Gartic::on_wordButton_1_clicked()
 {
-    word = ui.wordButton_1->text();
-    qDebug() << "Word selected: " << word;
-    ui.wordText->setText(QString::fromStdString("Draw: ") + word);
+    if (!wordChosen)
+    {
+        wordChosen = true;
+        word = ui.wordButton_1->text();
+        qDebug() << "Word selected: " << word;
+        ui.wordText->setText(QString::fromStdString("Draw: ") + word);
+        hideWordChoices();
+    }
 }
 
 void Gartic::on_wordButton_2_clicked()
 {
-    word = ui.wordButton_2->text();
-    ui.wordText->setText(QString::fromStdString("Draw: ") + word);
+    if (!wordChosen)
+    {
+        wordChosen = true;
+        word = ui.wordButton_2->text();
+        qDebug() << "Word selected: " << word;
+        ui.wordText->setText(QString::fromStdString("Draw: ") + word);
+        hideWordChoices();
+    }
 }
 
 void Gartic::on_wordButton_3_clicked()
 {
-    word = ui.wordButton_3->text();
-    ui.wordText->setText(QString::fromStdString("Draw: ") + word);
+    if (!wordChosen)
+    {
+        wordChosen = true;
+        word = ui.wordButton_3->text();
+        qDebug() << "Word selected: " << word;
+        ui.wordText->setText(QString::fromStdString("Draw: ") + word);
+        hideWordChoices();
+    }
 }
 
+void Gartic::hideWordChoices()
+{
+    if (wordChosen == true)
+    {
+        ui.wordButton_1->hide();
+        ui.wordButton_2->hide();
+        ui.wordButton_3->hide();
+    }
+}
 void Gartic::on_language1_clicked()
 {
     language = 1;
@@ -244,6 +270,8 @@ void Gartic::showInterface()
     ui.username_text->hide();
     ui.username->hide();
 }
+
+
 
 void Gartic::updateLeaderboard()
 {
