@@ -185,7 +185,7 @@
      <string>Limba Romana</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="wordButton_5">
+   <widget class="QPushButton" name="language2">
     <property name="geometry">
      <rect>
       <x>230</x>

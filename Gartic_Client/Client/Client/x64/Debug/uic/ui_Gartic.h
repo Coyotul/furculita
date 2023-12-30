@@ -43,7 +43,7 @@ public:
     QLabel *wordText;
     QLabel *LeaderboardText;
     QPushButton *language1;
-    QPushButton *wordButton_5;
+    QPushButton *language2;
     QLabel *leaderboard;
     QMenuBar *menuBar;
     QMenu *menuGartic;
@@ -106,12 +106,12 @@ public:
         language1 = new QPushButton(centralWidget);
         language1->setObjectName("language1");
         language1->setGeometry(QRect(230, 513, 141, 41));
-        wordButton_5 = new QPushButton(centralWidget);
-        wordButton_5->setObjectName("wordButton_5");
-        wordButton_5->setGeometry(QRect(230, 550, 141, 41));
+        language2 = new QPushButton(centralWidget);
+        language2->setObjectName("language2");
+        language2->setGeometry(QRect(230, 550, 141, 41));
         leaderboard = new QLabel(centralWidget);
         leaderboard->setObjectName("leaderboard");
-        leaderboard->setGeometry(QRect(390, 530, 171, 141));
+        leaderboard->setGeometry(QRect(400, 520, 171, 141));
         leaderboard->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
@@ -145,7 +145,7 @@ public:
         wordText->setText(QCoreApplication::translate("GarticClass", "Draw: ", nullptr));
         LeaderboardText->setText(QCoreApplication::translate("GarticClass", "Leaderboard", nullptr));
         language1->setText(QCoreApplication::translate("GarticClass", "Limba Romana", nullptr));
-        wordButton_5->setText(QCoreApplication::translate("GarticClass", "English Language", nullptr));
+        language2->setText(QCoreApplication::translate("GarticClass", "English Language", nullptr));
         leaderboard->setText(QCoreApplication::translate("GarticClass", "TextLabel", nullptr));
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi

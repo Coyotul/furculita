@@ -336,7 +336,7 @@ void Gartic::getWords()
         else chosenLanugage = "2";
 
         // Configurația cererii
-        cpr::Response r = cpr::Get(cpr::Url{ url }, cpr::Parameters{ {"lang", chosenLanugage} });
+        cpr::Response r = cpr::Get(cpr::Url{ url }, cpr::Parameters{ {"language", chosenLanugage} });
 
         auto words = crow::json::load(r.text);
         std::vector<std::string> stringWords;
