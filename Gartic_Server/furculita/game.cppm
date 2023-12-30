@@ -21,7 +21,7 @@ namespace gartic {
 		//const std::vector<std::pair<std::string, uint16_t>>& getPlayers() const;
 		void calculateScoresBasedOnTime();
 		~Game();
-		
+		Round m_currentRound;
 		
 	private:
 		
@@ -29,7 +29,7 @@ namespace gartic {
 		std::vector<int> test;
 		std::uint8_t m_currentPlayerIndex;
 		bool m_gameInProgress;
-		Round m_currentRound;
+		
 		//Word m_currentWord;
 
 	};

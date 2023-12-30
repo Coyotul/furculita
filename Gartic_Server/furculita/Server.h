@@ -1,4 +1,5 @@
 #include <crow.h>
+#include "Logger.h"
 import game;
 
 class Server {
@@ -9,6 +10,7 @@ public:
 private:
     crow::SimpleApp app;
     gartic::Game myGame;
+    Logger logger;
 
     void configureRoutes();
 };

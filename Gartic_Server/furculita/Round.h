@@ -12,6 +12,7 @@ public:
 	void startRound();
 	void finishRound();
 	uint16_t getRoundNumber() const;
+	void setWordToDraw(std::string word);
 private:
 	std::string m_wordToDraw;
 	uint16_t m_duration;

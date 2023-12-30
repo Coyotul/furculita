@@ -37,7 +37,7 @@ std::vector<Word> Word::generateRandomWords(const std::string& filePath, int num
 {
 
 	std::vector<Word>words;
-	std::ifstream inputFile("words.txt");
+	std::ifstream inputFile("wordsfile.txt");
 
 	if (inputFile.is_open()) {
 		std::string currentWord;

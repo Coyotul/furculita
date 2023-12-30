@@ -87,6 +87,34 @@ void Server::configureRoutes() {
 		// Returnează un răspuns simplu
 		return "Cererea POST a fost primită cu succes!";
 			});
+	CROW_ROUTE(app, "/wordToDraw")
+		.methods("POST"_method)([&](const crow::request & req) -> crow::response {
+		auto chosenWord = req.url_params.get("chosenWord");
+		if (chosenWord) {
+			std::string wordToDraw = chosenWord;
+
+			myGame.m_currentRound.setWordToDraw(wordToDraw);
+			logi("Word to draw is: ", wordToDraw);
+			return crow::response{ 200 };
+
+		}
+		else {
+			loge("Bad request: Word not chosen");
+			return crow::response{ 400 };
+		}
+	});
+	CROW_ROUTE(app, "/getWord")
+		.methods("GET"_method)([&]() -> crow::response {
+		std::vector<crow::json::wvalue> wordsJSON;
+		const auto& word = myGame.m_currentRound.getWordToDraw();
+		crow::json::wvalue wordJSON{
+			{"word to be drawn:", word}
+			};
+			wordsJSON.push_back(wordJSON);
+		
+		return crow::json::wvalue{ wordsJSON };
+			});
+
 	CROW_ROUTE(app, "/addPlayer")
 		.methods("POST"_method)([&](const crow::request& req) -> crow::response {
 		auto usernameParam = req.url_params.get("username");
