@@ -43,4 +43,21 @@ public:
 	}
 };
 
+template <typename... Args>
+void logi(Args&&... args)
+{
+	Logger::Log(Logger::Level::Info, std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+void logw(Args&&... args)
+{
+	Logger::Log(Logger::Level::Warning, std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+void loge(Args&&... args)
+{
+	Logger::Log(Logger::Level::Error, std::forward<Args>(args)...);
+}
 
