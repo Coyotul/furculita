@@ -174,6 +174,20 @@ void Server::configureRoutes() {
 				return crow::response(400); // Returnează un răspuns 400 Bad Request
 			}
 		});
+	CROW_ROUTE(app, "/drawing")
+		.methods("POST"_method)([&](const crow::request& req) -> crow::response {
+		// Obțineți datele din corpul cererii POST
+		auto data = req.body;
+
+		// Salvați datele într-un fișier temporar (în loc să le stocați direct într-o variabilă, puteți
+		// alege să salvați aceste date în baza de date sau în alt loc în funcție de necesități)
+		std::ofstream file("received_image.png", std::ios::binary);
+		file.write(data.c_str(), data.size());
+		file.close();
+
+		// Răspuns OK
+		return crow::response{ 200 };
+			});
 	
 }
 

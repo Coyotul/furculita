@@ -18,7 +18,6 @@ class Gartic : public QMainWindow
     Gartic(QWidget *parent = nullptr);
     ~Gartic();
     QGraphicsPathItem* currentDrawing;
-
     void SetWords(std::string word1, std::string word2, std::string word3);
 
  protected:
@@ -30,89 +29,42 @@ private slots:
     void on_wordButton_3_clicked();
     void on_language1_clicked();
     void on_language2_clicked();
-
     //void open();
-
     //void save();
-
     void penColor();
-
     void penWidth();
-
     //void about();
-
-
     //For methods
 private:
     // Will tie user actions to functions
-
     void createActions();
-
     void createMenus();
-
-
-
     // Will check if changes have occurred since last save
-
     //bool maybeSave();
-
-
-
     // Opens the Save dialog and saves
-
     //bool saveFile(const QByteArray& fileFormat);
-
-
-
     // What we'll draw on
-
     ScribbleArea* scribbleArea;
-
-
-
     // The menu widgets
-
     QMenu* saveAsMenu;
-
     QMenu* fileMenu;
-
     QMenu* optionMenu;
-
     QMenu* helpMenu;
-
-
-
     // All the actions that can occur
-
     QAction* openAct;
-
-
-
     // Actions tied to specific file formats
-
     QList<QAction*> saveAsActs;
-
     QAction* exitAct;
-
     QAction* penColorAct;
-
     QAction* penWidthAct;
-
-    QAction* printAct;
-
+    QAction* printAct; 
     QAction* clearScreenAct;
-
     QAction* aboutAct;
-
     QAction* aboutQtAct;
-
-
-    
     Ui::GarticClass ui;
-   
     void keyPressEvent(QKeyEvent* event);
-    /*void mousePressEvent(QMouseEvent* event);
-    void paintEvent(QPaintEvent* event);
+    bool eventFilter(QObject* obj, QEvent* event);
+    /*void paintEvent(QPaintEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
     bool eventFilter(QObject* obj, QEvent* event);*/
     void hideInterface();
@@ -123,13 +75,8 @@ private:
     void addPlayerToServer(const QString& playerName);
     void getWords();
     void sendWordToServer(const QString& word);
-    void sendDrawingToServer();
-
-    
-
+    void sendImageToServer(const QByteArray& imageData);
     QGraphicsScene* scene;
-    
-
 
     //For var
 private:
@@ -141,7 +88,7 @@ private:
     int language=1;
     std::vector<std::pair<QString,QString>> players;
     bool playerLogged = false;
-    bool isDrawing = false;
+    bool isDrawing = true;
     QPointF lastMousePos;
     std::vector<QPainterPath> lines;
     bool isPlayerAllowedToDraw = true;
