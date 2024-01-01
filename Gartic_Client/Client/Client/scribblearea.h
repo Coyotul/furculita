@@ -20,7 +20,8 @@ public:
     bool isModified() const { return modified; }
     QColor penColor() const { return myPenColor; }
     int penWidth() const { return myPenWidth; }
-    QByteArray getImage();
+    QImage getImage();
+
 
 public slots:
     void clearImage();

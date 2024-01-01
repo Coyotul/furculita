@@ -14,6 +14,8 @@
 #include <QList>
 #include <QMainWindow>
 #include <QtWidgets>
+#include <QPixmap>
+#include <QLabel>
 
 std::ofstream f("output.out");
 
@@ -339,6 +341,8 @@ void Gartic::on_language2_clicked()
     cpr::Response response = cpr::Get(cpr::Url{ url });
 }
 
+
+
 void Gartic::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
@@ -379,16 +383,86 @@ bool Gartic::eventFilter(QObject* obj, QEvent* event)
 {
     if (obj == ui.drawView->viewport())
     {
-        if (event->type() == QEvent::MouseButtonPress)
+        if (event->type() == QEvent::MouseButtonRelease)
         {
-
-            QByteArray imageData = scribbleArea->getImage();
+            QImage imageData = scribbleArea->getImage();
             sendImageToServer(imageData);
         }
     }
     return QMainWindow::eventFilter(obj, event);
 }
+void Gartic::downloadImageFromServer()
+{
+    // Adresa URL a serverului pentru a descărca imaginea
+    std::string url = "http://localhost:8080/getDrawing";
 
+    // Trimiterea cererii GET pentru a descărca imaginea
+    cpr::Response response = cpr::Get(cpr::Url{ url });
+
+    if (response.status_code == 200) {
+        // Imaginea a fost descărcată cu succes
+        // Salvează imaginea într-un fișier
+        std::ofstream file("downloaded_image.png", std::ios::binary);
+        file.write(response.text.c_str(), response.text.size());
+        file.close();
+
+        qDebug() << "Imaginea a fost descărcată și salvată cu succes în downloaded_image.png.";
+    }
+    else {
+        // Eroare în timpul descărcării imaginii
+        qDebug() << "Eroare la descărcarea imaginii. Cod de stare: " << response.status_code;
+    }
+}
+
+void Gartic::displayImage(const QString& imagePath)
+{
+    // Creați o instanță de QPixmap pentru a încărca imaginea
+    QPixmap pixmap(imagePath);
+
+    // Verificați dacă încărcarea imaginii a avut succes
+    if (pixmap.isNull()) {
+        qDebug() << "Eroare la încărcarea imaginii.";
+        return;
+    }
+
+    // Afișați imaginea într-un QLabel sau alt widget corespunzător
+    QLabel* label = new QLabel(this);
+    label->setPixmap(pixmap);
+    label->show();
+}
+
+
+void Gartic::sendImageToServer(const QImage& image)
+{
+    std::ofstream logFile("log.txt");
+    std::cout.rdbuf(logFile.rdbuf());
+    std::cerr.rdbuf(logFile.rdbuf());
+
+    std::string url = "http://localhost:8080/drawing";
+
+    // Serializarea imaginii într-un QByteArray
+    QByteArray imageData;
+    QBuffer buffer(&imageData);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+    buffer.close();
+
+    // Trimiterea cererii POST cu datele serializate ale imaginii
+    cpr::Response r = cpr::Post(
+        cpr::Url{ url },
+        cpr::Header{ {"Content-Type", "application/octet-stream"} },
+        cpr::Body{ imageData.data(), static_cast<size_t>(imageData.size()) });
+
+
+    if (r.status_code == 200) {
+        std::cout << "Cererea POST a fost trimisă cu succes!\n";
+        std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+    else {
+        std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
+        std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+}
 
 
 void Gartic::hideInterface()
@@ -510,29 +584,6 @@ void Gartic::sendWordToServer(const QString& word)
     std::string wordToDraw = word.toUtf8().constData();
 
     cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"chosenWord", wordToDraw} });
-
-    if (r.status_code == 200) {
-        std::cout << "Cererea POST a fost trimisă cu succes!\n";
-        std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
-    }
-    else {
-        std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
-        std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
-    }
-}
-
-void Gartic::sendImageToServer(const QByteArray& imageData)
-{
-    std::ofstream logFile("log.txt");
-    std::cout.rdbuf(logFile.rdbuf());
-    std::cerr.rdbuf(logFile.rdbuf());
-
-    std::string url = "http://localhost:8080/drawing";
-
-    cpr::Response r = cpr::Post(
-        cpr::Url{ url },
-        cpr::Header{ {"Content-Type", "application/octet-stream"} },
-        cpr::Body{ imageData });
 
     if (r.status_code == 200) {
         std::cout << "Cererea POST a fost trimisă cu succes!\n";

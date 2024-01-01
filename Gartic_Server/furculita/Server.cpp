@@ -178,7 +178,7 @@ void Server::configureRoutes() {
 		.methods("POST"_method)([&](const crow::request& req) -> crow::response {
 		// Obțineți datele din corpul cererii POST
 		auto data = req.body;
-
+		std::cout << data.size();
 		// Salvați datele într-un fișier temporar (în loc să le stocați direct într-o variabilă, puteți
 		// alege să salvați aceste date în baza de date sau în alt loc în funcție de necesități)
 		std::ofstream file("received_image.png", std::ios::binary);
@@ -188,6 +188,34 @@ void Server::configureRoutes() {
 		// Răspuns OK
 		return crow::response{ 200 };
 			});
-	
+
+	CROW_ROUTE(app, "/getDrawing")
+		.methods("GET"_method)([&]() -> crow::response {
+		// Încarcă imaginea din fișierul temporar
+		std::ifstream file("received_image.png", std::ios::binary | std::ios::ate);
+		if (!file.is_open()) {
+			std::cerr << "Eroare la deschiderea fișierului temporar." << std::endl;
+			return crow::response(500);  // Server error
+		}
+
+		std::streamsize size = file.tellg();
+		file.seekg(0, std::ios::beg);
+
+		std::vector<char> buffer(size);
+		if (file.read(buffer.data(), size)) {
+			// Răspuns cu imaginea încărcată
+			crow::response response;
+			response.add_header("Content-Type", "image/png");
+			response.add_header("Content-Length", std::to_string(size));
+			response.body.assign(buffer.data(), buffer.size());  // Convertirea vectorului în șir
+			return response;
+		}
+		else {
+			std::cerr << "Eroare la citirea fișierului temporar." << std::endl;
+			return crow::response(500);  // Server error
+		}
+			});
+
+
 }
 

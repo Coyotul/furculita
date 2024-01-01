@@ -19,6 +19,9 @@ class Gartic : public QMainWindow
     ~Gartic();
     QGraphicsPathItem* currentDrawing;
     void SetWords(std::string word1, std::string word2, std::string word3);
+    void downloadImageFromServer();
+    void displayImage(const QString& imagePath);
+    bool isDrawing = true;
 
  protected:
     //void closeEvent(QCloseEvent* event) override;
@@ -75,7 +78,8 @@ private:
     void addPlayerToServer(const QString& playerName);
     void getWords();
     void sendWordToServer(const QString& word);
-    void sendImageToServer(const QByteArray& imageData);
+    void sendImageToServer(const QImage& imageData);
+    
     QGraphicsScene* scene;
 
     //For var
@@ -88,7 +92,6 @@ private:
     int language=1;
     std::vector<std::pair<QString,QString>> players;
     bool playerLogged = false;
-    bool isDrawing = true;
     QPointF lastMousePos;
     std::vector<QPainterPath> lines;
     bool isPlayerAllowedToDraw = true;

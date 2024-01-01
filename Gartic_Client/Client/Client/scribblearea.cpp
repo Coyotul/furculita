@@ -9,6 +9,7 @@
 #endif
 #endif
 #include "scribblearea.h"
+#include <iostream>
 
 ScribbleArea::ScribbleArea(QWidget* parent)
     : QWidget(parent)
@@ -24,25 +25,42 @@ bool ScribbleArea::openImage(const QString& fileName)
 {
     QImage loadedImage;
     if (!loadedImage.load(fileName))
+    {
+        std::cerr << "Eroare la înc?rcarea imaginii din fi?ier: " << fileName.toStdString() << std::endl;
         return false;
+    }
+
+    std::cerr << "Imagine înc?rcat? cu succes din fi?ier: " << fileName.toStdString() << std::endl;
+
     QSize newSize = loadedImage.size().expandedTo(size());
     resizeImage(&loadedImage, newSize);
     image = loadedImage;
     modified = false;
+
+    if (saveImage("test_image.png", "PNG"))
+    {
+        std::cerr << "Imaginea a fost salvat? cu succes în test_image.png." << std::endl;
+    }
+    else
+    {
+        std::cerr << "Eroare la salvarea imaginii în test_image.png." << std::endl;
+    }
+
     update();
     return true;
 }
+
 
 bool ScribbleArea::saveImage(const QString& fileName, const char* fileFormat)
 {
     QImage visibleImage = image;
     resizeImage(&visibleImage, size());
-    if (visibleImage.save(fileName, fileFormat)) 
+    if (visibleImage.save(fileName, fileFormat))
     {
         modified = false;
         return true;
     }
-    else 
+    else
     {
         return false;
     }
@@ -58,22 +76,20 @@ void ScribbleArea::setPenWidth(int newWidth)
     myPenWidth = newWidth;
 }
 
-QByteArray ScribbleArea::getImage()
+QImage ScribbleArea::getImage()
 {
-    QByteArray imageData;
-    QBuffer buffer(&imageData);
-    buffer.open(QIODevice::WriteOnly);
-
     QImage visibleImage = image;
     resizeImage(&visibleImage, size());
 
-    if (visibleImage.save(&buffer, "PNG")) {
-        buffer.close();
-        return imageData;
+    if (visibleImage.isNull()) {
+        std::cerr << "Imaginea este nula." << std::endl;
+        return QImage();
     }
 
-    return QByteArray();
+    return visibleImage;
 }
+
+
 
 void ScribbleArea::clearImage()
 {
@@ -84,7 +100,7 @@ void ScribbleArea::clearImage()
 
 void ScribbleArea::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton) 
+    if (event->button() == Qt::LeftButton)
     {
         lastPoint = event->pos();
         scribbling = true;
@@ -100,7 +116,7 @@ void ScribbleArea::mouseMoveEvent(QMouseEvent* event)
 
 void ScribbleArea::mouseReleaseEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton && scribbling) 
+    if (event->button() == Qt::LeftButton && scribbling)
     {
         drawLineTo(event->pos());
         scribbling = false;
@@ -116,7 +132,7 @@ void ScribbleArea::paintEvent(QPaintEvent* event)
 
 void ScribbleArea::resizeEvent(QResizeEvent* event)
 {
-    if (width() > image.width() || height() > image.height()) 
+    if (width() > image.width() || height() > image.height())
     {
         int newWidth = qMax(width() + 128, image.width());
         int newHeight = qMax(height() + 128, image.height());
@@ -129,7 +145,7 @@ void ScribbleArea::resizeEvent(QResizeEvent* event)
 void ScribbleArea::drawLineTo(const QPoint& endPoint)
 {
     QPainter painter(&image);
-    painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,Qt::RoundJoin));
+    painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.drawLine(lastPoint, endPoint);
     modified = true;
     int rad = (myPenWidth / 2) + 2;

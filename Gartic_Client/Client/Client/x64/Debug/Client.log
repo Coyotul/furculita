@@ -1,1 +1,6 @@
-﻿LINK : fatal error LNK1168: cannot open C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe for writing
+﻿  uic Gartic.ui
+  Gartic.cpp
+  main.cpp
+  moc_Gartic.cpp
+MSVCRT.lib(initializers.obj) : warning LNK4098: defaultlib 'msvcrtd.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Client.vcxproj -> C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe
