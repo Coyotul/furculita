@@ -1,0 +1,6 @@
+baaaaaaaMouse Press Event
+baaaaaaaMouse left button pressed
+Mouse position: 92 274
+lastMousePos (before): 6 450
+lastMousePos (after): 73 426
+First path start: 231 294
