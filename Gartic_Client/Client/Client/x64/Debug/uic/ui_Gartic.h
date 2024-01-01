@@ -13,7 +13,6 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -22,6 +21,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -35,6 +35,7 @@ public:
     QPushButton *wordButton_1;
     QPushButton *wordButton_2;
     QPushButton *wordButton_3;
+    QTextEdit *textEdit;
     QGraphicsView *drawView;
     QLineEdit *username;
     QLabel *username_text;
@@ -45,8 +46,6 @@ public:
     QPushButton *language2;
     QLabel *leaderboard;
     QLabel *easterEgg;
-    QLabel *textEdit;
-    QFrame *line;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -72,6 +71,9 @@ public:
         wordButton_3 = new QPushButton(centralWidget);
         wordButton_3->setObjectName("wordButton_3");
         wordButton_3->setGeometry(QRect(170, 10, 75, 24));
+        textEdit = new QTextEdit(centralWidget);
+        textEdit->setObjectName("textEdit");
+        textEdit->setGeometry(QRect(30, 510, 201, 111));
         drawView = new QGraphicsView(centralWidget);
         drawView->setObjectName("drawView");
         drawView->setGeometry(QRect(10, 50, 641, 451));
@@ -116,15 +118,6 @@ public:
         easterEgg->setObjectName("easterEgg");
         easterEgg->setGeometry(QRect(370, 80, 271, 351));
         easterEgg->setPixmap(QPixmap(QString::fromUtf8(":/newPrefix/iulian.png")));
-        textEdit = new QLabel(centralWidget);
-        textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(28, 515, 201, 101));
-        textEdit->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        line = new QFrame(centralWidget);
-        line->setObjectName("line");
-        line->setGeometry(QRect(10, 510, 20, 121));
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
@@ -160,7 +153,6 @@ public:
         language2->setText(QCoreApplication::translate("GarticClass", "English Language", nullptr));
         leaderboard->setText(QCoreApplication::translate("GarticClass", "TextLabel", nullptr));
         easterEgg->setText(QString());
-        textEdit->setText(QCoreApplication::translate("GarticClass", "Chat", nullptr));
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 

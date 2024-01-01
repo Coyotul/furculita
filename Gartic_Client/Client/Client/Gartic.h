@@ -79,7 +79,7 @@ private:
     void getWords();
     void sendWordToServer(const QString& word);
     void sendImageToServer(const QImage& imageData);
-    
+    void sortPlayersByScore();
     QGraphicsScene* scene;
 
     //For var

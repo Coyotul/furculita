@@ -464,6 +464,12 @@ void Gartic::sendImageToServer(const QImage& image)
     }
 }
 
+void Gartic::sortPlayersByScore()
+{
+    std::sort(players.begin(), players.end(),
+        [](const auto& a, const auto& b) { return a.second < b.second; });
+}
+
 
 void Gartic::hideInterface()
 {
@@ -509,11 +515,6 @@ void Gartic::updateLeaderboard()
         leaderboard = leaderboard +'\n' + QString::number(++index) + ": " + it.first + " " + it.second;
     }
     ui.leaderboard->setText(leaderboard);
-}
-
-void sortPlayersByScore()
-{
-
 }
 
 void Gartic::updatePlayers()
