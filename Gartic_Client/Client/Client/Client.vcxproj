@@ -101,11 +101,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="scribblearea.cpp" />
     <QtRcc Include="Gartic.qrc" />
     <QtUic Include="Gartic.ui" />
     <QtMoc Include="Gartic.h" />
     <ClCompile Include="Gartic.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="scribblearea.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
