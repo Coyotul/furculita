@@ -8,17 +8,21 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <cpr/cpr.h>
+#include "scribblearea.h"
 
 class Gartic : public QMainWindow
 {
     Q_OBJECT
 
-public:
+ public:
     Gartic(QWidget *parent = nullptr);
     ~Gartic();
     QGraphicsPathItem* currentDrawing;
 
     void SetWords(std::string word1, std::string word2, std::string word3);
+
+ protected:
+    //void closeEvent(QCloseEvent* event) override;
 
 private slots:
     void on_wordButton_1_clicked();
@@ -27,15 +31,90 @@ private slots:
     void on_language1_clicked();
     void on_language2_clicked();
 
+    //void open();
+
+    //void save();
+
+    void penColor();
+
+    void penWidth();
+
+    //void about();
+
+
     //For methods
 private:
+    // Will tie user actions to functions
+
+    void createActions();
+
+    void createMenus();
+
+
+
+    // Will check if changes have occurred since last save
+
+    //bool maybeSave();
+
+
+
+    // Opens the Save dialog and saves
+
+    //bool saveFile(const QByteArray& fileFormat);
+
+
+
+    // What we'll draw on
+
+    ScribbleArea* scribbleArea;
+
+
+
+    // The menu widgets
+
+    QMenu* saveAsMenu;
+
+    QMenu* fileMenu;
+
+    QMenu* optionMenu;
+
+    QMenu* helpMenu;
+
+
+
+    // All the actions that can occur
+
+    QAction* openAct;
+
+
+
+    // Actions tied to specific file formats
+
+    QList<QAction*> saveAsActs;
+
+    QAction* exitAct;
+
+    QAction* penColorAct;
+
+    QAction* penWidthAct;
+
+    QAction* printAct;
+
+    QAction* clearScreenAct;
+
+    QAction* aboutAct;
+
+    QAction* aboutQtAct;
+
+
+    
     Ui::GarticClass ui;
    
     void keyPressEvent(QKeyEvent* event);
-    void mousePressEvent(QMouseEvent* event);
+    /*void mousePressEvent(QMouseEvent* event);
     void paintEvent(QPaintEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
-    bool eventFilter(QObject* obj, QEvent* event);
+    bool eventFilter(QObject* obj, QEvent* event);*/
     void hideInterface();
     void showInterface();
     void hideWordChoices();
@@ -46,8 +125,10 @@ private:
     void sendWordToServer(const QString& word);
     void sendDrawingToServer();
 
+    
+
     QGraphicsScene* scene;
-    QGraphicsRectItem* drawRectItem;
+    
 
 
     //For var
@@ -64,4 +145,6 @@ private:
     QPointF lastMousePos;
     std::vector<QPainterPath> lines;
     bool isPlayerAllowedToDraw = true;
+
+    QPainterPath currentPath;
 };
