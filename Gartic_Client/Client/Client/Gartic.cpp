@@ -357,6 +357,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
                 ui.easterEgg->show();
             }
             ui.textBox->clear();
+            //sendChatToServer(chatText); - lasati comentat sau crapa programul >:(
         }
         else
         {
@@ -464,11 +465,38 @@ void Gartic::sendImageToServer(const QImage& image)
     }
 }
 
-void Gartic::sortPlayersByScore()
+void Gartic::updateChat()
 {
-    std::sort(players.begin(), players.end(),
-        [](const auto& a, const auto& b) { return a.second < b.second; });
+    std::string url = "http://localhost:8080/getChat";
+    cpr::Response response = cpr::Get(cpr::Url{ url });
+    if (response.status_code == 200)
+    {
+        crow::json::rvalue jsonData = crow::json::load(response.text);
+        std::string text = std::string(jsonData);
+    }
 }
+
+void Gartic::sendChatToServer(const QString& chat)
+{
+    std::string url = "http://localhost:8080/chat";
+    std::string txt = chat.toStdString();
+    cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Body{txt}, cpr::Header{ {"Content-Type", "text/plain"} });
+    if (r.status_code == 200) {
+        std::cout << "Cererea POST a fost trimisă cu succes!\n";
+        std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+    else {
+        std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
+        std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+}
+
+//Had to comment this until I figure out how to fix it as it is very unstable >:(
+//void Gartic::sortPlayersByScore()
+//{
+//    std::sort(players.begin(), players.end(),
+//        [](const auto& a, const auto& b) { return a.second < b.second; });
+//}
 
 
 void Gartic::hideInterface()

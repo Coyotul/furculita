@@ -79,7 +79,9 @@ private:
     void getWords();
     void sendWordToServer(const QString& word);
     void sendImageToServer(const QImage& imageData);
-    void sortPlayersByScore();
+    void updateChat();
+    void sendChatToServer(const QString& chat);
+    //void sortPlayersByScore();
     QGraphicsScene* scene;
 
     //For var

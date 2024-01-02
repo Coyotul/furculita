@@ -27,7 +27,6 @@ void Server::configureRoutes() {
 	}
 	WordsDb wordsDb(db);
 	std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3);
-	std::string chatText;
 	
 
 	CROW_ROUTE(app, "/words")
@@ -215,19 +214,37 @@ void Server::configureRoutes() {
 			return crow::response(500);  // Server error
 		}
 			});
+
 	CROW_ROUTE(app, "/chat")
 		.methods("POST"_method) ([&](const crow::request& req) -> crow::response {
 		// Extract chat text from the request body
-		chatText = req.body;
-
+		std::string chatText = req.body;
+		std::ofstream fout("chat.txt");
+		if (!fout.is_open())
+		{
+			std::cerr << "Nu s-a putut deschide fisierul.\n";
+			return crow::response{ 500 };
+		}
+		fout.clear();
+		fout << chatText;
+		fout.close();
 		return crow::response{ 200 };
 			});
+
 	CROW_ROUTE(app, "/getChat")
 		.methods("GET"_method)([&]() -> crow::response {
+		std::ifstream fin("chat.txt");
+		if (!fin.is_open())
+		{
+			std::cerr << "Nu s-a putut deschide fisierul.\n";
+			return crow::response{ 500 };
+		}
+		std::string chatText;
+		while (fin)
+			chatText += fin.get();
 		crow::json::wvalue chatJSON{
-			{"chat:\n", chatText}
+			{"chat", chatText}
 		};
-
 		return chatJSON;
 			});
 }
