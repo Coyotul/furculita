@@ -27,7 +27,7 @@ void Server::configureRoutes() {
 	}
 	WordsDb wordsDb(db);
 	std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3);
-	
+	std::string chatText;
 	
 
 	CROW_ROUTE(app, "/words")
@@ -215,7 +215,20 @@ void Server::configureRoutes() {
 			return crow::response(500);  // Server error
 		}
 			});
+	CROW_ROUTE(app, "/chat")
+		.methods("POST"_method) ([&](const crow::request& req) -> crow::response {
+		// Extract chat text from the request body
+		chatText = req.body;
 
+		return crow::response{ 200 };
+			});
+	CROW_ROUTE(app, "/getChat")
+		.methods("GET"_method)([&]() -> crow::response {
+		crow::json::wvalue chatJSON{
+			{"chat:\n", chatText}
+		};
 
+		return chatJSON;
+			});
 }
 
