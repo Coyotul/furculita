@@ -74,6 +74,7 @@ public:
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName("textEdit");
         textEdit->setGeometry(QRect(30, 510, 201, 111));
+        textEdit->setReadOnly(true);
         drawView = new QGraphicsView(centralWidget);
         drawView->setObjectName("drawView");
         drawView->setGeometry(QRect(10, 50, 641, 451));
