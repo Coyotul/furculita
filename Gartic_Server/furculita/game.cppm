@@ -22,6 +22,7 @@ namespace gartic {
 		void calculateScoresBasedOnTime();
 		~Game();
 		Round m_currentRound;
+		std::string chat;
 		
 	private:
 		

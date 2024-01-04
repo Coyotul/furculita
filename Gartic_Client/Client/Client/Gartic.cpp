@@ -357,7 +357,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
                 ui.easterEgg->show();
             }
             ui.textBox->clear();
-            //sendChatToServer(chatText); - lasati comentat sau crapa programul >:(
+            sendChatToServer(chatText);
         }
         else
         {
@@ -473,17 +473,18 @@ void Gartic::updateChat()
     {
         crow::json::rvalue jsonData = crow::json::load(response.text);
         std::string text = std::string(jsonData);
+        chatText = QString::fromStdString(text);
     }
 }
 
 void Gartic::sendChatToServer(const QString& chat)
 {
     std::string url = "http://localhost:8080/chat";
-    std::string txt = chat.toStdString();
-    cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Body{txt}, cpr::Header{ {"Content-Type", "text/plain"} });
+    std::string txt = chat.toUtf8().constData();
+    cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"chat", txt} });
     if (r.status_code == 200) {
-        std::cout << "Cererea POST a fost trimisă cu succes!\n";
-        std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+        //std::cout << "Cererea POST a fost trimisă cu succes!\n";
+        //std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
     }
     else {
         std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
