@@ -84,7 +84,7 @@ private:
     //void sortPlayersByScore();
     QGraphicsScene* scene;
 
-    //For var
+   //For var
 private:
     QString username;
     QString chatText;
@@ -97,6 +97,5 @@ private:
     QPointF lastMousePos;
     std::vector<QPainterPath> lines;
     bool isPlayerAllowedToDraw = true;
-
     QPainterPath currentPath;
 };
