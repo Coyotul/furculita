@@ -10,7 +10,7 @@
 import game;
 using gartic::Game;
 
-Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 0) {
+Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 60) {
    
 }
 

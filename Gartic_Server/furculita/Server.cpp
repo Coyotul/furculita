@@ -1,6 +1,7 @@
 ﻿#include "Server.h";
 #include "Word.h"
 #include "WordsDb.h"
+#include <thread>
 
 import game;
 
@@ -91,11 +92,15 @@ void Server::configureRoutes() {
 		auto chosenWord = req.url_params.get("chosenWord");
 		if (chosenWord) {
 			std::string wordToDraw = chosenWord;
+			std::thread roundThread([=]() {
+				myGame.m_currentRound.startRound();
+				});
 
 			myGame.m_currentRound.setWordToDraw(wordToDraw);
 			logi("Word to draw is: ", wordToDraw);
+			roundThread.detach();
 			return crow::response{ 200 };
-
+			
 		}
 		else {
 			loge("Bad request: Word not chosen");
@@ -104,6 +109,7 @@ void Server::configureRoutes() {
 	});
 	CROW_ROUTE(app, "/getWord")
 		.methods("GET"_method)([&]() -> crow::response {
+		
 		std::vector<crow::json::wvalue> wordsJSON;
 		const auto& word = myGame.m_currentRound.getWordToDraw();
 		crow::json::wvalue wordJSON{
@@ -255,6 +261,15 @@ void Server::configureRoutes() {
 			{"chat", chatText}
 		};
 		return chatJSON;
+			});
+
+	CROW_ROUTE(app, "/getTimeLeft")
+		.methods("GET"_method)([&]() -> crow::response {
+		const auto timeLeft = myGame.m_currentRound.getTimeLeft();
+		crow::json::wvalue timeLeftJSON{
+			{"timeLeft", timeLeft}
+		};
+		return crow::json::wvalue{ timeLeftJSON };
 			});
 }
 
