@@ -37,10 +37,13 @@ Gartic::Gartic(QWidget* parent)
     createActions();
     createMenus();
     setWindowTitle(tr("Scribble Application"));
+    //Timer
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Gartic::getTimer);
+
+    
    
 }
-
-
 void Gartic::penColor()
 {
     
@@ -49,10 +52,6 @@ void Gartic::penColor()
     if (newColor.isValid())
         scribbleArea->setPenColor(newColor);
 }
-
-
-
-
 void Gartic::penWidth()
 {
     bool ok;
@@ -62,7 +61,6 @@ void Gartic::penWidth()
     if (ok)
         scribbleArea->setPenWidth(newWidth);
 }
-
 void Gartic::createActions()
 {
     
@@ -100,6 +98,7 @@ void Gartic::on_wordButton_1_clicked()
         word = ui.wordButton_1->text();
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
+        timer->start(1000);
         ui.wordText->setText("Draw: " + word);
         hideWordChoices();
     }
@@ -113,6 +112,7 @@ void Gartic::on_wordButton_2_clicked()
         word = ui.wordButton_2->text();
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
+        timer->start(1000);
         ui.wordText->setText("Draw: " + word);
         hideWordChoices();
     }
@@ -124,10 +124,13 @@ void Gartic::on_wordButton_3_clicked()
     {
         wordChosen = true;
         word = ui.wordButton_3->text();
+        
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
+        timer->start(1000);
         if(language ==2)
         ui.wordText->setText("Draw: " + word);
+        
         else
             ui.wordText->setText("Desen: " + word);
         hideWordChoices();
@@ -165,6 +168,31 @@ void Gartic::on_language2_clicked()
     std::string url = "http://localhost:8080/language?language=" + std::to_string(languageValue);
     cpr::Response response = cpr::Get(cpr::Url{ url });
 }
+void Gartic::getTimer()
+{
+    std::string url = "http://localhost:8080/getTimeLeft";
+    cpr::Response response = cpr::Get(cpr::Url{ url });
+
+    // Check if the request was successful
+    if (response.status_code == 200)
+    {
+        // Parse the JSON response
+        crow::json::rvalue jsonData = crow::json::load(response.text);
+
+        // Get the timer value from the JSON response
+        int timeLeft = jsonData["timeLeft"].i();
+
+        // Display the timer value along with the "Draw:" text
+        QString timerText = QString("Timer: %1").arg(timeLeft);
+        ui.timerText->setText(timerText);
+    }
+    else
+    {
+        // Handle the case where the request was not successful
+        qDebug() << "Error fetching timer value. Status code: " << response.status_code;
+    }
+}
+
 
 void Gartic::keyPressEvent(QKeyEvent* event)
 {
@@ -332,7 +360,7 @@ void Gartic::hideInterface()
     ui.wordText->hide();
     ui.leaderboard->hide();
     ui.LeaderboardText->hide();
-
+    ui.timerText->hide();
     ui.username_text->show();
     ui.username->show();  
 }
@@ -347,6 +375,7 @@ void Gartic::showInterface()
     ui.wordButton_2->show();
     ui.wordButton_3->show();
     ui.wordText->show();
+    ui.timerText->show();
     ui.leaderboard->show(); 
     ui.LeaderboardText->show();
 

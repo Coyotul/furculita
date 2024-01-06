@@ -81,8 +81,10 @@ private:
     void sendImageToServer(const QImage& imageData);
     void updateChat();
     void sendChatToServer(const QString& chat);
+    void getTimer();
     //void sortPlayersByScore();
     QGraphicsScene* scene;
+    QLabel* timerLabel;
 
    //For var
 private:
@@ -98,4 +100,7 @@ private:
     std::vector<QPainterPath> lines;
     bool isPlayerAllowedToDraw = true;
     QPainterPath currentPath;
+
+    QTimer* timer;
+    
 };
