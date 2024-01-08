@@ -262,6 +262,13 @@ void Server::configureRoutes() {
 		};
 		return chatJSON;
 			});
+	CROW_ROUTE(app, "/getMainPlayer")
+		.methods("GET"_method)([&]() -> crow::response {
+		crow::json::wvalue player{
+			{"name", myGame.getMainPlayer()},
+		};
+		return crow::json::wvalue{ player };
+			});
 
 	CROW_ROUTE(app, "/getTimeLeft")
 		.methods("GET"_method)([&]() -> crow::response {

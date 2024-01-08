@@ -15,6 +15,8 @@ namespace gartic {
 		void displayScores() const;
 		void resetScores();
 		bool checkGameState() const;
+		std::string getMainPlayer();
+		void changeMainPlayer();
 		void resetGame();
 		void addPlayer(std::string playerName);
 		std::vector<std::pair<std::string, int>> getPlayers();
@@ -30,7 +32,7 @@ namespace gartic {
 		std::vector<int> test;
 		std::uint8_t m_currentPlayerIndex;
 		bool m_gameInProgress;
-		
+		int playerIndex = 0;
 		//Word m_currentWord;
 
 	};

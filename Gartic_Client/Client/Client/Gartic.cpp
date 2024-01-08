@@ -193,6 +193,33 @@ void Gartic::getTimer()
     }
 }
 
+void Gartic::getPlayerName()
+{
+    std::string url = "http://localhost:8080/getMainPlayer";
+    cpr::Response response = cpr::Get(cpr::Url{ url });
+    // Check if the request was successful
+    if (response.status_code == 200)
+    {
+
+        cpr::Response r = cpr::Get(cpr::Url{ url });
+
+        auto name = crow::json::load(r.text);
+        if (username.toStdString() == ((std::string)name["name"]))
+        {
+            isDrawing = true;
+        }
+        else
+        {
+            isDrawing = false;
+        }
+    }
+    else
+    {
+        // Handle the case where the request was not successful
+        qDebug() << "Error fetching timer value. Status code: " << response.status_code;
+    }
+}
+
 
 void Gartic::keyPressEvent(QKeyEvent* event)
 {

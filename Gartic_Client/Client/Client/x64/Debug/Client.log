@@ -1,12 +1,1 @@
-﻿  scribblearea.cpp
-  Gartic.cpp
-  main.cpp
-C:\Users\George\source\repos\furculita\Gartic_Client\Client\Client\scribblearea.cpp(1,1): warning C4828: The file contains a character starting at offset 0x271 that is illegal in the current source character set (codepage 65001).
-C:\Users\George\source\repos\furculita\Gartic_Client\Client\Client\scribblearea.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2f6 that is illegal in the current source character set (codepage 65001).
-C:\Users\George\source\repos\furculita\Gartic_Client\Client\Client\scribblearea.cpp(1,1): warning C4828: The file contains a character starting at offset 0x447 that is illegal in the current source character set (codepage 65001).
-C:\Users\George\source\repos\furculita\Gartic_Client\Client\Client\scribblearea.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4b4 that is illegal in the current source character set (codepage 65001).
-  qrc_Gartic.cpp
-  moc_Gartic.cpp
-  moc_scribblearea.cpp
-MSVCRT.lib(initializers.obj) : warning LNK4098: defaultlib 'msvcrtd.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Client.vcxproj -> C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe
+﻿  Client.vcxproj -> C:\Users\George\source\repos\furculita\Gartic_Client\Client\x64\Debug\Client.exe

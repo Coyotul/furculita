@@ -117,4 +117,18 @@ bool Game::checkGameState()const {
     return true;
 }
 
+std::string Game::getMainPlayer()
+{
+    return m_players[playerIndex].GetName();
+}
+
+void Game::changeMainPlayer()
+{
+    playerIndex++;
+    if (playerIndex > m_players.size() - 1)
+    {
+        playerIndex = 0;
+    }
+}
+
 
