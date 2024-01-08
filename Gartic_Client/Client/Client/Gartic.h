@@ -21,7 +21,7 @@ class Gartic : public QMainWindow
     void SetWords(std::string word1, std::string word2, std::string word3);
     void downloadImageFromServer();
     void displayImage(const QString& imagePath);
-    bool isDrawing = true;
+    bool isDrawing = false;
 
  protected:
     //void closeEvent(QCloseEvent* event) override;

@@ -51,6 +51,8 @@ bool ScribbleArea::openImage(const QString& fileName)
 }
 
 
+
+
 bool ScribbleArea::saveImage(const QString& fileName, const char* fileFormat)
 {
     QImage visibleImage = image;

@@ -173,6 +173,9 @@ void Gartic::getTimer()
     std::string url = "http://localhost:8080/getTimeLeft";
     cpr::Response response = cpr::Get(cpr::Url{ url });
 
+    downloadImageFromServer();
+    displayImage("downloaded_image.png");
+
     // Check if the request was successful
     if (response.status_code == 200)
     {
@@ -300,11 +303,9 @@ void Gartic::displayImage(const QString& imagePath)
         qDebug() << "Eroare la încărcarea imaginii.";
         return;
     }
-
-    // Afișați imaginea într-un QLabel sau alt widget corespunzător
-    QLabel* label = new QLabel(this);
-    label->setPixmap(pixmap);
-    label->show();
+    scene->clear();
+    scene->addPixmap(pixmap);
+    
 }
 
 
@@ -461,6 +462,7 @@ void Gartic::addPlayerToServer(const QString& playerName)
     // URL-ul către serverul la care trimitem cererea POST
     std::string url = "http://localhost:8080/addPlayer";
 
+    getPlayerName();
     // Cuvântul pe care vrem să-l trimitem
     std::string cuvant = playerName.toUtf8().constData();
     
