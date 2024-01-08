@@ -1,0 +1,4 @@
+Converted player name: Guest
+Eroare la trimiterea cererii POST. Cod de stare: 0
+Răspunsul serverului:
+

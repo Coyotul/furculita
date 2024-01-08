@@ -46,6 +46,7 @@ public:
     QPushButton *language2;
     QLabel *leaderboard;
     QLabel *easterEgg;
+    QLabel *timerText;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -55,7 +56,7 @@ public:
     {
         if (GarticClass->objectName().isEmpty())
             GarticClass->setObjectName("GarticClass");
-        GarticClass->resize(622, 725);
+        GarticClass->resize(740, 725);
         GarticClass->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
         centralWidget = new QWidget(GarticClass);
         centralWidget->setObjectName("centralWidget");
@@ -95,7 +96,7 @@ public:
         logo->setPixmap(QPixmap(QString::fromUtf8(":/Gartic/gartic_logo_125px.png")));
         wordText = new QLabel(centralWidget);
         wordText->setObjectName("wordText");
-        wordText->setGeometry(QRect(440, 20, 221, 21));
+        wordText->setGeometry(QRect(500, 20, 221, 21));
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Garamond")});
         font1.setPointSize(16);
@@ -119,10 +120,14 @@ public:
         easterEgg->setObjectName("easterEgg");
         easterEgg->setGeometry(QRect(370, 80, 271, 351));
         easterEgg->setPixmap(QPixmap(QString::fromUtf8(":/newPrefix/iulian.png")));
+        timerText = new QLabel(centralWidget);
+        timerText->setObjectName("timerText");
+        timerText->setGeometry(QRect(370, 20, 151, 21));
+        timerText->setFont(font1);
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 622, 22));
+        menuBar->setGeometry(QRect(0, 0, 740, 22));
         menuGartic = new QMenu(menuBar);
         menuGartic->setObjectName("menuGartic");
         GarticClass->setMenuBar(menuBar);
@@ -154,6 +159,7 @@ public:
         language2->setText(QCoreApplication::translate("GarticClass", "English Language", nullptr));
         leaderboard->setText(QCoreApplication::translate("GarticClass", "TextLabel", nullptr));
         easterEgg->setText(QString());
+        timerText->setText(QCoreApplication::translate("GarticClass", "Timer: ", nullptr));
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 
