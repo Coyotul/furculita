@@ -47,6 +47,7 @@ public:
     QLabel *leaderboard;
     QLabel *easterEgg;
     QLabel *timerText;
+    QLabel *drawing;
     QMenuBar *menuBar;
     QMenu *menuGartic;
     QToolBar *mainToolBar;
@@ -124,6 +125,10 @@ public:
         timerText->setObjectName("timerText");
         timerText->setGeometry(QRect(370, 20, 151, 21));
         timerText->setFont(font1);
+        drawing = new QLabel(centralWidget);
+        drawing->setObjectName("drawing");
+        drawing->setGeometry(QRect(10, 40, 691, 351));
+        drawing->setPixmap(QPixmap(QString::fromUtf8(":/newPrefix/iulian.png")));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
         menuBar->setObjectName("menuBar");
@@ -160,6 +165,7 @@ public:
         leaderboard->setText(QCoreApplication::translate("GarticClass", "TextLabel", nullptr));
         easterEgg->setText(QString());
         timerText->setText(QCoreApplication::translate("GarticClass", "Timer: ", nullptr));
+        drawing->setText(QString());
         menuGartic->setTitle(QCoreApplication::translate("GarticClass", "Gartic", nullptr));
     } // retranslateUi
 

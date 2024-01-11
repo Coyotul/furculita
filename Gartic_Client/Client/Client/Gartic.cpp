@@ -33,6 +33,7 @@ Gartic::Gartic(QWidget* parent)
     username = "Guest";
     ui.drawView->viewport()->installEventFilter(this);
     ui.easterEgg->hide();
+    ui.drawing->hide();
     ui.drawView->setMouseTracking(true);
     createActions();
     createMenus();
@@ -41,14 +42,12 @@ Gartic::Gartic(QWidget* parent)
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Gartic::getTimer);
 
-    
-   
 }
 void Gartic::penColor()
 {
-    
+
     QColor newColor = QColorDialog::getColor(scribbleArea->penColor());
-    
+
     if (newColor.isValid())
         scribbleArea->setPenColor(newColor);
 }
@@ -63,30 +62,30 @@ void Gartic::penWidth()
 }
 void Gartic::createActions()
 {
-    
+
     penColorAct = new QAction(tr("&Pen Color..."), this);
     connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
-    
+
     penWidthAct = new QAction(tr("Pen &Width..."), this);
     connect(penWidthAct, SIGNAL(triggered()), this, SLOT(penWidth()));
-    
+
     clearScreenAct = new QAction(tr("&Clear Screen"), this);
     clearScreenAct->setShortcut(tr("Ctrl+L"));
     connect(clearScreenAct, SIGNAL(triggered()),
         scribbleArea, SLOT(clearImage()));
-    
+
 }
 void Gartic::createMenus()
 {
-    
+
     optionMenu = new QMenu(tr("&Options"), this);
     optionMenu->addAction(penColorAct);
     optionMenu->addAction(penWidthAct);
     optionMenu->addSeparator();
     optionMenu->addAction(clearScreenAct);
-    
+
     menuBar()->addMenu(optionMenu);
-    
+
 }
 Gartic::~Gartic()
 {}
@@ -124,13 +123,13 @@ void Gartic::on_wordButton_3_clicked()
     {
         wordChosen = true;
         word = ui.wordButton_3->text();
-        
+
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
         timer->start(1000);
-        if(language ==2)
-        ui.wordText->setText("Draw: " + word);
-        
+        if (language == 2)
+            ui.wordText->setText("Draw: " + word);
+
         else
             ui.wordText->setText("Desen: " + word);
         hideWordChoices();
@@ -173,8 +172,7 @@ void Gartic::getTimer()
     std::string url = "http://localhost:8080/getTimeLeft";
     cpr::Response response = cpr::Get(cpr::Url{ url });
 
-    downloadImageFromServer();
-    displayImage("downloaded_image.png");
+
 
     // Check if the request was successful
     if (response.status_code == 200)
@@ -233,7 +231,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             chatText = chatText + '\n' + username + ": " + ui.textBox->text();
             ui.textEdit->setText(chatText);
 
-            if (ui.textBox->text() == "nazi")
+            if (ui.textBox->text() == "german")
             {
                 ui.easterEgg->show();
             }
@@ -250,10 +248,15 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             playerLogged = true;
             updatePlayers();
             updateLeaderboard();
-           
+
         }
         getWords();
-        
+
+    }
+    else if (event->key() == Qt::Key_U)
+    {
+        downloadImageFromServer();
+        displayImage("downloaded_image.png");
     }
     QMainWindow::keyPressEvent(event);
 }
@@ -295,18 +298,16 @@ void Gartic::downloadImageFromServer()
 
 void Gartic::displayImage(const QString& imagePath)
 {
-    // Creați o instanță de QPixmap pentru a încărca imaginea
-    QPixmap pixmap(imagePath);
+    QPixmap newPixmap(imagePath);
 
-    // Verificați dacă încărcarea imaginii a avut succes
-    if (pixmap.isNull()) {
-        qDebug() << "Eroare la încărcarea imaginii.";
+    if (newPixmap.isNull()) {
+        qDebug() << "Eroare la încărcarea noii imagini.";
         return;
     }
-    scene->clear();
-    scene->addPixmap(pixmap);
-    
+    ui.drawing->show();
+    ui.drawing->setPixmap(newPixmap);
 }
+
 
 
 void Gartic::sendImageToServer(const QImage& image)
@@ -390,7 +391,7 @@ void Gartic::hideInterface()
     ui.LeaderboardText->hide();
     ui.timerText->hide();
     ui.username_text->show();
-    ui.username->show();  
+    ui.username->show();
 }
 
 void Gartic::showInterface()
@@ -404,7 +405,7 @@ void Gartic::showInterface()
     ui.wordButton_3->show();
     ui.wordText->show();
     ui.timerText->show();
-    ui.leaderboard->show(); 
+    ui.leaderboard->show();
     ui.LeaderboardText->show();
 
     ui.username_text->hide();
@@ -418,7 +419,7 @@ void Gartic::updateLeaderboard()
     int index = 0;
     for (auto& it : players)
     {
-        leaderboard = leaderboard +'\n' + QString::number(++index) + ": " + it.first + " " + it.second;
+        leaderboard = leaderboard + '\n' + QString::number(++index) + ": " + it.first + " " + it.second;
     }
     ui.leaderboard->setText(leaderboard);
 }
@@ -456,16 +457,15 @@ void Gartic::updatePlayers()
 void Gartic::addPlayerToServer(const QString& playerName)
 {
     std::ofstream logFile("log.txt");
-    std::cout.rdbuf(logFile.rdbuf()); 
-    std::cerr.rdbuf(logFile.rdbuf()); 
+    std::cout.rdbuf(logFile.rdbuf());
+    std::cerr.rdbuf(logFile.rdbuf());
 
     // URL-ul către serverul la care trimitem cererea POST
     std::string url = "http://localhost:8080/addPlayer";
 
-    getPlayerName();
     // Cuvântul pe care vrem să-l trimitem
     std::string cuvant = playerName.toUtf8().constData();
-    
+
     std::cout << "Converted player name: " << cuvant << std::endl;
 
     // Configurația cererii
@@ -475,11 +475,12 @@ void Gartic::addPlayerToServer(const QString& playerName)
     if (r.status_code == 200) {
         std::cout << "Cererea POST a fost trimisă cu succes!\n";
         std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
+        getPlayerName();
     }
     else {
         std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
         std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
-    } 
+    }
 }
 
 void Gartic::sendWordToServer(const QString& word)
@@ -487,7 +488,7 @@ void Gartic::sendWordToServer(const QString& word)
     std::ofstream logFile("log.txt");
     std::cout.rdbuf(logFile.rdbuf());
     std::cerr.rdbuf(logFile.rdbuf());
-    
+
     std::string url = "http://localhost:8080/wordToDraw";
     std::string wordToDraw = word.toUtf8().constData();
 
@@ -532,7 +533,7 @@ void Gartic::getWords()
     }
 }
 
-void Gartic::SetWords(std::string word1,std::string word2,std::string word3)
+void Gartic::SetWords(std::string word1, std::string word2, std::string word3)
 {
     ui.wordButton_1->setText(QString::fromUtf8(word1.c_str()));
     ui.wordButton_2->setText(QString::fromUtf8(word2.c_str()));
