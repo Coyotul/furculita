@@ -223,40 +223,12 @@ void Server::configureRoutes() {
 
 	CROW_ROUTE(app, "/chat")
 		.methods("POST"_method) ([&](const crow::request& req) -> crow::response {
-		// Extract chat text from the request body
-		//char* txt=req.url_params.get("chat");
-		//std::string strTxt(txt);
-		//chatText = strTxt;
 		myGame.chat = req.body;
-		//std::cout << chatText;
-		//chatText = req.body;
-		/*std::ofstream fout("chat.txt");
-		if (!fout.is_open())
-		{
-			std::cerr << "Nu s-a putut deschide fisierul.\n";
-			return crow::response{ 500 };
-		}
-		fout.clear();
-		fout << chatText;
-		fout.close();*/
 		return crow::response(200);
 			});
 
 	CROW_ROUTE(app, "/getChat")
 		.methods("GET"_method)([&]() -> crow::response {
-		/*std::ifstream fin("chat.txt");
-		if (!fin.is_open())
-		{
-			std::cerr << "Nu s-a putut deschide fisierul.\n";
-			return crow::response{ 500 };
-		}
-		std::string chatText;
-		while (fin)
-			chatText += fin.get();
-		crow::json::wvalue chatJSON{
-			{"chat", chatText}
-		};
-		fin.close();*/
 		crow::json::wvalue chatJSON{
 			{"chat", chatText}
 		};
