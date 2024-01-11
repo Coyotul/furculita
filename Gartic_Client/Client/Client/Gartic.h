@@ -83,7 +83,7 @@ private:
     void sendChatToServer(const QString& chat);
     void getTimer();
     void getPlayerName();
-    //void sortPlayersByScore();
+    void sortPlayersByScore();
     QGraphicsScene* scene;
     QLabel* timerLabel;
 

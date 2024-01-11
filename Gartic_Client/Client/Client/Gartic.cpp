@@ -174,22 +174,17 @@ void Gartic::getTimer()
 
 
 
-    // Check if the request was successful
     if (response.status_code == 200)
     {
-        // Parse the JSON response
         crow::json::rvalue jsonData = crow::json::load(response.text);
 
-        // Get the timer value from the JSON response
         int timeLeft = jsonData["timeLeft"].i();
 
-        // Display the timer value along with the "Draw:" text
         QString timerText = QString("Timer: %1").arg(timeLeft);
         ui.timerText->setText(timerText);
     }
     else
     {
-        // Handle the case where the request was not successful
         qDebug() << "Error fetching timer value. Status code: " << response.status_code;
     }
 }
@@ -198,7 +193,6 @@ void Gartic::getPlayerName()
 {
     std::string url = "http://localhost:8080/getMainPlayer";
     cpr::Response response = cpr::Get(cpr::Url{ url });
-    // Check if the request was successful
     if (response.status_code == 200)
     {
 
@@ -216,7 +210,6 @@ void Gartic::getPlayerName()
     }
     else
     {
-        // Handle the case where the request was not successful
         qDebug() << "Error fetching timer value. Status code: " << response.status_code;
     }
 }
@@ -275,15 +268,15 @@ bool Gartic::eventFilter(QObject* obj, QEvent* event)
 }
 void Gartic::downloadImageFromServer()
 {
-    // Adresa URL a serverului pentru a descărca imaginea
+    ui.wordButton_1->hide();
+    ui.wordButton_2->hide();
+    ui.wordButton_3->hide();
+
     std::string url = "http://localhost:8080/getDrawing";
 
-    // Trimiterea cererii GET pentru a descărca imaginea
     cpr::Response response = cpr::Get(cpr::Url{ url });
 
     if (response.status_code == 200) {
-        // Imaginea a fost descărcată cu succes
-        // Salvează imaginea într-un fișier
         std::ofstream file("downloaded_image.png", std::ios::binary);
         file.write(response.text.c_str(), response.text.size());
         file.close();
@@ -291,7 +284,6 @@ void Gartic::downloadImageFromServer()
         qDebug() << "Imaginea a fost descărcată și salvată cu succes în downloaded_image.png.";
     }
     else {
-        // Eroare în timpul descărcării imaginii
         qDebug() << "Eroare la descărcarea imaginii. Cod de stare: " << response.status_code;
     }
 }
@@ -318,14 +310,12 @@ void Gartic::sendImageToServer(const QImage& image)
 
     std::string url = "http://localhost:8080/drawing";
 
-    // Serializarea imaginii într-un QByteArray
     QByteArray imageData;
     QBuffer buffer(&imageData);
     buffer.open(QIODevice::WriteOnly);
     image.save(&buffer, "PNG");
     buffer.close();
 
-    // Trimiterea cererii POST cu datele serializate ale imaginii
     cpr::Response r = cpr::Post(
         cpr::Url{ url },
         cpr::Header{ {"Content-Type", "application/octet-stream"} },
@@ -360,8 +350,6 @@ void Gartic::sendChatToServer(const QString& chat)
     std::string txt = chat.toUtf8().constData();
     cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"chat", txt} });
     if (r.status_code == 200) {
-        //std::cout << "Cererea POST a fost trimisă cu succes!\n";
-        //std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
     }
     else {
         std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
@@ -369,17 +357,16 @@ void Gartic::sendChatToServer(const QString& chat)
     }
 }
 
-//Had to comment this until I figure out how to fix it as it is very unstable >:(
-//void Gartic::sortPlayersByScore()
-//{
-//    std::sort(players.begin(), players.end(),
-//        [](const auto& a, const auto& b) { return a.second < b.second; });
-//}
+void Gartic::sortPlayersByScore()
+{
+    std::sort(players.begin(), players.end(),
+        [](const auto& a, const auto& b) { return a.second < b.second; });
+    updateLeaderboard();
+}
 
 
 void Gartic::hideInterface()
 {
-    //We are gonna hide all buttons until the player logs in
     ui.drawView->hide();
     ui.textBox->hide();
     ui.textEdit->hide();
