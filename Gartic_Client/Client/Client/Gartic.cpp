@@ -41,6 +41,11 @@ Gartic::Gartic(QWidget* parent)
     //Timer
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Gartic::getTimer);
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Gartic::getTimer);
+    chatUpdateTimer = new QTimer(this);
+    connect(chatUpdateTimer, &QTimer::timeout, this, &Gartic::updateChat);
+    chatUpdateTimer->start(1000);
 
 }
 void Gartic::penColor()
