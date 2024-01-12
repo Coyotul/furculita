@@ -230,9 +230,9 @@ void Server::configureRoutes() {
 	CROW_ROUTE(app, "/getChat")
 		.methods("GET"_method)([&]() -> crow::response {
 		crow::json::wvalue chatJSON{
-			{"chat", chatText}
+			{"chat", myGame.chat}
 		};
-		return chatJSON;
+		return crow::json::wvalue{ chatJSON };
 			});
 	CROW_ROUTE(app, "/getMainPlayer")
 		.methods("GET"_method)([&]() -> crow::response {

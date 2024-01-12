@@ -344,8 +344,9 @@ void Gartic::updateChat()
     if (response.status_code == 200)
     {
         crow::json::rvalue jsonData = crow::json::load(response.text);
-        std::string text = std::string(jsonData);
+        std::string text = jsonData["chat"].s();
         chatText = QString::fromStdString(text);
+        ui.textEdit->setText(chatText);
     }
 }
 

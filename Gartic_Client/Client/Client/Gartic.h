@@ -103,5 +103,5 @@ private:
     QPainterPath currentPath;
 
     QTimer* timer;
-    
+    QTimer* chatUpdateTimer;
 };
