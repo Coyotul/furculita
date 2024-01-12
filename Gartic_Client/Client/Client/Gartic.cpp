@@ -197,13 +197,13 @@ void Gartic::getPlayerName()
 {
     std::string url = "http://localhost:8080/getMainPlayer";
     cpr::Response response = cpr::Get(cpr::Url{ url });
+
     if (response.status_code == 200)
     {
-
-        cpr::Response r = cpr::Get(cpr::Url{ url });
-
-        auto name = crow::json::load(r.text);
-        if (username.toStdString() == ((std::string)name["name"]))
+        auto name = crow::json::load(response.text);
+        std::string name1 = (std::string)name["name"];
+        std::string stringUsername = username.toUtf8().constData();
+        if (stringUsername == name1)
         {
             isDrawing = true;
         }
@@ -214,7 +214,7 @@ void Gartic::getPlayerName()
     }
     else
     {
-        qDebug() << "Error fetching timer value. Status code: " << response.status_code;
+        qDebug() << "Error fetching player name. Status code: " << response.status_code;
     }
 }
 
@@ -254,11 +254,6 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         getWords();
 
     }
-    /*else if (event->key() == Qt::Key_U)
-    {
-        downloadImageFromServer();
-        displayImage("downloaded_image.png");
-    }*/
     QMainWindow::keyPressEvent(event);
 }
 
@@ -344,7 +339,7 @@ void Gartic::updateChat()
 {
     std::string url = "http://localhost:8080/getChat";
     cpr::Response response = cpr::Get(cpr::Url{ url });
-    if (response.status_code == 200 /*&& chatText!=EMPTY_CHAT*/)
+    if (response.status_code == 200)
     {
         auto jsonData = crow::json::load(response.text);
         std::string text = jsonData["chat"].s();
@@ -353,7 +348,7 @@ void Gartic::updateChat()
         std::string copy = stdString;
         stdString = stdString.substr(lastNewlinePos + 1);
         if (text != ('\n'+stdString) && text.size() != 0) {
-            chatText += /*'\n' +  */text;
+            chatText +=text;
             ui.textEdit->setText(chatText);
         }
     }
