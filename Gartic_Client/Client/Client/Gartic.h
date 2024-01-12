@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#define EMPTY_CHAT ""
+
 #include <QtWidgets/QMainWindow>
 #include "ui_Gartic.h"
 #include <QtWidgets/QMainWindow>
@@ -84,13 +86,14 @@ private:
     void getTimer();
     void getPlayerName();
     void sortPlayersByScore();
+    void downloadAndDisplayImage();
     QGraphicsScene* scene;
     QLabel* timerLabel;
 
    //For var
 private:
     QString username;
-    QString chatText;
+    QString chatText=EMPTY_CHAT;
     QString leaderboard;
     QString word;
     bool wordChosen = false;
@@ -104,4 +107,5 @@ private:
 
     QTimer* timer;
     QTimer* chatUpdateTimer;
+    QTimer* imageTimer;
 };

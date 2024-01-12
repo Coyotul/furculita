@@ -46,7 +46,6 @@ Gartic::Gartic(QWidget* parent)
     chatUpdateTimer = new QTimer(this);
     connect(chatUpdateTimer, &QTimer::timeout, this, &Gartic::updateChat);
     chatUpdateTimer->start(1000);
-
 }
 void Gartic::penColor()
 {
@@ -233,8 +232,8 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             {
                 ui.easterEgg->show();
             }
+            sendChatToServer('\n' + username + ": " + ui.textBox->text());
             ui.textBox->clear();
-            sendChatToServer(chatText);
         }
         else
         {
@@ -246,16 +245,20 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             playerLogged = true;
             updatePlayers();
             updateLeaderboard();
-
+            if (isDrawing == false) {
+                imageTimer = new QTimer(this);
+                connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);
+                imageTimer->start(1000);
+            }
         }
         getWords();
 
     }
-    else if (event->key() == Qt::Key_U)
+    /*else if (event->key() == Qt::Key_U)
     {
         downloadImageFromServer();
         displayImage("downloaded_image.png");
-    }
+    }*/
     QMainWindow::keyPressEvent(event);
 }
 
@@ -341,12 +344,18 @@ void Gartic::updateChat()
 {
     std::string url = "http://localhost:8080/getChat";
     cpr::Response response = cpr::Get(cpr::Url{ url });
-    if (response.status_code == 200)
+    if (response.status_code == 200 /*&& chatText!=EMPTY_CHAT*/)
     {
-        crow::json::rvalue jsonData = crow::json::load(response.text);
+        auto jsonData = crow::json::load(response.text);
         std::string text = jsonData["chat"].s();
-        chatText = QString::fromStdString(text);
-        ui.textEdit->setText(chatText);
+        std::string stdString = chatText.toUtf8().constData();
+        size_t lastNewlinePos = stdString.find_last_of("\n");
+        std::string copy = stdString;
+        stdString = stdString.substr(lastNewlinePos + 1);
+        if (text != ('\n'+stdString) && text.size() != 0) {
+            chatText += /*'\n' +  */text;
+            ui.textEdit->setText(chatText);
+        }
     }
 }
 
@@ -368,6 +377,12 @@ void Gartic::sortPlayersByScore()
     std::sort(players.begin(), players.end(),
         [](const auto& a, const auto& b) { return a.second < b.second; });
     updateLeaderboard();
+}
+
+void Gartic::downloadAndDisplayImage()
+{
+    downloadImageFromServer();
+    displayImage("downloaded_image.png");
 }
 
 

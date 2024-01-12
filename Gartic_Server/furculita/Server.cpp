@@ -223,7 +223,8 @@ void Server::configureRoutes() {
 
 	CROW_ROUTE(app, "/chat")
 		.methods("POST"_method) ([&](const crow::request& req) -> crow::response {
-		myGame.chat = req.body;
+		auto data = req.url_params.get("chat");
+		myGame.chat = data;
 		return crow::response(200);
 			});
 
@@ -232,6 +233,7 @@ void Server::configureRoutes() {
 		crow::json::wvalue chatJSON{
 			{"chat", myGame.chat}
 		};
+		std::cout << myGame.chat << '\n';
 		return crow::json::wvalue{ chatJSON };
 			});
 	CROW_ROUTE(app, "/getMainPlayer")
