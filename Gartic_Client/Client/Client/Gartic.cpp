@@ -186,6 +186,11 @@ void Gartic::getTimer()
 
         QString timerText = QString("Timer: %1").arg(timeLeft);
         ui.timerText->setText(timerText);
+        if (timeLeft == 0) 
+        {
+            scribbleArea->clearImage();
+            
+        }
     }
     else
     {

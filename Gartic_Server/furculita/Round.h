@@ -13,10 +13,12 @@ public:
 	void finishRound();
 	uint16_t getRoundNumber() const;
 	void setWordToDraw(std::string word);
+	bool isInProgress();
 private:
 	std::string m_wordToDraw;
 	uint16_t m_duration;
 	uint16_t m_timeLeft;
 	uint16_t m_roundNumber;
+	bool m_inProgress;
 };
 

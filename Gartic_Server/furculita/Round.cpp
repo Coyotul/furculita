@@ -4,10 +4,11 @@
 #include <iostream>
 
 Round::Round(const std::string& wordToDraw, uint16_t duration)
-	:m_wordToDraw(wordToDraw),
-	m_duration(duration),
-	m_timeLeft(duration),
-	m_roundNumber(1)
+	:m_wordToDraw{ wordToDraw },
+	m_duration{ duration },
+	m_timeLeft{ duration },
+	m_roundNumber{ 1 },
+	m_inProgress{ false }
 {
 }
 
@@ -39,13 +40,13 @@ void Round::startRound()
 {
 	Timer* timer = Timer::Instance();
 	bool isRunning = true;
-
+	m_inProgress = true;
 	while (isRunning)
 	{
 		timer->Tick();
 
 		if (timer->GetDeltaTime() >= 1) {
-			
+
 			timer->Reset();
 			m_timeLeft--;
 			if (m_timeLeft == 0) isRunning = false;
@@ -60,6 +61,7 @@ void Round::finishRound()
 		std::cout << "Round " << m_roundNumber << " has finished!\n";
 		m_timeLeft = m_duration;
 		m_roundNumber++;
+		m_inProgress = false;
 	}
 }
 
@@ -74,3 +76,7 @@ void Round::setWordToDraw(std::string word)
 	m_wordToDraw = word;
 }
 
+bool Round::isInProgress()
+{
+	return m_inProgress;
+}

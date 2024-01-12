@@ -92,13 +92,17 @@ void Server::configureRoutes() {
 		auto chosenWord = req.url_params.get("chosenWord");
 		if (chosenWord) {
 			std::string wordToDraw = chosenWord;
-			std::thread roundThread([=]() {
-				myGame.m_currentRound.startRound();
-				});
+			if (myGame.m_currentRound.getRoundNumber() == 1)
+			{
+				std::thread roundThread([=]() {
+					myGame.m_currentRound.startRound();
+					});
+				roundThread.detach();
+			}
 
 			myGame.m_currentRound.setWordToDraw(wordToDraw);
 			logi("Word to draw is: ", wordToDraw);
-			roundThread.detach();
+			
 			return crow::response{ 200 };
 			
 		}
@@ -250,6 +254,25 @@ void Server::configureRoutes() {
 		crow::json::wvalue timeLeftJSON{
 			{"timeLeft", timeLeft}
 		};
+		std::thread cycleThread([=]() {
+
+
+			if (timeLeft == 0)
+			{
+				myGame.m_currentRound.finishRound();
+				std::this_thread::sleep_for(std::chrono::seconds(5));
+				if (myGame.m_currentRound.getRoundNumber() <= 3 && myGame.m_currentRound.getRoundNumber() != 1
+					&& !myGame.m_currentRound.isInProgress())
+				{
+					std::thread roundThread([=]() {
+						myGame.m_currentRound.startRound();
+						});
+					roundThread.detach();
+				}
+
+			}
+			});
+		cycleThread.detach();
 		return crow::json::wvalue{ timeLeftJSON };
 			});
 }
