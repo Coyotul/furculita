@@ -85,6 +85,15 @@ void Game::resetGame() {
 
 }
 
+int comparator(User p1, User p2)
+{
+    return (p1.GetScore() < p2.GetScore());
+}
+void gartic::Game::sortPlayers()
+{
+    std::sort(m_players.begin(), m_players.end(), comparator);
+}
+
 //const std::vector<std::pair<std::string, uint16_t>>& gartic::Game::getPlayers() const {
 //    static std::vector<std::pair<std::string, uint16_t>> playerNames;
 //    playerNames.clear();  

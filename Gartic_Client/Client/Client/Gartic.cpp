@@ -234,6 +234,10 @@ void Gartic::getPlayerName()
         {
             isDrawing = true;
             ui.drawing->hide();
+            getWords();
+            ui.wordButton_1->show();
+            ui.wordButton_2->show();
+            ui.wordButton_3->show();
         }
         else
         {
@@ -397,7 +401,7 @@ void Gartic::sendChatToServer(const QString& chat)
 
 void Gartic::sendGuessedWordToServer(const QString& word)
 {
-    std::string url = "http://localhost:8080/guessedWord";
+    /*std::string url = "http://localhost:8080/guessedWord";
     std::string wordStr = word.toUtf8().constData();
     std::string txt = wordStr;
 
@@ -415,21 +419,22 @@ void Gartic::sendGuessedWordToServer(const QString& word)
     else {
         std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
         std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
-    }
+    }*/
 }
 
 void Gartic::sortPlayersByScore()
 {
     std::sort(players.begin(), players.end(),
         [](const auto& a, const auto& b) { return a.second < b.second; });
-    updateLeaderboard();
 }
 
 void Gartic::downloadAndDisplayImage()
 {
-    downloadImageFromServer();
-    displayImage("downloaded_image.png");
-    sortPlayersByScore();
+    if (!isDrawing)
+    {
+        downloadImageFromServer();
+        displayImage("downloaded_image.png");
+    }
 }
 
 
@@ -474,6 +479,7 @@ void Gartic::updateLeaderboard()
     ui.leaderboard->setText(" ");
     int index = 0;
     updatePlayers();
+    sortPlayersByScore();
     for (auto& it : players)
     {
         leaderboard = leaderboard + '\n' + QString::number(++index) + ": " + it.first + " " + it.second;
@@ -488,7 +494,7 @@ void Gartic::updatePlayers()
 
     // Configurația cererii GET
     cpr::Response response = cpr::Get(cpr::Url{ url });
-
+    players.clear();
     // Verifică dacă cererea a fost reușită
     if (response.status_code == 200) {
         // Parsarea răspunsului JSON

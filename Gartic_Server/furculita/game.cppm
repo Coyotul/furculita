@@ -18,6 +18,7 @@ namespace gartic {
 		std::string getMainPlayer();
 		void changeMainPlayer();
 		void resetGame();
+		void sortPlayers();
 		void addPlayer(std::string playerName);
 		std::vector<std::pair<std::string, int>> getPlayers();
 		//const std::vector<std::pair<std::string, uint16_t>>& getPlayers() const;

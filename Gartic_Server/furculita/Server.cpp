@@ -94,7 +94,6 @@ void Server::configureRoutes() {
 		auto chosenWord = req.url_params.get("chosenWord");
 		if (chosenWord) {
 			std::string wordToDraw = chosenWord;
-			//if(myGame.getMainPlayer() == myGame.m_players[currentPlayer].GetName())
 			if (myGame.m_currentRound.getRoundNumber() == 1)
 			{
 				std::thread roundThread([=]() {
@@ -233,6 +232,42 @@ void Server::configureRoutes() {
 		.methods("POST"_method) ([&](const crow::request& req) -> crow::response {
 		auto data = req.url_params.get("chat");
 		myGame.chat = data;
+		size_t lastNewlineIndex = myGame.chat.find_last_of('\n');
+
+		if (lastNewlineIndex != std::string::npos) {
+			std::string lastLine = myGame.chat.substr(lastNewlineIndex + 1);
+
+			size_t separatorIndex = lastLine.find(": ");
+
+			if (separatorIndex != std::string::npos) {
+				size_t firstSpaceIndex = lastLine.find(' ', separatorIndex + 2);
+				std::string firstWord = lastLine.substr(separatorIndex + 2, firstSpaceIndex - separatorIndex - 2);
+
+				size_t secondSpaceIndex = lastLine.find(' ', firstSpaceIndex + 1);
+				std::string secondWord;
+				if (secondSpaceIndex != std::string::npos) {
+					secondWord = lastLine.substr(firstSpaceIndex + 1, secondSpaceIndex - firstSpaceIndex - 1);
+				}
+				else {
+					secondWord = lastLine.substr(firstSpaceIndex + 1);
+				}
+
+				secondWord.pop_back();
+
+				if (firstWord == myGame.m_currentRound.getWordToDraw())
+				{
+					for (auto& it : myGame.m_players)
+					{
+						if (it.GetName() == secondWord)
+						{
+							it.SetScore(it.GetScore() + myGame.score);
+							myGame.score -= 10;
+						}
+					}
+				}
+			}
+			
+		}
 		return crow::response(200);
 			});
 	CROW_ROUTE(app, "/guessedWord")
@@ -278,9 +313,10 @@ void Server::configureRoutes() {
 		std::thread cycleThread([=]() {
 			if (timeLeft == 0)
 			{
+				myGame.sortPlayers();
 				myGame.score = 100;
 				myGame.m_currentRound.finishRound();
-				std::this_thread::sleep_for(std::chrono::seconds(5));
+				std::this_thread::sleep_for(std::chrono::seconds(10));
 				if (myGame.m_currentRound.getRoundNumber() <= myGame.m_players.size() && myGame.m_currentRound.getRoundNumber() != 1
 						&& !myGame.m_currentRound.isInProgress())
 					{

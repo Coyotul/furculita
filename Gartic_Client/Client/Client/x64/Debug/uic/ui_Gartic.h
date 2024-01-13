@@ -127,7 +127,7 @@ public:
         timerText->setFont(font1);
         drawing = new QLabel(centralWidget);
         drawing->setObjectName("drawing");
-        drawing->setGeometry(QRect(10, 40, 691, 481));
+        drawing->setGeometry(QRect(10, 40, 691, 451));
         drawing->setPixmap(QPixmap(QString::fromUtf8(":/newPrefix/iulian.png")));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);
