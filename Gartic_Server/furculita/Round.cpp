@@ -65,7 +65,6 @@ void Round::finishRound()
 	}
 }
 
-
 uint16_t Round::getRoundNumber() const
 {
 	return m_roundNumber;

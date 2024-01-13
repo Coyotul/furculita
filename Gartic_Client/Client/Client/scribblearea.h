@@ -22,7 +22,6 @@ public:
     int penWidth() const { return myPenWidth; }
     QImage getImage();
 
-
 public slots:
     void clearImage();
     void print();

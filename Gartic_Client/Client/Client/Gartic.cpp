@@ -19,7 +19,6 @@
 
 std::ofstream f("output.out");
 
-// At Start
 Gartic::Gartic(QWidget* parent)
     : QMainWindow(parent)
 {
@@ -38,7 +37,6 @@ Gartic::Gartic(QWidget* parent)
     createActions();
     createMenus();
     setWindowTitle(tr("Scribble Application"));
-    //Timer
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Gartic::getTimer);
     timer = new QTimer(this);
@@ -49,9 +47,7 @@ Gartic::Gartic(QWidget* parent)
 }
 void Gartic::penColor()
 {
-
     QColor newColor = QColorDialog::getColor(scribbleArea->penColor());
-
     if (newColor.isValid())
         scribbleArea->setPenColor(newColor);
 }
@@ -66,30 +62,23 @@ void Gartic::penWidth()
 }
 void Gartic::createActions()
 {
-
     penColorAct = new QAction(tr("&Pen Color..."), this);
     connect(penColorAct, SIGNAL(triggered()), this, SLOT(penColor()));
-
     penWidthAct = new QAction(tr("Pen &Width..."), this);
     connect(penWidthAct, SIGNAL(triggered()), this, SLOT(penWidth()));
-
     clearScreenAct = new QAction(tr("&Clear Screen"), this);
     clearScreenAct->setShortcut(tr("Ctrl+L"));
     connect(clearScreenAct, SIGNAL(triggered()),
         scribbleArea, SLOT(clearImage()));
-
 }
 void Gartic::createMenus()
 {
-
     optionMenu = new QMenu(tr("&Options"), this);
     optionMenu->addAction(penColorAct);
     optionMenu->addAction(penWidthAct);
     optionMenu->addSeparator();
     optionMenu->addAction(clearScreenAct);
-
     menuBar()->addMenu(optionMenu);
-
 }
 Gartic::~Gartic()
 {}
@@ -101,12 +90,10 @@ void Gartic::on_wordButton_1_clicked()
         word = ui.wordButton_1->text();
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
-        //timer->start(1000);
         if (language == 2)
             ui.wordText->setText("Draw: " + word);
         else
             ui.wordText->setText("Desen: " + word);
-
         hideWordChoices();
     }
 }
@@ -119,7 +106,6 @@ void Gartic::on_wordButton_2_clicked()
         word = ui.wordButton_2->text();
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
-        //timer->start(1000);
         if (language == 2)
             ui.wordText->setText("Draw: " + word);
         else
@@ -134,10 +120,8 @@ void Gartic::on_wordButton_3_clicked()
     {
         wordChosen = true;
         word = ui.wordButton_3->text();
-
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
-        //timer->start(1000);
         if (language == 2)
             ui.wordText->setText("Draw: " + word);
         else
@@ -167,21 +151,18 @@ void Gartic::showWordChoices()
 
 void Gartic::on_language1_clicked()
 {
-    //romanian language
     language = 1;
     int languageValue = 1;
     ui.LeaderboardText->setText("Clasament");
     ui.username_text->setText("Utilizator:");
     ui.wordText->setText("Deseneaza:");
     ui.timerText->setText("Timp:");
-
     std::string url = "http://localhost:8080/language?language=" + std::to_string(languageValue);
     cpr::Response response = cpr::Get(cpr::Url{ url });
 }
 
 void Gartic::on_language2_clicked()
 {
-    //english language
     language = 2;
     int languageValue = 2;
     ui.LeaderboardText->setText("Leaderboard");
@@ -195,13 +176,9 @@ void Gartic::getTimer()
 {
     std::string url = "http://localhost:8080/getTimeLeft";
     cpr::Response response = cpr::Get(cpr::Url{ url });
-
-
-
     if (response.status_code == 200)
     {
         crow::json::rvalue jsonData = crow::json::load(response.text);
-
         int timeLeft = jsonData["timeLeft"].i();
         if (timeLeft == 60 || timeLeft == 59 || timeLeft == 58 || timeLeft == 57 || timeLeft == 56 || timeLeft == 55)
         {
@@ -236,7 +213,6 @@ void Gartic::getPlayerName()
         {
             isDrawing = true;
             ui.drawing->hide();
-
         }
         else
         {
@@ -269,7 +245,6 @@ void Gartic::keyPressEvent(QKeyEvent* event)
         {
             chatText = chatText + '\n' + username + ": " + ui.textBox->text();
             ui.textEdit->setText(chatText);
-
             if (ui.textBox->text() == "german")
             {
                 ui.easterEgg->show();
@@ -290,7 +265,6 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             timer->start(1000);
         }
         getWords();
-
     }
     QMainWindow::keyPressEvent(event);
 }
@@ -348,15 +322,12 @@ void Gartic::sendImageToServer(const QImage& image)
     std::ofstream logFile("log.txt");
     std::cout.rdbuf(logFile.rdbuf());
     std::cerr.rdbuf(logFile.rdbuf());
-
     std::string url = "http://localhost:8080/drawing";
-
     QByteArray imageData;
     QBuffer buffer(&imageData);
     buffer.open(QIODevice::WriteOnly);
     image.save(&buffer, "PNG");
     buffer.close();
-
     cpr::Response r = cpr::Post(
         cpr::Url{ url },
         cpr::Header{ {"Content-Type", "application/octet-stream"} },
@@ -407,25 +378,6 @@ void Gartic::sendChatToServer(const QString& chat)
 
 void Gartic::sendGuessedWordToServer(const QString& word)
 {
-    /*std::string url = "http://localhost:8080/guessedWord";
-    std::string wordStr = word.toUtf8().constData();
-    std::string txt = wordStr;
-
-    cpr::Response r = cpr::Post(
-        cpr::Url{ url },
-        cpr::Parameters{
-            {"word", txt},
-            {"name", username.toStdString()}
-        }
-    );
-
-    if (r.status_code == 200)
-    {
-    }
-    else {
-        std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
-        std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
-    }*/
 }
 
 void Gartic::sortPlayersByScore()
@@ -502,29 +454,20 @@ void Gartic::updateLeaderboard()
 
 void Gartic::updatePlayers()
 {
-    // URL-ul către serverul de la care obținem informațiile despre jucători
     std::string url = "http://localhost:8080/getPlayers";
-
-    // Configurația cererii GET
     cpr::Response response = cpr::Get(cpr::Url{ url });
     players.clear();
-    // Verifică dacă cererea a fost reușită
     if (response.status_code == 200) {
-        // Parsarea răspunsului JSON
         crow::json::rvalue jsonData = crow::json::load(response.text);
-
-        // Iterarea prin elementele JSON pentru a obține informațiile despre jucători
         for (const auto& player : jsonData) {
             std::string playerName = player["name"].s();
             int playerScore = player["score"].u();
             QString name = QString::fromUtf8(playerName);
             QString score = QString::number(playerScore);
-            // Adaugă informațiile despre jucători în vectorul players
             players.push_back(std::make_pair(name, score));
         }
     }
     else {
-        // Tratează eroarea în cazul în care cererea nu a fost reușită
         std::cerr << "Eroare la obținerea informațiilor despre jucători. Cod de stare: " << response.status_code << std::endl;
         std::cerr << "Răspunsul serverului:\n" << response.text << std::endl;
     }
@@ -535,19 +478,10 @@ void Gartic::addPlayerToServer(const QString& playerName)
     std::ofstream logFile("log.txt");
     std::cout.rdbuf(logFile.rdbuf());
     std::cerr.rdbuf(logFile.rdbuf());
-
-    // URL-ul către serverul la care trimitem cererea POST
     std::string url = "http://localhost:8080/addPlayer";
-
-    // Cuvântul pe care vrem să-l trimitem
     std::string cuvant = playerName.toUtf8().constData();
-
     std::cout << "Converted player name: " << cuvant << std::endl;
-
-    // Configurația cererii
     cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"username", cuvant} });
-
-    // Verifică dacă cererea a fost reușită
     if (r.status_code == 200) {
         std::cout << "Cererea POST a fost trimisă cu succes!\n";
         std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
@@ -564,12 +498,9 @@ void Gartic::sendWordToServer(const QString& word)
     std::ofstream logFile("log.txt");
     std::cout.rdbuf(logFile.rdbuf());
     std::cerr.rdbuf(logFile.rdbuf());
-
     std::string url = "http://localhost:8080/wordToDraw";
     std::string wordToDraw = word.toUtf8().constData();
-
     cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"chosenWord", wordToDraw} });
-
     if (r.status_code == 200) {
         std::cout << "Cererea POST a fost trimisă cu succes!\n";
         std::cout << "Răspunsul serverului:\n" << r.text << std::endl;
@@ -587,18 +518,12 @@ void Gartic::getWords()
         std::ofstream logFile("log.txt");
         std::cout.rdbuf(logFile.rdbuf());
         std::cerr.rdbuf(logFile.rdbuf());
-
-        // URL-ul către serverul la care trimitem cererea POST
         std::string url = "http://localhost:8080/words";
-
         std::string chosenLanugage;
         if (language == 1)
             chosenLanugage = "1";
         else chosenLanugage = "2";
-
-        // Configurația cererii
         cpr::Response r = cpr::Get(cpr::Url{ url }, cpr::Parameters{ {"language", chosenLanugage} });
-
         auto words = crow::json::load(r.text);
         std::vector<std::string> stringWords;
         for (const auto& word : words)

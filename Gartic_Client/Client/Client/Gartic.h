@@ -24,40 +24,24 @@ class Gartic : public QMainWindow
     void downloadImageFromServer();
     void displayImage(const QString& imagePath);
     bool isDrawing = false;
-
  protected:
-    //void closeEvent(QCloseEvent* event) override;
-
 private slots:
     void on_wordButton_1_clicked();
     void on_wordButton_2_clicked();
     void on_wordButton_3_clicked();
     void on_language1_clicked();
     void on_language2_clicked();
-    //void open();
-    //void save();
     void penColor();
     void penWidth();
-    //void about();
-    //For methods
 private:
-    // Will tie user actions to functions
     void createActions();
     void createMenus();
-    // Will check if changes have occurred since last save
-    //bool maybeSave();
-    // Opens the Save dialog and saves
-    //bool saveFile(const QByteArray& fileFormat);
-    // What we'll draw on
     ScribbleArea* scribbleArea;
-    // The menu widgets
     QMenu* saveAsMenu;
     QMenu* fileMenu;
     QMenu* optionMenu;
     QMenu* helpMenu;
-    // All the actions that can occur
     QAction* openAct;
-    // Actions tied to specific file formats
     QList<QAction*> saveAsActs;
     QAction* exitAct;
     QAction* penColorAct;
@@ -69,9 +53,6 @@ private:
     Ui::GarticClass ui;
     void keyPressEvent(QKeyEvent* event);
     bool eventFilter(QObject* obj, QEvent* event);
-    /*void paintEvent(QPaintEvent* event);
-    void mouseReleaseEvent(QMouseEvent* event);
-    bool eventFilter(QObject* obj, QEvent* event);*/
     void hideInterface();
     void showInterface();
     void hideWordChoices();

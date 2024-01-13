@@ -6,7 +6,6 @@ class Server {
 public:
     Server();
     void run();
-
 private:
     crow::SimpleApp app;
     gartic::Game myGame;

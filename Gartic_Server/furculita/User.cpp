@@ -5,8 +5,6 @@ User::User()
 	m_score = 0;
 }
 
-
-
  std::string User::GetName() const
 {
 	return this->m_name;

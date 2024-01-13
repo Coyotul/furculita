@@ -12,10 +12,7 @@ public:
 	std::string getWord() const;
 	std::string getLanguage() const;
 	static std::vector<Word> generateRandomWords(const std::string& filePath, int numWords);
-
-
 private:
 	std::string m_word;
 	std::string m_language;
 };
-

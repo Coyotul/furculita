@@ -4,9 +4,7 @@
 #else
 #define TIMER_API _declspec(dllimport)
 #endif
-
 #include <chrono>
-
 class TIMER_API Timer
 {
 private:
