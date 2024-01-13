@@ -102,7 +102,11 @@ void Gartic::on_wordButton_1_clicked()
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
         //timer->start(1000);
-        ui.wordText->setText("Draw: " + word);
+        if (language == 2)
+            ui.wordText->setText("Draw: " + word);
+        else
+            ui.wordText->setText("Desen: " + word);
+
         hideWordChoices();
     }
 }
@@ -116,7 +120,10 @@ void Gartic::on_wordButton_2_clicked()
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
         //timer->start(1000);
-        ui.wordText->setText("Draw: " + word);
+        if (language == 2)
+            ui.wordText->setText("Draw: " + word);
+        else
+            ui.wordText->setText("Desen: " + word);
         hideWordChoices();
     }
 }
@@ -133,7 +140,6 @@ void Gartic::on_wordButton_3_clicked()
         //timer->start(1000);
         if (language == 2)
             ui.wordText->setText("Draw: " + word);
-
         else
             ui.wordText->setText("Desen: " + word);
         hideWordChoices();
@@ -167,6 +173,7 @@ void Gartic::on_language1_clicked()
     ui.LeaderboardText->setText("Clasament");
     ui.username_text->setText("Utilizator:");
     ui.wordText->setText("Deseneaza:");
+    ui.timerText->setText("Timp:");
 
     std::string url = "http://localhost:8080/language?language=" + std::to_string(languageValue);
     cpr::Response response = cpr::Get(cpr::Url{ url });
@@ -177,6 +184,10 @@ void Gartic::on_language2_clicked()
     //english language
     language = 2;
     int languageValue = 2;
+    ui.LeaderboardText->setText("Leaderboard");
+    ui.username_text->setText("Username:");
+    ui.wordText->setText("Draw:");
+    ui.timerText->setText("Timer:");
     std::string url = "http://localhost:8080/language?language=" + std::to_string(languageValue);
     cpr::Response response = cpr::Get(cpr::Url{ url });
 }
@@ -192,14 +203,15 @@ void Gartic::getTimer()
         crow::json::rvalue jsonData = crow::json::load(response.text);
 
         int timeLeft = jsonData["timeLeft"].i();
-
+        if (timeLeft == 60)
+        {
+            getPlayerName();
+        }
         QString timerText = QString("Timer: %1").arg(timeLeft);
         ui.timerText->setText(timerText);
-        if (timeLeft == 0) 
+        if (timeLeft == 0)
         {
             scribbleArea->clearImage();
-
-            
         }
     }
     else
@@ -221,10 +233,14 @@ void Gartic::getPlayerName()
         if (stringUsername == name1)
         {
             isDrawing = true;
+            ui.drawing->hide();
         }
         else
         {
             isDrawing = false;
+            imageTimer = new QTimer(this);
+            connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);
+            imageTimer->start(1000);
         }
     }
     else
@@ -258,12 +274,8 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             addPlayerToServer(username);
             showInterface();
             playerLogged = true;
-            updatePlayers();
             updateLeaderboard();
             if (isDrawing == false) {
-                imageTimer = new QTimer(this);
-                connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);
-                imageTimer->start(1000);
             }
             timer->start(1000);
         }
@@ -339,7 +351,7 @@ void Gartic::sendImageToServer(const QImage& image)
         cpr::Url{ url },
         cpr::Header{ {"Content-Type", "application/octet-stream"} },
         cpr::Body{ imageData.data(), static_cast<size_t>(imageData.size()) });
-
+    updateLeaderboard();
 
     if (r.status_code == 200) {
         std::cout << "Cererea POST a fost trimisă cu succes!\n";
@@ -363,8 +375,8 @@ void Gartic::updateChat()
         size_t lastNewlinePos = stdString.find_last_of("\n");
         std::string copy = stdString;
         stdString = stdString.substr(lastNewlinePos + 1);
-        if (text != ('\n'+stdString) && text.size() != 0) {
-            chatText +=text;
+        if (text != ('\n' + stdString) && text.size() != 0) {
+            chatText += text;
             ui.textEdit->setText(chatText);
         }
     }
@@ -383,6 +395,29 @@ void Gartic::sendChatToServer(const QString& chat)
     }
 }
 
+void Gartic::sendGuessedWordToServer(const QString& word)
+{
+    std::string url = "http://localhost:8080/guessedWord";
+    std::string wordStr = word.toUtf8().constData();
+    std::string txt = wordStr;
+
+    cpr::Response r = cpr::Post(
+        cpr::Url{ url },
+        cpr::Parameters{
+            {"word", txt},
+            {"name", username.toStdString()}
+        }
+    );
+
+    if (r.status_code == 200)
+    {
+    }
+    else {
+        std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
+        std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
+    }
+}
+
 void Gartic::sortPlayersByScore()
 {
     std::sort(players.begin(), players.end(),
@@ -394,6 +429,7 @@ void Gartic::downloadAndDisplayImage()
 {
     downloadImageFromServer();
     displayImage("downloaded_image.png");
+    sortPlayersByScore();
 }
 
 
@@ -435,7 +471,9 @@ void Gartic::showInterface()
 void Gartic::updateLeaderboard()
 {
     leaderboard.clear();
+    ui.leaderboard->setText(" ");
     int index = 0;
+    updatePlayers();
     for (auto& it : players)
     {
         leaderboard = leaderboard + '\n' + QString::number(++index) + ": " + it.first + " " + it.second;

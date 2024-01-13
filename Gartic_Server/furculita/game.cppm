@@ -27,6 +27,7 @@ namespace gartic {
 		std::string chat;
 		std::uint16_t m_currentPlayerIndex;
 		std::vector<User> m_players;
+		std::uint16_t score = 100;
 	private:
 		
 		

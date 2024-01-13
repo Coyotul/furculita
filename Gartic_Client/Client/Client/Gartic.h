@@ -82,6 +82,7 @@ private:
     void getWords();
     void sendWordToServer(const QString& word);
     void sendImageToServer(const QImage& imageData);
+    void sendGuessedWordToServer(const QString& word);
     void updateChat();
     void sendChatToServer(const QString& chat);
     void getTimer();

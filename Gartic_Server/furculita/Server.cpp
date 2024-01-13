@@ -20,6 +20,7 @@ void Server::configureRoutes() {
 	
 	int language = 1; // Acest lucru nu pare a fi folosit în codul tău, îl poți elimina dacă nu este necesar.
 	int currentPlayer;
+	int score=100;
 	std::string username = " ";
 	Storage db = createStorage("words.sqlite");
 	db.sync_schema();
@@ -234,6 +235,23 @@ void Server::configureRoutes() {
 		myGame.chat = data;
 		return crow::response(200);
 			});
+	CROW_ROUTE(app, "/guessedWord")
+		.methods("POST"_method) ([&](const crow::request& req) -> crow::response {
+		auto data = req.url_params.get("word");
+		auto data2 = req.url_params.get("name");
+		if (data == myGame.m_currentRound.getWordToDraw())
+		{
+			for (auto& it : myGame.m_players)
+			{
+				if (it.GetName() == data2)
+				{
+					it.SetScore(it.GetScore() + myGame.score);
+					myGame.score -= 10;
+				}
+			}
+		}
+		return crow::response(200);
+			});
 
 	CROW_ROUTE(app, "/getChat")
 		.methods("GET"_method)([&]() -> crow::response {
@@ -260,6 +278,7 @@ void Server::configureRoutes() {
 		std::thread cycleThread([=]() {
 			if (timeLeft == 0)
 			{
+				myGame.score = 100;
 				myGame.m_currentRound.finishRound();
 				std::this_thread::sleep_for(std::chrono::seconds(5));
 				if (myGame.m_currentRound.getRoundNumber() <= myGame.m_players.size() && myGame.m_currentRound.getRoundNumber() != 1

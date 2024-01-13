@@ -119,7 +119,7 @@ public:
         leaderboard->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         easterEgg = new QLabel(centralWidget);
         easterEgg->setObjectName("easterEgg");
-        easterEgg->setGeometry(QRect(370, 80, 271, 351));
+        easterEgg->setGeometry(QRect(370, 500, 271, 301));
         easterEgg->setPixmap(QPixmap(QString::fromUtf8(":/newPrefix/iulian.png")));
         timerText = new QLabel(centralWidget);
         timerText->setObjectName("timerText");
@@ -127,7 +127,7 @@ public:
         timerText->setFont(font1);
         drawing = new QLabel(centralWidget);
         drawing->setObjectName("drawing");
-        drawing->setGeometry(QRect(10, 40, 691, 351));
+        drawing->setGeometry(QRect(10, 40, 691, 481));
         drawing->setPixmap(QPixmap(QString::fromUtf8(":/newPrefix/iulian.png")));
         GarticClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GarticClass);

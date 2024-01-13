@@ -2,7 +2,7 @@
 
 User::User()
 {
-	
+	m_score = 0;
 }
 
 
@@ -26,4 +26,9 @@ uint16_t User::GetScore() const
 void User::SetScore(uint16_t score)
 {
 	m_score = score;
+}
+
+void User::AddScore(uint16_t score)
+{
+	m_score += score;
 }
