@@ -1,3 +1,5 @@
+#define MAX_SCORE 100
+
 #include "User.h"
 #include "Round.h"
 #include "Word.h"
@@ -28,7 +30,7 @@ namespace gartic {
 		std::string chat;
 		std::uint16_t m_currentPlayerIndex;
 		std::vector<User> m_players;
-		std::uint16_t score = 100;
+		std::uint16_t score = MAX_SCORE;
 	private:
 		
 		

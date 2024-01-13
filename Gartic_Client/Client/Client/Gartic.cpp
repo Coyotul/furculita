@@ -268,6 +268,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
                 ui.easterEgg->show();
             }
             sendChatToServer('\n' + username + ": " + ui.textBox->text());
+            updatePlayers();
             ui.textBox->clear();
         }
         else
@@ -278,6 +279,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             addPlayerToServer(username);
             showInterface();
             playerLogged = true;
+            updatePlayers();
             updateLeaderboard();
             if (isDrawing == false) {
             }
@@ -355,7 +357,7 @@ void Gartic::sendImageToServer(const QImage& image)
         cpr::Url{ url },
         cpr::Header{ {"Content-Type", "application/octet-stream"} },
         cpr::Body{ imageData.data(), static_cast<size_t>(imageData.size()) });
-    updateLeaderboard();
+    //updateLeaderboard();
 
     if (r.status_code == 200) {
         std::cout << "Cererea POST a fost trimisă cu succes!\n";
@@ -382,6 +384,8 @@ void Gartic::updateChat()
         if (text != ('\n' + stdString) && text.size() != 0) {
             chatText += text;
             ui.textEdit->setText(chatText);
+            updatePlayers();
+            updateLeaderboard();
         }
     }
 }
@@ -391,9 +395,7 @@ void Gartic::sendChatToServer(const QString& chat)
     std::string url = "http://localhost:8080/chat";
     std::string txt = chat.toUtf8().constData();
     cpr::Response r = cpr::Post(cpr::Url{ url }, cpr::Parameters{ {"chat", txt} });
-    if (r.status_code == 200) {
-    }
-    else {
+    if (r.status_code != 200) {
         std::cerr << "Eroare la trimiterea cererii POST. Cod de stare: " << r.status_code << std::endl;
         std::cerr << "Răspunsul serverului:\n" << r.text << std::endl;
     }
@@ -478,7 +480,7 @@ void Gartic::updateLeaderboard()
     leaderboard.clear();
     ui.leaderboard->setText(" ");
     int index = 0;
-    updatePlayers();
+    //updatePlayers();
     sortPlayersByScore();
     for (auto& it : players)
     {
@@ -494,7 +496,7 @@ void Gartic::updatePlayers()
 
     // Configurația cererii GET
     cpr::Response response = cpr::Get(cpr::Url{ url });
-    players.clear();
+    //players.clear();
     // Verifică dacă cererea a fost reușită
     if (response.status_code == 200) {
         // Parsarea răspunsului JSON
@@ -506,8 +508,31 @@ void Gartic::updatePlayers()
             int playerScore = player["score"].u();
             QString name = QString::fromUtf8(playerName);
             QString score = QString::number(playerScore);
-            // Adaugă informațiile despre jucători în vectorul players
-            players.push_back(std::make_pair(name, score));
+            bool playerNotFound = true;
+            //std::pair<QString, QString> identicalPlayer;
+            for (const auto& existingPlayer : players)
+            {
+                if (name == existingPlayer.first) {
+                    playerNotFound = false;
+                    //identicalPlayer = existingPlayer;
+                    //players.erase(existingPlayer);
+                    break;
+                }
+            }
+            if (playerNotFound == true) {
+                players.push_back(std::make_pair(name, score));
+                updateLeaderboard();
+            }
+            else {
+                for (int index=0; index<players.size(); index++)
+                    if (name == players[index].first && score != players[index].second) {
+                        players[index].second = score;
+                        //players.push_back(identicalPlayer);
+                        updateLeaderboard();
+                        break;
+                    }
+                    //else players.push_back(identicalPlayer);
+            }
         }
     }
     else {
