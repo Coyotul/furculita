@@ -203,7 +203,7 @@ void Gartic::getTimer()
         crow::json::rvalue jsonData = crow::json::load(response.text);
 
         int timeLeft = jsonData["timeLeft"].i();
-        if (timeLeft == 60 || timeLeft == 59 || timeLeft == 58)
+        if (timeLeft == 60 || timeLeft == 59 || timeLeft == 58 || timeLeft == 57 || timeLeft == 56 || timeLeft == 55)
         {
             getPlayerName();
         }
@@ -238,6 +238,7 @@ void Gartic::getPlayerName()
         }
         else
         {
+            ui.wordText->setText(" ");
             isDrawing = false;
             imageTimer = new QTimer(this);
             connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);
