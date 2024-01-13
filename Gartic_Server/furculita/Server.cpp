@@ -22,18 +22,16 @@ void Server::configureRoutes() {
 	int currentPlayer;
 	int score=100;
 	std::string username = " ";
-	Storage db = createStorage("words.sqlite");
-	db.sync_schema();
-	auto initialProductsCount = db.count<WordStruct>();
-	if (initialProductsCount == 0) {
-		populateStorage(db);
-	}
-	WordsDb wordsDb(db);
-	std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3);
-	std::string chatText;
-
 	CROW_ROUTE(app, "/words")
-		([randomWords](const crow::request& req)-> crow::response {
+		([](const crow::request& req)-> crow::response {
+		Storage db = createStorage("words.sqlite");
+		db.sync_schema();
+		auto initialProductsCount = db.count<WordStruct>();
+		if (initialProductsCount == 0) {
+			populateStorage(db);
+		}
+		WordsDb wordsDb(db);
+		std::vector<WordStruct> randomWords = wordsDb.getRandomWords(3);
 		std::vector<crow::json::wvalue> wordsJSON;
 
 		// Obține limba specificată de client din query string
