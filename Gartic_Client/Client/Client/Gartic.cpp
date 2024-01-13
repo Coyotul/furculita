@@ -242,12 +242,12 @@ void Gartic::getPlayerName()
         {
             auto wordToGuess = crow::json::load(response2.text);
             std::string wordToGuess2 = (std::string)wordToGuess[0]["word"];
-            std::string word = "";
+            QString word = "";
             for (const auto& it : wordToGuess2)
             {
-                word.push_back('_');
+                word.push_back('-');
             }
-            ui.wordText->setText(QString::fromStdString(word));
+            ui.wordText->setText(word);
             isDrawing = false;
             imageTimer = new QTimer(this);
             connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);
