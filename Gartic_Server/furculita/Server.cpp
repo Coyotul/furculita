@@ -19,6 +19,7 @@ void Server::run() {
 void Server::configureRoutes() {
 	
 	int language = 1; // Acest lucru nu pare a fi folosit în codul tău, îl poți elimina dacă nu este necesar.
+	int currentPlayer;
 	std::string username = " ";
 	Storage db = createStorage("words.sqlite");
 	db.sync_schema();
@@ -92,13 +93,14 @@ void Server::configureRoutes() {
 		auto chosenWord = req.url_params.get("chosenWord");
 		if (chosenWord) {
 			std::string wordToDraw = chosenWord;
-			if (myGame.m_currentRound.getRoundNumber() == 1)
-			{
+			//if(myGame.getMainPlayer() == myGame.m_players[currentPlayer].GetName())
+			//if (myGame.m_currentRound.getRoundNumber() == 1)
+			//{
 				std::thread roundThread([=]() {
 					myGame.m_currentRound.startRound();
 					});
 				roundThread.detach();
-			}
+			//}
 
 			myGame.m_currentRound.setWordToDraw(wordToDraw);
 			logi("Word to draw is: ", wordToDraw);
@@ -132,7 +134,8 @@ void Server::configureRoutes() {
 			std::string playerName=usernameParam;
 			
 			myGame.addPlayer(playerName);
-			
+			currentPlayer = myGame.m_currentPlayerIndex;
+			myGame.m_currentPlayerIndex++;
 			return crow::response{ "Player added successfully" };
 		}
 		else {
@@ -254,25 +257,24 @@ void Server::configureRoutes() {
 		crow::json::wvalue timeLeftJSON{
 			{"timeLeft", timeLeft}
 		};
-		std::thread cycleThread([=]() {
-
-
+		/*std::thread cycleThread([=]() {
 			if (timeLeft == 0)
 			{
 				myGame.m_currentRound.finishRound();
 				std::this_thread::sleep_for(std::chrono::seconds(5));
-				if (myGame.m_currentRound.getRoundNumber() <= 3 && myGame.m_currentRound.getRoundNumber() != 1
-					&& !myGame.m_currentRound.isInProgress())
-				{
-					std::thread roundThread([=]() {
-						myGame.m_currentRound.startRound();
-						});
-					roundThread.detach();
-				}
+				if (myGame.m_currentRound.getRoundNumber() <= myGame.m_players.size() && myGame.m_currentRound.getRoundNumber() != 1
+						&& !myGame.m_currentRound.isInProgress())
+					{
+						myGame.changeMainPlayer();
+						std::thread roundThread([=]() {
+							myGame.m_currentRound.startRound();
+							});
+						roundThread.detach();
+					}
 
-			}
-			});
-		cycleThread.detach();
+				}
+				});
+			cycleThread.detach();*/
 		return crow::json::wvalue{ timeLeftJSON };
 			});
 }

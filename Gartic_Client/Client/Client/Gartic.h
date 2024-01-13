@@ -75,6 +75,7 @@ private:
     void hideInterface();
     void showInterface();
     void hideWordChoices();
+    void showWordChoices();
     void updateLeaderboard();
     void updatePlayers();
     void addPlayerToServer(const QString& playerName);

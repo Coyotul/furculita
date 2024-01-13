@@ -25,12 +25,13 @@ namespace gartic {
 		~Game();
 		Round m_currentRound;
 		std::string chat;
-		
+		std::uint16_t m_currentPlayerIndex;
+		std::vector<User> m_players;
 	private:
 		
-		std::vector<User> m_players;
+		
 		std::vector<int> test;
-		std::uint8_t m_currentPlayerIndex;
+		
 		bool m_gameInProgress;
 		int playerIndex = 0;
 		//Word m_currentWord;

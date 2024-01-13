@@ -10,7 +10,7 @@
 import game;
 using gartic::Game;
 
-Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 60) {
+Game::Game() : m_currentPlayerIndex(0), m_gameInProgress(false), m_currentRound("default word", 10) {
    
 }
 
@@ -107,7 +107,7 @@ void gartic::Game::calculateScoresBasedOnTime()
 
 
 bool Game::checkGameState()const {
-    const uint8_t maxRounds = 4;
+    const uint8_t maxRounds = 3;
     if (m_currentRound.getRoundNumber() > maxRounds) {
         std::cout << "Game over! All rounds have been completed." << std::endl;
         displayScores();

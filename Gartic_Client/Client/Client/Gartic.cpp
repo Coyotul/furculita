@@ -150,6 +150,15 @@ void Gartic::hideWordChoices()
     }
 }
 
+void Gartic::showWordChoices()
+{
+    ui.wordButton_1->show();
+    ui.wordButton_2->show();
+    ui.wordButton_3->show();
+}
+
+
+
 void Gartic::on_language1_clicked()
 {
     //romanian language
@@ -255,6 +264,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
                 connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);
                 imageTimer->start(1000);
             }
+            //timer->start(1000);
         }
         getWords();
 
