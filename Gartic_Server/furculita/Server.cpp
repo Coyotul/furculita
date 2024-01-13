@@ -253,8 +253,14 @@ void Server::configureRoutes() {
 				}
 
 				secondWord.pop_back();
-
-				if (firstWord == myGame.m_currentRound.getWordToDraw())
+				std::string copy;
+				for (char it : firstWord)
+				{
+					it = tolower(it);
+					copy.push_back(it);
+				}
+				copy[0] = toupper(copy[0]);
+				if (copy == myGame.m_currentRound.getWordToDraw())
 				{
 					for (auto& it : myGame.m_players)
 					{
