@@ -223,7 +223,9 @@ void Gartic::getTimer()
 void Gartic::getPlayerName()
 {
     std::string url = "http://localhost:8080/getMainPlayer";
+    std::string url2 = "http://localhost:8080/getWord";
     cpr::Response response = cpr::Get(cpr::Url{ url });
+    cpr::Response response2 = cpr::Get(cpr::Url{ url2 });
 
     if (response.status_code == 200)
     {
@@ -238,7 +240,14 @@ void Gartic::getPlayerName()
         }
         else
         {
-            ui.wordText->setText(" ");
+            auto wordToGuess = crow::json::load(response2.text);
+            std::string wordToGuess2 = (std::string)wordToGuess[0]["word"];
+            std::string word = "";
+            for (const auto& it : wordToGuess2)
+            {
+                word.push_back('_');
+            }
+            ui.wordText->setText(QString::fromStdString(word));
             isDrawing = false;
             imageTimer = new QTimer(this);
             connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);

@@ -117,7 +117,7 @@ void Server::configureRoutes() {
 		std::vector<crow::json::wvalue> wordsJSON;
 		const auto& word = myGame.m_currentRound.getWordToDraw();
 		crow::json::wvalue wordJSON{
-			{"word to be drawn:", word}
+			{"word", word}
 			};
 			wordsJSON.push_back(wordJSON);
 		
