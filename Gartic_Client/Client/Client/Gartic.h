@@ -105,6 +105,7 @@ private:
     QPointF lastMousePos;
     std::vector<QPainterPath> lines;
     bool isPlayerAllowedToDraw = true;
+    bool playerWillBeDrawing = false;
     QPainterPath currentPath;
 
     QTimer* timer;

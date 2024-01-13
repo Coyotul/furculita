@@ -203,7 +203,7 @@ void Gartic::getTimer()
         crow::json::rvalue jsonData = crow::json::load(response.text);
 
         int timeLeft = jsonData["timeLeft"].i();
-        if (timeLeft == 60)
+        if (timeLeft == 60 || timeLeft == 59 || timeLeft == 58)
         {
             getPlayerName();
         }
@@ -234,10 +234,7 @@ void Gartic::getPlayerName()
         {
             isDrawing = true;
             ui.drawing->hide();
-            getWords();
-            ui.wordButton_1->show();
-            ui.wordButton_2->show();
-            ui.wordButton_3->show();
+
         }
         else
         {
@@ -269,6 +266,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             }
             sendChatToServer('\n' + username + ": " + ui.textBox->text());
             ui.textBox->clear();
+            updateLeaderboard();
         }
         else
         {
@@ -279,8 +277,6 @@ void Gartic::keyPressEvent(QKeyEvent* event)
             showInterface();
             playerLogged = true;
             updateLeaderboard();
-            if (isDrawing == false) {
-            }
             timer->start(1000);
         }
         getWords();
@@ -434,6 +430,13 @@ void Gartic::downloadAndDisplayImage()
     {
         downloadImageFromServer();
         displayImage("downloaded_image.png");
+    }
+    else if (!playerWillBeDrawing)
+    {
+        playerWillBeDrawing = true;
+        getWords();
+        showWordChoices();
+        ui.drawing->hide();
     }
 }
 
