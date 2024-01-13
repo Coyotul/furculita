@@ -101,7 +101,7 @@ void Gartic::on_wordButton_1_clicked()
         word = ui.wordButton_1->text();
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
-        timer->start(1000);
+        //timer->start(1000);
         ui.wordText->setText("Draw: " + word);
         hideWordChoices();
     }
@@ -115,7 +115,7 @@ void Gartic::on_wordButton_2_clicked()
         word = ui.wordButton_2->text();
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
-        timer->start(1000);
+        //timer->start(1000);
         ui.wordText->setText("Draw: " + word);
         hideWordChoices();
     }
@@ -130,7 +130,7 @@ void Gartic::on_wordButton_3_clicked()
 
         sendWordToServer(word);
         qDebug() << "Word selected: " << word;
-        timer->start(1000);
+        //timer->start(1000);
         if (language == 2)
             ui.wordText->setText("Draw: " + word);
 
@@ -198,6 +198,7 @@ void Gartic::getTimer()
         if (timeLeft == 0) 
         {
             scribbleArea->clearImage();
+
             
         }
     }
@@ -264,7 +265,7 @@ void Gartic::keyPressEvent(QKeyEvent* event)
                 connect(imageTimer, &QTimer::timeout, this, &Gartic::downloadAndDisplayImage);
                 imageTimer->start(1000);
             }
-            //timer->start(1000);
+            timer->start(1000);
         }
         getWords();
 

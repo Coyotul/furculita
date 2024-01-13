@@ -94,13 +94,13 @@ void Server::configureRoutes() {
 		if (chosenWord) {
 			std::string wordToDraw = chosenWord;
 			//if(myGame.getMainPlayer() == myGame.m_players[currentPlayer].GetName())
-			//if (myGame.m_currentRound.getRoundNumber() == 1)
-			//{
+			if (myGame.m_currentRound.getRoundNumber() == 1)
+			{
 				std::thread roundThread([=]() {
 					myGame.m_currentRound.startRound();
 					});
 				roundThread.detach();
-			//}
+			}
 
 			myGame.m_currentRound.setWordToDraw(wordToDraw);
 			logi("Word to draw is: ", wordToDraw);
@@ -257,7 +257,7 @@ void Server::configureRoutes() {
 		crow::json::wvalue timeLeftJSON{
 			{"timeLeft", timeLeft}
 		};
-		/*std::thread cycleThread([=]() {
+		std::thread cycleThread([=]() {
 			if (timeLeft == 0)
 			{
 				myGame.m_currentRound.finishRound();
@@ -274,7 +274,7 @@ void Server::configureRoutes() {
 
 				}
 				});
-			cycleThread.detach();*/
+			cycleThread.detach();
 		return crow::json::wvalue{ timeLeftJSON };
 			});
 }
