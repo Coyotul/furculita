@@ -53,7 +53,7 @@ void Server::configureRoutes() {
 					}
 					return crow::json::wvalue{ wordsJSON };
 				}
-				else return crow::response(400,"Nu stiu ce are bossule");
+				else return crow::response(400,"Eroare de transmitere");
 
 			}
 			catch (const std::exception& e) {
